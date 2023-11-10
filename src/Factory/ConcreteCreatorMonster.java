@@ -1,5 +1,10 @@
 package Factory;
 
+import Elements.Element;
+import Elements.Monster;
+
 public class ConcreteCreatorMonster extends Creator {
-    void createElement() {};
+    public Element createElement() {
+        return new Monster();
+    };
 }

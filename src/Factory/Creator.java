@@ -1,5 +1,7 @@
 package Factory;
 
+import Elements.Element;
+
 public abstract class Creator {
-    abstract void createElement();
+    public abstract Element createElement();
 }

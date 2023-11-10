@@ -1,5 +1,10 @@
 package Factory;
 
+import Elements.Element;
+import Elements.Obstacle;
+
 public class ConcreteCreatorObstacle extends Creator {
-    void createElement(){};
+    public Element createElement(){
+        return new Obstacle();
+    };
 }

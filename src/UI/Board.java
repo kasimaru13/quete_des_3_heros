@@ -1,6 +1,6 @@
 package UI;
 
-import Factory.Element;
+import Elements.Element;
 
 public class Board {
     private Element[] board;
