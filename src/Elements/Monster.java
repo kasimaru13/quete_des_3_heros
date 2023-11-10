@@ -1,5 +1,5 @@
 package Elements;
 
 public class Monster implements Element {
-    public void display_sprite(){};
+    public void display_sprite(){}
 }

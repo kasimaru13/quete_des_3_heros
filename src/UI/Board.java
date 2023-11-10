@@ -1,8 +1,10 @@
 package UI;
 
+import javax.swing.JPanel;
+
 import Elements.Element;
 
-public class Board {
+public class Board extends JPanel{
     private Element[] board;
 
     Board(){
