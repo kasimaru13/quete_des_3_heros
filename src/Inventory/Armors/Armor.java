@@ -1,4 +1,6 @@
-package Inventory;
+package Inventory.Armors;
+
+import Inventory.Item;
 
 public class Armor extends Item {
     private String type;
