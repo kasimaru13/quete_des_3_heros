@@ -59,6 +59,20 @@ public class Inventory {
     }
 
     /**
+     * Echange un item de l'inventaire avec un autre item (qui n'est pas dans l'inventaire).
+     * Est plus rapide que d'utiliser la fonction delete puis add, qui parcourent l'inventaire avec une boucle.
+     * @param item_inside_inventory L'item à remplacer dans l'inventaire
+     * @param item_outside_inventory L'item se trouvant en dehors de l'inventaire qu'on cherche à placer à l'intérieur
+     * @return L'item de l'inventaire remplacé
+     */
+    public Item swapItem(Item item_inside_inventory, Item item_outside_inventory){
+        item_inside_inventory = item_outside_inventory;
+        return item_inside_inventory;
+    }
+
+
+
+    /**
      * Supprime l'Item passé en paramètre et le renvoie.
      * @param item
      * @return
