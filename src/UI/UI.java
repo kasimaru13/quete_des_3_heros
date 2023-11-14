@@ -21,12 +21,15 @@ public class UI extends JFrame {
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
+        container.add(leftPanel);
         container.add(board);
+        container.add(rightPanel);
 
-        add(container);
+        //add(container);
+        add(new TitleScreen());
         
         setTitle("Quête des 3 héros");
-        setSize(Constants.WINDOW_SIZE + 400, Constants.WINDOW_SIZE);
+        setSize(Constants.WINDOW_SIZE, Constants.WINDOW_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

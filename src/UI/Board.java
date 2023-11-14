@@ -1,5 +1,6 @@
 package UI;
 
+
 import javax.swing.JPanel;
 
 import Elements.Element;
@@ -7,7 +8,7 @@ import Elements.Element;
 public class Board extends JPanel{
     private Element[] board;
 
-    Board(){
+    public Board(){
         board = new Element[256];
     }
 
