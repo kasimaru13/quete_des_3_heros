@@ -191,7 +191,7 @@ public void defendre() {
 
 package main.java.com.quete_des_3_heros.modele.heros;
 
-import javax.lang.model.element.Element;
+import main.java.com.quete_des_3_heros.elements.Element;
 
 import main.java.com.quete_des_3_heros.modele.combattant;
 

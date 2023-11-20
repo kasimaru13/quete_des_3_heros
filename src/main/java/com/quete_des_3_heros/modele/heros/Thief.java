@@ -30,10 +30,10 @@ public class Thief extends Hero {
     }
 }*/
 
-package main.java.com.votrenomdeprojet.modele.heros;
+package main.java.com.quete_des_3_heros.modele.heros;
 
-import main.java.com.votrenomdeprojet.modele.combattant;
-import main.java.com.votrenomdeprojet.modele.ennemis.Monster;
+import main.java.com.quete_des_3_heros.modele.combattant;
+import main.java.com.quete_des_3_heros.modele.ennemis.Monster;
 import java.util.Random;
 
 public class Thief extends Hero {

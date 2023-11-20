@@ -1,6 +1,6 @@
 package main.java.com.quete_des_3_heros.inventory.weapons;
 
-import Inventory.Item;
+import main.java.com.quete_des_3_heros.inventory.Item;
 
 public class Weapon extends Item {
     private int damage;

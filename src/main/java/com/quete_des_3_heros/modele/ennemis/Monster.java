@@ -155,10 +155,11 @@ public abstract class Monster {
 
 package main.java.com.quete_des_3_heros.modele.ennemis;
 
+import main.java.com.quete_des_3_heros.elements.Element;
 import main.java.com.quete_des_3_heros.modele.combattant;
 import main.java.com.quete_des_3_heros.modele.heros.Hero;
 
-public abstract class Monster extends combattant {
+public abstract class Monster extends combattant implements Element {
 
     // Constructeur de Monster
     public Monster(int pv, int totalPV, int pm, int totalPM, int force, int intelligence,

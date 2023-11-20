@@ -1,4 +1,4 @@
-package main.java.com.votrenomdeprojet.modele;
+package main.java.com.quete_des_3_heros.modele;
 
 public abstract class combattant {
     protected int pv; // Points de vie

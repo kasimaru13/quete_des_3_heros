@@ -27,11 +27,11 @@ public class Warrior extends Hero {
     }
 }*/
 
-package main.java.com.votrenomdeprojet.modele.heros;
+package main.java.com.quete_des_3_heros.modele.heros;
 
 import java.util.Random;
-import main.java.com.votrenomdeprojet.modele.combattant;
-import main.java.com.votrenomdeprojet.modele.ennemis.Monster;
+import main.java.com.quete_des_3_heros.modele.combattant;
+import main.java.com.quete_des_3_heros.modele.ennemis.Monster;
 
 public class Warrior extends Hero {
 
