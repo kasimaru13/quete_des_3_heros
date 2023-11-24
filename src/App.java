@@ -1,9 +1,10 @@
-import Controllers.GameController;
+import main.java.com.quete_des_3_heros.UI.UI;
 
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Launching the game");
 
-        GameController game = new GameController();
+        UI ui = new UI();
+        ui.setVisible(true);
     }
 }
