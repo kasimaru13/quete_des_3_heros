@@ -22,7 +22,7 @@ public class Board extends JPanel{
         board = new Element[256];
 
         try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/grass.png")).getSubimage(0, 0, 720, 720);
+            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/grass.png"));
             warrior = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/warrior.png"));
         } catch (IOException e) {
             System.out.println("Erreur dans la lecture de l'image d'arrière plan");
@@ -39,7 +39,7 @@ public class Board extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        g.drawImage(backgroundImage, 0, 0, null);
-        g.drawImage(warrior, 672, 0, null);
+        // g.drawImage(backgroundImage, 0, 0, null);
+        // g.drawImage(warrior, 672, 0, null);
     }
 }
