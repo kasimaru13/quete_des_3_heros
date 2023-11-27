@@ -1,31 +1,9 @@
 package main.java.com.quete_des_3_heros.UI.components;
 
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
-
-// public class GameButton extends JPanel {
-//     public GameButton(String text){
-//         super();
-
-//         JButton button = new JButton(text);
-//         button.setFocusable(false);
-//         button.setBackground(Color.gray);
-
-//         add(button);
-//         setPreferredSize(new Dimension(800,500));
-//     }
-// }
 
 public class GameButton extends JButton {
     public GameButton(String text){

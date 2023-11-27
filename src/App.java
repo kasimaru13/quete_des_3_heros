@@ -4,7 +4,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Launching the game");
 
-        UI ui = new UI();
+        UI ui = UI.getInstance();
         ui.setVisible(true);
     }
 }

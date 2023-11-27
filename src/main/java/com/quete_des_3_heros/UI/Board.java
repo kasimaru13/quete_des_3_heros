@@ -5,7 +5,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -39,7 +38,7 @@ public class Board extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        // g.drawImage(backgroundImage, 0, 0, null);
-        // g.drawImage(warrior, 672, 0, null);
+        g.drawImage(backgroundImage, 0, 0, null);
+        g.drawImage(warrior, 672, 0, null);
     }
 }
