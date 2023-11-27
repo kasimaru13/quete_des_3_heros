@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,9 +18,10 @@ import javax.swing.border.LineBorder;
 
 import main.java.com.quete_des_3_heros.UI.components.GameButton;
 
-public class TitleScreen extends JPanel {
+public class TitleScreen extends JPanel implements ActionListener {
     private JLabel title;
     private Image backgroundImage;
+    private GameButton start, leave;
 
     public TitleScreen(){
         backgroundImage = new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/landscape.jpg").getImage();
@@ -30,10 +33,13 @@ public class TitleScreen extends JPanel {
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setForeground(Color.WHITE);
 
-        GameButton start = new GameButton("Commencer");
-        GameButton leave = new GameButton("Quitter");
+        start = new GameButton("Commencer");
+        leave = new GameButton("Quitter");
         start.setBorder(new LineBorder(Color.lightGray));
+        start.addActionListener(this);
         leave.setBorder(new LineBorder(Color.lightGray));
+        leave.addActionListener(this);
+
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -50,5 +56,15 @@ public class TitleScreen extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(backgroundImage, 0, 0, null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == start){
+
+        }
+        else if(e.getSource() == leave){
+            System.exit(0);
+        }
     }
 }
