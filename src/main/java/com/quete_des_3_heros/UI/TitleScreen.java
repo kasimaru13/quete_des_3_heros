@@ -7,10 +7,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -23,7 +24,14 @@ public class TitleScreen extends JPanel implements ActionListener {
     private GameButton start, leave;
 
     public TitleScreen(){
-        backgroundImage = new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/landscape.jpg").getImage();
+        try {
+            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/landscape.jpg"));
+            // Scale the image so it fills the whole window
+            backgroundImage = backgroundImage.getScaledInstance(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Image.SCALE_DEFAULT);
+        } catch (IOException e) {
+            System.out.println("Erreur dans la lecture de l'image de fond de l'écran titre");
+            System.exit(0);
+        }
 
         setFocusable(true);
 

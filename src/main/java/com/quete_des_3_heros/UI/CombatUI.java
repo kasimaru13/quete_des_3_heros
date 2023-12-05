@@ -19,9 +19,9 @@ public class CombatUI extends JPanel {
         rightPanel = new RightPanel();
 
         setLayout(null);
-        leftPanel.setBounds(0, 0, leftPanel.LEFTPANEL_WIDTH, 720);
+        leftPanel.setBounds(0, 0, Constants.LEFTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
         board.setBounds(280, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
-        rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, rightPanel.RIGHTPANEL_WIDTH, 720);
+        rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
 
         add(leftPanel);
         add(board);

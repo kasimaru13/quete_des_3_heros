@@ -2,7 +2,6 @@ package main.java.com.quete_des_3_heros.UI;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class UI extends JFrame {
     static UI instance;
@@ -12,7 +11,13 @@ public class UI extends JFrame {
         add(titleScreen);
         
         setTitle("Gnir's Needle");
-        setSize(new Dimension(280 + Constants.BOARD_SIZE + 280, 720));
+        
+        startGame(); // A ENLEVER, PERMET DE SKIP L'ECRAN D'ACCUEIL
+
+        // Pour donner une taille constante à la fenêtre
+        getContentPane().setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+        pack();
+
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
