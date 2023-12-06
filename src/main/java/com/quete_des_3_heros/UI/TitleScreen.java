@@ -14,7 +14,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 import main.java.com.quete_des_3_heros.UI.components.GameButton;
 
@@ -24,6 +23,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     private GameButton start, leave;
 
     public TitleScreen(){
+        // Loading images
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/landscape.jpg"));
             // Scale the image so it fills the whole window
@@ -35,26 +35,26 @@ public class TitleScreen extends JPanel implements ActionListener {
 
         setFocusable(true);
 
+        // Title
         title = new JLabel("La Quête des 3 Héros");
         title.setFont(new Font("Serif", Font.BOLD, 50));
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setForeground(Color.WHITE);
 
+        // Buttons
         start = new GameButton("Commencer");
         leave = new GameButton("Quitter");
-        start.setBorder(new LineBorder(Color.lightGray));
         start.addActionListener(this);
-        leave.setBorder(new LineBorder(Color.lightGray));
         leave.addActionListener(this);
 
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));   // Layout for vertical buttons
 
-        add(Box.createRigidArea(new Dimension(0, 100)));
+        add(Box.createRigidArea(new Dimension(0, 100))); // Space between buttons
         add(title);
-        add(Box.createRigidArea(new Dimension(0, 100)));
+        add(Box.createRigidArea(new Dimension(0, 100))); // Space between buttons
         add(start);
-        add(Box.createRigidArea(new Dimension(0, 100)));
+        add(Box.createRigidArea(new Dimension(0, 100))); // Space between buttons
         add(leave);
     }
 
@@ -67,10 +67,10 @@ public class TitleScreen extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == start){
+        if (e.getSource() == start){ // Start button
             UI.getInstance().startGame();
         }
-        else if(e.getSource() == leave){
+        else if(e.getSource() == leave){ // Leave game button
             System.exit(0);
         }
     }
