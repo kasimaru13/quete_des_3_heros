@@ -3,6 +3,9 @@ package main.java.com.quete_des_3_heros.UI;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+import main.java.com.quete_des_3_heros.UI.combat_ui.CombatUI;
+import main.java.com.quete_des_3_heros.UI.title_screen.TitleScreen;
+
 public class UI extends JFrame {
     static UI instance;
 

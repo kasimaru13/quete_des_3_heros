@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.UI;
+package main.java.com.quete_des_3_heros.UI.combat_ui;
 
 
 import javax.imageio.ImageIO;
@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
+import main.java.com.quete_des_3_heros.UI.Constants;
 import main.java.com.quete_des_3_heros.elements.Element;
 
 public class Board extends JPanel{

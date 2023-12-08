@@ -1,10 +1,12 @@
-package main.java.com.quete_des_3_heros.UI;
+package main.java.com.quete_des_3_heros.UI.combat_ui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+
+import main.java.com.quete_des_3_heros.UI.Constants;
 
 public class CombatUI extends JPanel implements ActionListener {
     Board board;
