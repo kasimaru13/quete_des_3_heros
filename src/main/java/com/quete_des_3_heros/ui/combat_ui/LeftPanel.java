@@ -1,10 +1,8 @@
-package main.java.com.quete_des_3_heros.UI.combat_ui;
+package main.java.com.quete_des_3_heros.ui.combat_ui;
 
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-
-import main.java.com.quete_des_3_heros.UI.components.Profile;
 
 
 public class LeftPanel extends JPanel{

@@ -1,12 +1,12 @@
-package main.java.com.quete_des_3_heros.UI.combat_ui;
+package main.java.com.quete_des_3_heros.ui.combat_ui;
 
 import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import main.java.com.quete_des_3_heros.UI.Constants;
-import main.java.com.quete_des_3_heros.UI.components.GameButton;
+import main.java.com.quete_des_3_heros.ui.Constants;
+import main.java.com.quete_des_3_heros.ui.components.GameButton;
 
 public class RightPanel extends JPanel{
     private JPanel buttonPanel;

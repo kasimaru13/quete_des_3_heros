@@ -1,10 +1,14 @@
-package main.java.com.quete_des_3_heros.UI;
+package main.java.com.quete_des_3_heros.ui;
 
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 
-import main.java.com.quete_des_3_heros.UI.combat_ui.CombatUI;
-import main.java.com.quete_des_3_heros.UI.title_screen.TitleScreen;
+import main.java.com.quete_des_3_heros.ui.combat_ui.CombatUI;
+import main.java.com.quete_des_3_heros.ui.dialogues.Dialogue;
+import main.java.com.quete_des_3_heros.ui.title_screen.TitleScreen;
 
 public class UI extends JFrame {
     static UI instance;
@@ -36,7 +40,27 @@ public class UI extends JFrame {
     public void startGame(){
         getContentPane().removeAll();
 
-        add(new CombatUI());
+        // add(new CombatUI());
+        add(new Dialogue(1));
+
+        revalidate();
+
+        repaint();
+    }
+
+    public void nextStep(int next_phase_number, String type_of_phase){
+        getContentPane().removeAll();
+
+        if (type_of_phase == "Dialogue"){
+            add(new Dialogue(next_phase_number));
+        }
+        else if (type_of_phase == "Combat"){
+            add(new CombatUI());
+        }
+        else{
+            System.err.println("Erreur dans le changement de phase");
+            System.exit(0);
+        }
 
         revalidate();
 

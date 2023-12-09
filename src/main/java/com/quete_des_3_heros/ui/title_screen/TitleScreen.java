@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.UI.title_screen;
+package main.java.com.quete_des_3_heros.ui.title_screen;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,9 +15,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.java.com.quete_des_3_heros.UI.Constants;
-import main.java.com.quete_des_3_heros.UI.UI;
-import main.java.com.quete_des_3_heros.UI.components.GameButton;
+import main.java.com.quete_des_3_heros.ui.Constants;
+import main.java.com.quete_des_3_heros.ui.UI;
+import main.java.com.quete_des_3_heros.ui.components.GameButton;
 
 public class TitleScreen extends JPanel implements ActionListener {
     private JLabel title;

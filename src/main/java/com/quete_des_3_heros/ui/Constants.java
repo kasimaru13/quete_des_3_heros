@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.UI;
+package main.java.com.quete_des_3_heros.ui;
 public class Constants {
     public static final int SPRITE_SIZE = 48;
     public static final int GRID = 1; // 1 if grid, 0 if no grid

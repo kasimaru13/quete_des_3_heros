@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.UI.components;
+package main.java.com.quete_des_3_heros.ui.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.java.com.quete_des_3_heros.UI.Constants;
+import main.java.com.quete_des_3_heros.ui.Constants;
 
 public class Profile extends JPanel {
     private JLabel description;
