@@ -18,8 +18,6 @@ public class UI extends JFrame {
         add(titleScreen);
         
         setTitle("Gnir's Needle");
-        
-        startGame(); // A ENLEVER, PERMET DE SKIP L'ECRAN D'ACCUEIL
 
         // Pour donner une taille constante à la fenêtre
         getContentPane().setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
@@ -35,17 +33,6 @@ public class UI extends JFrame {
             instance = new UI();
         }
         return instance;
-    }
-
-    public void startGame(){
-        getContentPane().removeAll();
-
-        // add(new CombatUI());
-        add(new Dialogue(1));
-
-        revalidate();
-
-        repaint();
     }
 
     public void nextStep(int next_phase_number, String type_of_phase){

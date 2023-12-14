@@ -21,10 +21,10 @@ public class Board extends JPanel{
         board = new Element[256];
 
         try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/grass.png")).getSubimage(0, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
-            warrior = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/warrior.png"));
+            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png")).getSubimage(0, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
+            warrior = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png"));
         } catch (IOException e) {
-            System.out.println("Erreur dans la lecture des sprites du jeu");
+            System.out.println("Erreur dans la lecture des images du jeu");
             System.exit(0);
         }
     }

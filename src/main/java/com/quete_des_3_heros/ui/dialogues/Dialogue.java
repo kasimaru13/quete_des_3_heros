@@ -39,7 +39,7 @@ public class Dialogue extends JPanel implements KeyListener{
 
         // Load background image
         try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/grass.png"))
+            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png"))
                 .getScaledInstance(Constants.WINDOW_WIDTH, Constants.WINDOW_WIDTH, Image.SCALE_DEFAULT);
         } catch (Exception e) {
             System.err.println("Erreur dans le chargement de l'image de fond de la phase de dialogue");
@@ -88,13 +88,13 @@ public class Dialogue extends JPanel implements KeyListener{
     private class DialogueLabel extends JLabel implements MouseListener {
         public DialogueLabel(int phase_number){
             // Load JLabel icon (down arrow)
-            ImageIcon arrow = new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/arrow_down.png");
+            ImageIcon arrow = new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/icons/arrow_down.png");
 
             setPreferredSize(new Dimension(Constants.WINDOW_WIDTH * 60/100, Constants.WINDOW_HEIGHT * 70/100));
-            setForeground(Color.white);
             setFont(new Font(getFont().getName(), Font.PLAIN, 22));
-            setOpaque(true);
-            setBackground(new Color(0, 0, 0, 50));
+            // setOpaque(true);
+            // setBackground(new Color(0, 0, 0, 50));
+            setForeground(Color.white);
             setBorder(new EmptyBorder(50, 50, 50, 50));
             setIcon(arrow);
             setVerticalTextPosition(JLabel.TOP);
@@ -103,6 +103,14 @@ public class Dialogue extends JPanel implements KeyListener{
             setText(findDialogue(phase_number));
 
             addMouseListener(this);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            g.setColor(new Color(0, 0, 0, 50));
+            g.fillRect(0, 0, getWidth(), getHeight());
+            
+            super.paintComponent(g);
         }
 
         /**

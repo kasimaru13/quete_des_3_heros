@@ -27,7 +27,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     public TitleScreen(){
         // Loading images
         try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/landscape.jpg"));
+            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/landscape.jpg"));
             // Scale the image so it fills the whole window
             backgroundImage = backgroundImage.getScaledInstance(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Image.SCALE_DEFAULT);
         } catch (IOException e) {
@@ -70,7 +70,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == start){ // Start button
-            UI.getInstance().startGame();
+            UI.getInstance().nextStep(1, "Dialogue");
         }
         else if(e.getSource() == leave){ // Leave game button
             System.exit(0);
