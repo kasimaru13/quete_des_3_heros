@@ -8,8 +8,13 @@ import javax.swing.JPanel;
 import main.java.com.quete_des_3_heros.ui.Constants;
 import main.java.com.quete_des_3_heros.ui.components.GameButton;
 
+
+/**
+ * Panel on the right of the combat UI. Contains the player's characters' profiles, actions buttons and rewind move button.
+ */
 public class RightPanel extends JPanel{
-    private JPanel buttonPanel;
+    private JPanel buttonPanel; // Panel containing actions buttons
+    // Actions buttons :
     private GameButton attack;
     private GameButton defend;
     private GameButton skill;

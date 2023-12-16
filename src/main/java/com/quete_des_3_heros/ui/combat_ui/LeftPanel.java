@@ -4,7 +4,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-
+/**
+ * Panel on the left of the combat UI. Contains the playing order, displaying it with characters' profiles.
+ */
 public class LeftPanel extends JPanel{
     public LeftPanel(){
     }
@@ -13,7 +15,7 @@ public class LeftPanel extends JPanel{
     public void paint(Graphics g) {
         super.paint(g);
 
-        drawArrowLine(g, 0, 0, 100, 100, 20, 10);
+        // drawArrowLine(g, 0, 0, 100, 100, 20, 10);
     }
 
     /**

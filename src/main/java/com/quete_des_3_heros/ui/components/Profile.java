@@ -3,7 +3,6 @@ package main.java.com.quete_des_3_heros.ui.components;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,17 +12,32 @@ import javax.swing.JPanel;
 
 import main.java.com.quete_des_3_heros.ui.Constants;
 
+
+/**
+ * Component to display that describes a character (or a monster) for the player. It contains its sprite,, its name,
+ * its health points and its mana points.
+ */
 public class Profile extends JPanel {
-    private JLabel description;
-    private JLabel sprite;
+    private JLabel description; // The text to display, with the name, hp and mp
+    private JLabel sprite; // Sprite to display
+
+    // Characteristics of the character:
     private String name;
     private String total_hp;
     private String total_mp;
     
-    
+    /**
+     * Creates a profile component with the characteristics passed as arguments
+     * @param character_name Name of the character / monster put int the profile
+     * @param hp Their HP
+     * @param mp Their MP
+     * @param character_sprite Image of the sprite of the character / monster
+     */
     public Profile(String character_name, int hp, int mp, Image character_sprite){
         setBackground(new Color(215,215,215));
         setPreferredSize(new Dimension(Constants.LEFTPANEL_WIDTH * 65/100, 75));
+
+        // Layout
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setAlignmentY(CENTER_ALIGNMENT);
 
@@ -48,6 +62,11 @@ public class Profile extends JPanel {
         add(description);
     }
 
+    /**
+     * Changes the characteristics of the profile
+     * @param hp New HP value
+     * @param mp New MP value
+     */
     public void updateProfile(int hp, int mp){
         description.setText(
             "<html>" + name + " :<br/>" +
@@ -56,6 +75,11 @@ public class Profile extends JPanel {
         );
     }
 
+    /**
+     * Changes the color of the sprite's label's border. Allows to show whose turn it is, or if a character is dead
+     * to the player.
+     * @param border_color Color of the new border
+     */
     public void changeBorderColor(Color border_color){
         sprite.setBorder(BorderFactory.createLineBorder(border_color));
     }

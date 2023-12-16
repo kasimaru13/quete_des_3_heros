@@ -19,6 +19,9 @@ import main.java.com.quete_des_3_heros.ui.Constants;
 import main.java.com.quete_des_3_heros.ui.UI;
 import main.java.com.quete_des_3_heros.ui.components.GameButton;
 
+/**
+ * Panel of the title screen. Contains the title of the game and buttons to either start or leave the game
+ */
 public class TitleScreen extends JPanel implements ActionListener {
     private JLabel title;
     private Image backgroundImage;
@@ -52,6 +55,7 @@ public class TitleScreen extends JPanel implements ActionListener {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));   // Layout for vertical buttons
 
+        // Add every element to the panel
         add(Box.createRigidArea(new Dimension(0, 100))); // Space between buttons
         add(title);
         add(Box.createRigidArea(new Dimension(0, 100))); // Space between buttons

@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 
 import main.java.com.quete_des_3_heros.ui.Constants;
 
+
+/**
+ * Panel for the combat phase. Contains two sides panels displaying information for the player, and in the center of the
+ * panel the board.
+ */
 public class CombatUI extends JPanel implements ActionListener {
     Board board;
     LeftPanel leftPanel;
