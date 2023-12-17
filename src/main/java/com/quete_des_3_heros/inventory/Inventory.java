@@ -1,5 +1,8 @@
 package main.java.com.quete_des_3_heros.inventory;
 
+/**
+ * Inventory class, which is a singleton that contains an array of Item. Common for every characters of the player.
+ */
 public class Inventory {
     private int inventorySize;
     private Item[] inventory;
@@ -10,6 +13,9 @@ public class Inventory {
         inventory = new Item[inventorySize];
     }
 
+    /**
+     * Returns the instance of the singleton Inventory, or create one if none exist.
+     */
     public Inventory getInstance(){
         if (instance == null){
             instance = new Inventory();
@@ -22,9 +28,9 @@ public class Inventory {
     }
 
     /**
-     * Ajoute un Item dans l'inventaire à la première position libre.
-     * /!\ Si l'inventaire est plein, créé une exception RuntimeException.
-     * @param item - l'item à ajouter à l'inventaire
+     * Adds the item in the inventory to the first available position
+     * /!\ If full inventory, throws a RuntimeException
+     * @param item Item to add to the inventory
      */
     public void addItem(Item item){
         int i = 0;
@@ -40,9 +46,9 @@ public class Inventory {
     }
 
     /**
-     * Supprime de l'inventaire l'Item passé en paramètre.
-     * /!\ Si l'Item ne se trouve pas dans l'inventaire, lance une RuntimeException
-     * @param item L'Item à supprimer de l'inventaire
+     * Deletes the Item passed as an attribute from the inventory
+     * /!\ If the Item is not in the inventory, throws a RuntimeException
+     * @param item Item to delete from the inventory
      */
     public void deleteItem(Item item){
         int i = 0;
@@ -59,21 +65,19 @@ public class Inventory {
     }
 
     /**
-     * Echange un item de l'inventaire avec un autre item (qui n'est pas dans l'inventaire).
-     * Est plus rapide que d'utiliser la fonction delete puis add, qui parcourent l'inventaire avec une boucle.
-     * @param item_inside_inventory L'item à remplacer dans l'inventaire
-     * @param item_outside_inventory L'item se trouvant en dehors de l'inventaire qu'on cherche à placer à l'intérieur
-     * @return L'item de l'inventaire remplacé
+     * Swapt an Item from the inventory with an Item from outside the inventory.
+     * Faster than using add then delete, which go through multiple items of the inventory (while loop).
+     * @param item_inside_inventory Item to take out of the inventory
+     * @param item_outside_inventory Item to put in the inventory
+     * @return Item taken out of the inventory
      */
     public Item swapItem(Item item_inside_inventory, Item item_outside_inventory){
         item_inside_inventory = item_outside_inventory;
         return item_inside_inventory;
     }
 
-
-
     /**
-     * Supprime l'Item passé en paramètre et le renvoie.
+     * Deletes the Item passed as an attribute an returns it
      * @param item
      * @return
      */
@@ -83,9 +87,9 @@ public class Inventory {
     }
 
     /**
-     * Supprime l'Item se trouvant à l'index passé en paramètre et le renvoie
-     * @param index Index de l'Item à prendre de l'inventaire
-     * @return L'Item qui a été supprimé de l'inventaire
+     * Deletes the Item at the index passed as an attribute and returns it
+     * @param index Index of Item in inventory to take out
+     * @return Item taken out of inventory
      */
     public Item takeItem(int index){
         Item item = inventory[index];
@@ -94,7 +98,7 @@ public class Inventory {
     }
 
     /**
-     * Trie l'inventaire de façon à ce qu'il n'y ait aucun élément null entre deux Item
+     * Sorts the inventory so there are no Null values between two Items
      */
     private void sortInventory(){
         int i = 0;

@@ -2,6 +2,10 @@ package main.java.com.quete_des_3_heros.inventory.weapons;
 
 import main.java.com.quete_des_3_heros.inventory.Item;
 
+/**
+ * Weapon class, children classes are the ones used in the game, so this is just a model for them, to group them in a 
+ * category of items.
+ */
 public class Weapon extends Item {
     private int damage;
     private int range;

@@ -1,9 +1,13 @@
-import Controllers.GameController;
+import main.java.com.quete_des_3_heros.ui.UI;
+import java.awt.EventQueue;
 
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Launching the game");
 
-        GameController game = new GameController();
+        EventQueue.invokeLater(() -> {
+            UI ui = UI.getInstance();
+            ui.setVisible(true);
+        });
     }
 }
