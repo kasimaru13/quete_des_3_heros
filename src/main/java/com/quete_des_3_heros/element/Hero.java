@@ -189,13 +189,9 @@ public void defendre() {
 }
 }*/
 
-package main.java.com.quete_des_3_heros.modele.heros;
+package main.java.com.quete_des_3_heros.element;
 
-import main.java.com.quete_des_3_heros.elements.Element;
-
-import main.java.com.quete_des_3_heros.modele.combattant;
-
-public abstract class Hero extends combattant implements Element {
+public abstract class Hero extends Entity implements Element {
     private int niveau; // Niveau actuel du héros
     private int xp; // Expérience actuelle
     private int xpAvantNiveau; // Expérience nécessaire pour atteindre le prochain niveau

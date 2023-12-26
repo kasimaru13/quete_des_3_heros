@@ -1,6 +1,6 @@
 package main.java.com.quete_des_3_heros.factory;
 
-import main.java.com.quete_des_3_heros.elements.Element;
+import main.java.com.quete_des_3_heros.element.Element;
 
 
 /**

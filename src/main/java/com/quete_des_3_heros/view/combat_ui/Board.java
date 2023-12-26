@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.ui.combat_ui;
+package main.java.com.quete_des_3_heros.view.combat_ui;
 
 
 import javax.imageio.ImageIO;
@@ -11,8 +11,8 @@ import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 
-import main.java.com.quete_des_3_heros.elements.Element;
-import main.java.com.quete_des_3_heros.ui.Constants;
+import main.java.com.quete_des_3_heros.element.Element;
+import main.java.com.quete_des_3_heros.view.Constants;
 
 /**
  * Panel in the center of the combat UI. It is a grid, containing characters, monsters and obstacles. 

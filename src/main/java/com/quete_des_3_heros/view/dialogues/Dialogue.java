@@ -1,12 +1,12 @@
-package main.java.com.quete_des_3_heros.ui.dialogues;
+package main.java.com.quete_des_3_heros.view.dialogues;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import main.java.com.quete_des_3_heros.ui.Constants;
-import main.java.com.quete_des_3_heros.ui.UI;
+import main.java.com.quete_des_3_heros.view.Constants;
+import main.java.com.quete_des_3_heros.view.UI;
 
 import java.awt.Color;
 import java.awt.Dimension;

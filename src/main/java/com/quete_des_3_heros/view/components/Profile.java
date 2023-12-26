@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.ui.components;
+package main.java.com.quete_des_3_heros.view.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.java.com.quete_des_3_heros.ui.Constants;
+import main.java.com.quete_des_3_heros.view.Constants;
 
 
 /**

@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.ui.combat_ui;
+package main.java.com.quete_des_3_heros.view.combat_ui;
 
 import java.awt.Graphics;
 

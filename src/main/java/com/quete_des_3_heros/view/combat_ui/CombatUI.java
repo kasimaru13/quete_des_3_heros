@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.ui.combat_ui;
+package main.java.com.quete_des_3_heros.view.combat_ui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import main.java.com.quete_des_3_heros.ui.Constants;
+import main.java.com.quete_des_3_heros.view.Constants;
 
 
 /**

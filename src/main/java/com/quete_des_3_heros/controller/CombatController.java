@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.controleurs;
+package main.java.com.quete_des_3_heros.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,34 +6,34 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import main.java.com.quete_des_3_heros.modele.ennemis.Monster;
-import main.java.com.quete_des_3_heros.modele.heros.Hero;
-import main.java.com.quete_des_3_heros.modele.heros.Mage;
-import main.java.com.quete_des_3_heros.modele.heros.Thief;
-import main.java.com.quete_des_3_heros.modele.heros.Warrior;
+import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.element.heros.Mage;
+import main.java.com.quete_des_3_heros.element.heros.Thief;
+import main.java.com.quete_des_3_heros.element.heros.Warrior;
 
 
 
 
-import main.java.com.quete_des_3_heros.modele.combattant;
+import main.java.com.quete_des_3_heros.element.Entity;
 
 
-public class combatcontrolleur {
-    private List<combattant> combattants;
+public class CombatController {
+    private List<Entity> Entities;
 
     // Constructeur
-    public combatcontrolleur(List<Hero> heros, List<Monster> monstres) {
+    public CombatController(List<Hero> heros, List<Monster> monstres) {
         // Fusionner les héros et les monstres en une seule liste
-        combattants = new ArrayList<>();
-        combattants.addAll(heros);
-        combattants.addAll(monstres);
+        Entities = new ArrayList<>();
+        Entities.addAll(heros);
+        Entities.addAll(monstres);
 
         // Trier les combattants par leur vitesse
-        Collections.sort(combattants, (c1, c2) -> c2.getVitesse() - c1.getVitesse());
-        Collections.sort(combattants, (c1, c2) -> c2.getVitesse() - c1.getVitesse());
+        Collections.sort(Entities, (c1, c2) -> c2.getVitesse() - c1.getVitesse());
+        Collections.sort(Entities, (c1, c2) -> c2.getVitesse() - c1.getVitesse());
 
         System.out.println("Ordre des combattants après le tri par vitesse :");
-        for (combattant c : combattants) {
+        for (Entity c : Entities) {
         String typeCombattant = c instanceof Hero ? "Héros" : "Monstre";
         System.out.println(typeCombattant + " - " + c.getClass().getSimpleName() + " (Vitesse: " + c.getVitesse() + ")");
         }
@@ -44,11 +44,11 @@ public class combatcontrolleur {
     public void demarrerCombat() {
         // Boucle du combat
         while (!combatTermine()) {
-            for (combattant combattant : combattants) {
-                executerTourCombattant(combattant);
+            for (Entity Entity : Entities) {
+                executerTourCombattant(Entity);
             }
             System.out.println("\nÉtat actuel des combattants:");
-            for (combattant c : combattants) {
+            for (Entity c : Entities) {
             String type = c instanceof Hero ? "Héros" : "Monstre";
             System.out.println(type + " - " + c.getClass().getSimpleName() + " (PV: " + c.getPv() + ")");
             }
@@ -57,17 +57,17 @@ public class combatcontrolleur {
 
     // Vérifie si le combat est terminé
     private boolean combatTermine() {
-        boolean tousLesHerosVaincus = combattants.stream().filter(c -> c instanceof Hero).allMatch(h -> h.getPv() <= 0);
-        boolean tousLesMonstresVaincus = combattants.stream().filter(c -> c instanceof Monster).allMatch(m -> m.getPv() <= 0);
+        boolean tousLesHerosVaincus = Entities.stream().filter(c -> c instanceof Hero).allMatch(h -> h.getPv() <= 0);
+        boolean tousLesMonstresVaincus = Entities.stream().filter(c -> c instanceof Monster).allMatch(m -> m.getPv() <= 0);
     
         return tousLesHerosVaincus || tousLesMonstresVaincus;
     }
     
 
     // Exécuter le tour d'un combattant
-    private void executerTourCombattant(combattant combattant) {
-        if (combattant instanceof Hero) {
-            Hero hero = (Hero) combattant;
+    private void executerTourCombattant(Entity Entity) {
+        if (Entity instanceof Hero) {
+            Hero hero = (Hero) Entity;
             
             // Demander au joueur de choisir entre attaquer ou se défendre
             System.out.println("Tour de " + hero.getClass().getSimpleName() + ":");
@@ -92,9 +92,9 @@ public class combatcontrolleur {
                 hero.defendre();
             }
     
-        } else if (combattant instanceof Monster) {
+        } else if (Entity instanceof Monster) {
             // Logique pour un monstre
-            Monster monstre = (Monster) combattant;
+            Monster monstre = (Monster) Entity;
             monstre.attaquer(trouverCibleHero());
         }
     }
@@ -102,7 +102,7 @@ public class combatcontrolleur {
 
     private Hero trouverCibleHero() {
     List<Hero> herosVivants = new ArrayList<>();
-    for (combattant c : combattants) {
+    for (Entity c : Entities) {
         if (c instanceof Hero && c.getPv() > 0) {
             herosVivants.add((Hero) c);
         }
@@ -119,7 +119,7 @@ public class combatcontrolleur {
 
     private Monster trouverCibleMonstre() {
         List<Monster> monstresVivants = new ArrayList<>();
-        for (combattant c : combattants) {
+        for (Entity c : Entities) {
             if (c instanceof Monster && c.getPv() > 0) {
                 monstresVivants.add((Monster) c);
             }

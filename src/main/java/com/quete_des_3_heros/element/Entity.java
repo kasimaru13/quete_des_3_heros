@@ -1,6 +1,6 @@
-package main.java.com.quete_des_3_heros.modele;
+package main.java.com.quete_des_3_heros.element;
 
-public abstract class combattant {
+public abstract class Entity {
     protected int pv; // Points de vie
     protected int totalPV; // Points de vie maximum
     protected int pm; // Points de magie
@@ -15,8 +15,8 @@ public abstract class combattant {
     protected String image; // Chemin de l'image du combattant
 
     // Constructeur
-    public combattant(int pv, int totalPV, int pm, int totalPM, int force, int intelligence,
-                      int agilite, int resistance, int vitesse, int esquive, int precision, String image) {
+    public Entity(int pv, int totalPV, int pm, int totalPM, int force, int intelligence,
+                  int agilite, int resistance, int vitesse, int esquive, int precision, String image) {
         this.pv = pv;
         this.totalPV = totalPV;
         this.pm = pm;
@@ -128,7 +128,7 @@ public abstract class combattant {
     }
 
     // Méthodes abstraites
-    public abstract void attaquer(combattant cible);
+    public abstract void attaquer(Entity cible);
 
     public void subirDegats(int degats) {
         this.pv -= degats;

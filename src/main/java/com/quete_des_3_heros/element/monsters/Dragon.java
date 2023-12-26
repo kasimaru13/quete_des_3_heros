@@ -11,7 +11,9 @@ public class Dragon extends Monster {
 
 }*/
 
-package main.java.com.quete_des_3_heros.modele.ennemis;
+package main.java.com.quete_des_3_heros.element.monsters;
+
+import main.java.com.quete_des_3_heros.element.Monster;
 
 public class Dragon extends Monster {
 

@@ -27,11 +27,13 @@ public class Warrior extends Hero {
     }
 }*/
 
-package main.java.com.quete_des_3_heros.modele.heros;
+package main.java.com.quete_des_3_heros.element.heros;
 
 import java.util.Random;
-import main.java.com.quete_des_3_heros.modele.combattant;
-import main.java.com.quete_des_3_heros.modele.ennemis.Monster;
+
+import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.element.Entity;
+import main.java.com.quete_des_3_heros.element.Monster;
 
 public class Warrior extends Hero {
 
@@ -40,7 +42,7 @@ public class Warrior extends Hero {
     }
 
     @Override
-    public void attaquer(combattant cible) {
+    public void attaquer(Entity cible) {
         if (cible instanceof Monster) {
             attaqueForte((Monster) cible);
         }

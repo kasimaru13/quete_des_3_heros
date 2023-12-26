@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.ui;
+package main.java.com.quete_des_3_heros.view;
 
 /**
  * Class containing all constant values of the game

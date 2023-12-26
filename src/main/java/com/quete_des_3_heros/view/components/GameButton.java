@@ -1,4 +1,4 @@
-package main.java.com.quete_des_3_heros.ui.components;
+package main.java.com.quete_des_3_heros.view.components;
 
 import java.awt.Color;
 import java.awt.Dimension;

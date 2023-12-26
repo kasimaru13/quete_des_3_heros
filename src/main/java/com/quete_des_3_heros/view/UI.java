@@ -1,10 +1,10 @@
-package main.java.com.quete_des_3_heros.ui;
+package main.java.com.quete_des_3_heros.view;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import main.java.com.quete_des_3_heros.ui.combat_ui.CombatUI;
-import main.java.com.quete_des_3_heros.ui.dialogues.Dialogue;
-import main.java.com.quete_des_3_heros.ui.title_screen.TitleScreen;
+import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
+import main.java.com.quete_des_3_heros.view.dialogues.Dialogue;
+import main.java.com.quete_des_3_heros.view.title_screen.TitleScreen;
 
 /**
  * Singleton frame containing every UI logic.

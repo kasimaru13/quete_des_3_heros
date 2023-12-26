@@ -1,7 +1,8 @@
 package main.java.com.quete_des_3_heros.factory;
 
-import main.java.com.quete_des_3_heros.elements.Element;
-import main.java.com.quete_des_3_heros.modele.ennemis.Monster;
+import main.java.com.quete_des_3_heros.element.Element;
+import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.element.monsters.Dragon;
 
 
 /**
@@ -9,6 +10,6 @@ import main.java.com.quete_des_3_heros.modele.ennemis.Monster;
  */
 public class ConcreteCreatorMonster extends Creator {
     public Element createElement() {
-        return new Monster();
+        return new Dragon();
     }
 }
