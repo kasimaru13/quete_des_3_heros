@@ -19,6 +19,9 @@ import main.java.com.quete_des_3_heros.element.Entity;
 
 
 public class CombatController {
+
+
+    /*
     private List<Entity> Entities;
 
     // Constructeur
@@ -164,4 +167,5 @@ public class CombatController {
     }
         return choix; // Retourne un choix valide
     }
+    */
 }

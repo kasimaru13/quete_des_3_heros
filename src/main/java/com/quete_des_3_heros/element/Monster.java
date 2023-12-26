@@ -156,7 +156,7 @@ public abstract class Monster {
 package main.java.com.quete_des_3_heros.element;
 
 public abstract class Monster extends Entity {
-
+    private int rangeAttack; // distance range of the base attack of the entity
     /**
      * Constructor of Monster inherits Entity
      *
@@ -173,8 +173,31 @@ public abstract class Monster extends Entity {
      * @param resistance   attribute resistance of the entity
      * @param speed        attribute speed of the entity
      * @param precision    attribute precision of the entity
+     * @param rangeAttack distance range of the base attack of the entity
      */
-    public Monster(int x, int y, String sprite, int health, int maxHealth, int mana, int maxMana, int strength, int intelligence, int agility, int resistance, int speed, int precision) {
+    public Monster(int x,
+                   int y,
+                   String sprite,
+                   int health,
+                   int maxHealth,
+                   int mana,
+                   int maxMana,
+                   int strength,
+                   int intelligence,
+                   int agility,
+                   int resistance,
+                   int speed,
+                   int precision,
+                   int rangeAttack) {
         super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision);
+        this.rangeAttack = rangeAttack;
+    }
+
+    public int getRangeAttack() {
+        return rangeAttack;
+    }
+
+    public void setRangeAttack(int rangeAttack) {
+        this.rangeAttack = rangeAttack;
     }
 }

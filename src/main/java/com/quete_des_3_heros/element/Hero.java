@@ -193,6 +193,10 @@ package main.java.com.quete_des_3_heros.element;
 
 public abstract class Hero extends Entity {
 
+    private int level; // level of the hero
+    private int xp; // experience points of the hero
+    private int xpMaxLevel; // maximum experience points of the level of the hero
+
     /**
      * Constructor of Hero inherits Entity
      *
@@ -210,8 +214,50 @@ public abstract class Hero extends Entity {
      * @param speed        attribute speed of the entity
      * @param precision    attribute precision of the entity
      */
-    public Hero(int x, int y, String sprite, int health, int maxHealth, int mana, int maxMana, int strength, int intelligence, int agility, int resistance, int speed, int precision) {
+    public Hero(int x,
+                int y,
+                String sprite,
+                int health,
+                int maxHealth,
+                int mana,
+                int maxMana,
+                int strength,
+                int intelligence,
+                int agility,
+                int resistance,
+                int speed,
+                int precision,
+                int level,
+                int xp,
+                int xpMaxLevel) {
         super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision);
+        this.level = level;
+        this.xp = xp;
+        this.xpMaxLevel = xpMaxLevel;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public int getXpMaxLevel() {
+        return xpMaxLevel;
+    }
+
+    public void setXpMaxLevel(int xpMaxLevel) {
+        this.xpMaxLevel = xpMaxLevel;
     }
 }
 
