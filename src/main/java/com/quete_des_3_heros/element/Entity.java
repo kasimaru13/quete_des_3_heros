@@ -1,74 +1,126 @@
 package main.java.com.quete_des_3_heros.element;
 
-public abstract class Entity {
-    protected int pv; // Points de vie
-    protected int totalPV; // Points de vie maximum
-    protected int pm; // Points de magie
-    protected int totalPM; // Points de magie maximum
-    protected int force; // Force physique ou magique
-    protected int intelligence; // Intelligence pour les attaques magiques
-    protected int agilite; // Agilité, affecte l'ordre d'attaque et l'esquive
-    protected int resistance; // Résistance aux dégâts
-    protected int vitesse; // Vitesse de déplacement
-    protected int esquive; // Capacité à esquiver les attaques
-    protected int precision; // Précision des attaques
-    protected String image; // Chemin de l'image du combattant
+public abstract class Entity implements Element{
+    private int x, y; // Position on the grid
+    private String sprite; // url of the sprite
+    private int health; // health points of the entity
+    private int maxHealth; // maximum health points of the entity
+    private int mana; // mana points of the entity
+    private int maxMana; // maximum mana points of the entity
+    private int strength; // attribute strength of the entity
+    private int intelligence; // attribute intelligence of the entity
+    private int agility; // attribute agility of the entity
+    private int resistance; // attribute resistance of the entity
+    private int speed; // attribute speed of the entity
+    private int precision; // attribute precision of the entity
 
-    // Constructeur
-    public Entity(int pv, int totalPV, int pm, int totalPM, int force, int intelligence,
-                  int agilite, int resistance, int vitesse, int esquive, int precision, String image) {
-        this.pv = pv;
-        this.totalPV = totalPV;
-        this.pm = pm;
-        this.totalPM = totalPM;
-        this.force = force;
+    /**
+     * Constructor of Entity
+     * @param x position of x-axis on the grid
+     * @param y position of y-axis on the grid
+     * @param sprite url of the sprite
+     * @param health health points of the entity
+     * @param maxHealth maximum health points of the entity
+     * @param mana mana points of the entity
+     * @param maxMana maximum mana points of the entity
+     * @param strength attribute strength of the entity
+     * @param intelligence attribute intelligence of the entity
+     * @param agility attribute agility of the entity
+     * @param resistance attribute resistance of the entity
+     * @param speed attribute speed of the entity
+     * @param precision attribute precision of the entity
+     */
+    public Entity(int x,
+                  int y,
+                  String sprite,
+                  int health,
+                  int maxHealth,
+                  int mana,
+                  int maxMana,
+                  int strength,
+                  int intelligence,
+                  int agility,
+                  int resistance,
+                  int speed,
+                  int precision){
+        this.x = x;
+        this.y = y;
+        this.sprite = sprite;
+        this.health = health;
+        this.maxHealth = maxHealth;
+        this.mana = mana;
+        this.maxMana = maxMana;
+        this.strength = strength;
         this.intelligence = intelligence;
-        this.agilite = agilite;
+        this.agility = agility;
         this.resistance = resistance;
-        this.vitesse = vitesse;
-        this.esquive = esquive;
+        this.speed = speed;
         this.precision = precision;
-        this.image = image;
     }
 
-    public int getPv() {
-        return pv;
+    public int getX() {
+        return x;
     }
 
-    public void setPv(int pv) {
-        this.pv = Math.max(0, Math.min(pv, this.totalPV));
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int getTotalPV() {
-        return totalPV;
+    public int getY() {
+        return y;
     }
 
-    public void setTotalPV(int totalPV) {
-        this.totalPV = Math.max(0, totalPV);
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public int getPm() {
-        return pm;
+    @Override
+    public String getSprite() {
+        return sprite;
     }
 
-    public void setPm(int pm) {
-        this.pm = Math.max(0, Math.min(pm, this.totalPM));
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
     }
 
-    public int getTotalPM() {
-        return totalPM;
+    public int getHealth() {
+        return health;
     }
 
-    public void setTotalPM(int totalPM) {
-        this.totalPM = Math.max(0, totalPM);
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    public int getForce() {
-        return force;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
-    public void setForce(int force) {
-        this.force = Math.max(0, force);
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public int getIntelligence() {
@@ -76,15 +128,15 @@ public abstract class Entity {
     }
 
     public void setIntelligence(int intelligence) {
-        this.intelligence = Math.max(0, intelligence);
+        this.intelligence = intelligence;
     }
 
-    public int getAgilite() {
-        return agilite;
+    public int getAgility() {
+        return agility;
     }
 
-    public void setAgilite(int agilite) {
-        this.agilite = Math.max(0, agilite);
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
     public int getResistance() {
@@ -92,23 +144,15 @@ public abstract class Entity {
     }
 
     public void setResistance(int resistance) {
-        this.resistance = Math.max(0, resistance);
+        this.resistance = resistance;
     }
 
-    public int getVitesse() {
-        return vitesse;
+    public int getSpeed() {
+        return speed;
     }
 
-    public void setVitesse(int vitesse) {
-        this.vitesse = Math.max(0, vitesse);
-    }
-
-    public int getEsquive() {
-        return esquive;
-    }
-
-    public void setEsquive(int esquive) {
-        this.esquive = Math.max(0, esquive);
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public int getPrecision() {
@@ -116,25 +160,7 @@ public abstract class Entity {
     }
 
     public void setPrecision(int precision) {
-        this.precision = Math.max(0, precision);
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    // Méthodes abstraites
-    public abstract void attaquer(Entity cible);
-
-    public void subirDegats(int degats) {
-        this.pv -= degats;
-        if (this.pv <= 0) {
-            System.out.println(this.getClass().getSimpleName() + " est mort.");
-        }
+        this.precision = precision;
     }
 }
 

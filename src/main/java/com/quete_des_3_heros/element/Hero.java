@@ -191,65 +191,27 @@ public void defendre() {
 
 package main.java.com.quete_des_3_heros.element;
 
-public abstract class Hero extends Entity implements Element {
-    private int niveau; // Niveau actuel du héros
-    private int xp; // Expérience actuelle
-    private int xpAvantNiveau; // Expérience nécessaire pour atteindre le prochain niveau
-    protected int defenseBonus; // Bonus de défense actuel
+public abstract class Hero extends Entity {
 
-    // Constructeur modifié de Hero
-    public Hero(int pv, int totalPV, int pm, int totalPM, int force, int intelligence,
-                int agilite, int resistance, int vitesse, int esquive, int precision,
-                String image, int niveau, int xp, int xpAvantNiveau) {
-        super(pv, totalPV, pm, totalPM, force, intelligence, agilite, resistance, vitesse, esquive, precision, image);
-        this.niveau = niveau;
-        this.xp = xp;
-        this.xpAvantNiveau = xpAvantNiveau;
-    }
-
-    // Getters et Setters pour les attributs spécifiques à Hero
-    public int getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(int niveau) {
-        this.niveau = Math.max(1, niveau);
-    }
-
-    public int getXp() {
-        return xp;
-    }
-
-    public void setXp(int xp) {
-        this.xp = Math.max(0, xp);
-    }
-
-    public int getXpAvantNiveau() {
-        return xpAvantNiveau;
-    }
-
-    public void setXpAvantNiveau(int xpAvantNiveau) {
-        this.xpAvantNiveau = Math.max(0, xpAvantNiveau);
-    }
-
-
-    @Override
-    public void subirDegats(int degats) {
-        int degatsEffectifs = Math.max(0, degats - defenseBonus);
-        super.subirDegats(degatsEffectifs); // Appel de la méthode de base si nécessaire
-
-        if (this.getPv() <= 0) {
-            // Gérer le cas où le héros meurt.
-            System.out.println("Le héros est mort.");
-        }
-        // Réinitialiser le defenseBonus après avoir subi des dégâts
-        defenseBonus = 0;
-    }
-
-    // Méthode spécifique à Hero
-    public void defendre() {
-        this.defenseBonus = this.getResistance();
-        System.out.println("Le héros se défend, augmentant sa résistance.");
+    /**
+     * Constructor of Hero inherits Entity
+     *
+     * @param x            position of x-axis on the grid
+     * @param y            position of y-axis on the grid
+     * @param sprite       url of the sprite
+     * @param health       health points of the entity
+     * @param maxHealth    maximum health points of the entity
+     * @param mana         mana points of the entity
+     * @param maxMana      maximum mana points of the entity
+     * @param strength     attribute strength of the entity
+     * @param intelligence attribute intelligence of the entity
+     * @param agility      attribute agility of the entity
+     * @param resistance   attribute resistance of the entity
+     * @param speed        attribute speed of the entity
+     * @param precision    attribute precision of the entity
+     */
+    public Hero(int x, int y, String sprite, int health, int maxHealth, int mana, int maxMana, int strength, int intelligence, int agility, int resistance, int speed, int precision) {
+        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision);
     }
 }
 
