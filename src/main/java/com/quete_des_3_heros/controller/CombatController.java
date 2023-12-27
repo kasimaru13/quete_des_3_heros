@@ -12,14 +12,25 @@ import main.java.com.quete_des_3_heros.element.heros.Mage;
 import main.java.com.quete_des_3_heros.element.heros.Thief;
 import main.java.com.quete_des_3_heros.element.heros.Warrior;
 
-
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 
 import main.java.com.quete_des_3_heros.element.Entity;
 
 
 public class CombatController {
+    private Board board;
 
+    public CombatController(int length, int width){
+        this.board = new Board(length, width);
+    }
+
+    public void addEntity(Entity entity, int x, int y){
+        board.addEntity(entity, x, y);
+    }
+    public void moveEntity(Entity entity, int newX, int newY){
+        board.moveEntity(entity, newX, newY);
+    }
 
     /*
     private List<Entity> Entities;

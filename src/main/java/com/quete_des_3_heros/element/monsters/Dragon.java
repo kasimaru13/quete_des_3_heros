@@ -18,8 +18,8 @@ import main.java.com.quete_des_3_heros.element.Monster;
 public class Dragon extends Monster {
 
     public Dragon() {
-        super(80, 80, 100, 100, 50, 20, 10,
-         30, 20, 10, 15, "image.pnj");
+        super(4, 4, "image.pnj", 100, 100, 30, 30,
+                20, 10, 10, 10, 10, 10, 2);
     }
 }
 

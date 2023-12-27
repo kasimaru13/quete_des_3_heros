@@ -42,11 +42,11 @@ public class Thief extends Hero {
 
     // Constructeur de Thief
     public Thief() {
-        super(100, 100, 30, 30, 15, 20, 40, 10, 40, 50, 90, "image.pnj", 1, 0, 100);
+        super(100, 100, "image.png", 30, 15, 20, 40, 10, 40, 50, 90, 11, 1, 1, 100, 200);
         this.furtivite = 50;
     }
 
-    @Override
+    /*
     public void attaquer(Entity cible) {
         if (cible instanceof Monster) {
             attaqueRapide((Monster) cible);
@@ -55,16 +55,17 @@ public class Thief extends Hero {
     }
 
     public void attaqueRapide(Monster ennemi) {
-    int chanceCritique = (this.getAgilite() + this.furtivite) / 3; // Chance d'un coup critique
-    int degatsBase = this.getForce(); // Dégâts de base basés sur la force
+    int chanceCritique = (this.getAgility() + this.furtivite) / 3; // Chance d'un coup critique
+    int degatsBase = this.getStrength(); // Dégâts de base basés sur la force
     boolean estCritique = (new Random().nextInt(100) < chanceCritique); // Génère une chance de coup critique
 
     int degats = estCritique ? degatsBase * 2 : degatsBase; // Dégâts doublés en cas de coup critique
-    ennemi.subirDegats(degats);
+
     if (estCritique) {
         System.out.println("Coup critique! Le voleur inflige " + degats + " points de dégâts!");
     } else {
         System.out.println("Le voleur attaque rapidement et inflige " + degats + " points de dégâts!");
     }
     }
+     */
 }

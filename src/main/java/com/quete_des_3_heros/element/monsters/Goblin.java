@@ -18,7 +18,7 @@ import main.java.com.quete_des_3_heros.element.Monster;
 public class Goblin extends Monster {
 
     public Goblin() {
-        super(40, 40, 100, 100, 30, 15, 10,
-         18, 20, 10, 10, "image.pnj");
+        super(8, 8, "image.pnj", 100, 100, 30, 30,
+         20, 10, 10, 10, 10, 10, 2);
     }
 }

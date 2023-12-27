@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import main.java.com.quete_des_3_heros.element.Element;
+import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.Constants;
 
 /**
@@ -19,15 +20,20 @@ import main.java.com.quete_des_3_heros.view.Constants;
  * When the player can move, his available moves are displayed on the grid as green squares.
  */
 public class Board extends JPanel implements MouseMotionListener{
-    private Element[] board; // Array of 256 values containing all the elements of the game to draw (characters, monsters and obstacles)
+    private Element[][] board; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
 
     private Image warrior; // TO GET RID OF WHEN BACKEND IS COMPLETE
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
 
-    public Board(){
-        board = new Element[256];
+    /**
+     *
+     * @param length length of the board
+     * @param width width of the board
+     */
+    public Board(int length, int width){
+        board = new Element[length][width];
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -48,7 +54,7 @@ public class Board extends JPanel implements MouseMotionListener{
         addMouseMotionListener(this);
     }
 
-    public Element[] getBoard() {
+    public Element[][] getBoard() {
         return board;
     }
 
@@ -132,5 +138,18 @@ public class Board extends JPanel implements MouseMotionListener{
             revalidate();
             repaint();
         }
+    }
+
+    public void addEntity(Entity entity, int x, int y){
+        entity.setX(x);
+        entity.setY(y);
+        board[entity.getX()][entity.getY()] = entity;
+    }
+
+    public void moveEntity(Entity entity, int newX, int newY){
+        board[entity.getX()][entity.getY()] = null;
+        entity.setX(newX);
+        entity.setY(newY);
+        board[entity.getX()][entity.getY()] = entity;
     }
 }

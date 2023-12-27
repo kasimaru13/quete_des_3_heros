@@ -24,7 +24,7 @@ public class CombatUI extends JPanel implements ActionListener {
         setFocusable(true);
         
         // Initialise different panels
-        board = new Board();
+        board = new Board(16, 16);
         leftPanel = new LeftPanel();
         rightPanel = new RightPanel();
 

@@ -39,10 +39,10 @@ import java.util.Random;
 public class Mage extends Hero {
 
     public Mage() {
-        super(100, 100, 50, 50, 10, 30, 20, 15, 25, 10, 80, "mage.png", 1, 0, 100);
+        super(100, 100, "mage.png", 50, 10, 30, 20, 15, 25, 10, 80, 10, 1, 1, 100, 200);
     }
 
-    @Override
+    /*
     public void attaquer(Entity cible) {
         if (cible instanceof Monster) {
             attaqueMagique((Monster) cible);
@@ -50,17 +50,18 @@ public class Mage extends Hero {
     }
 
     public void attaqueMagique(Monster ennemi) {
-    int chanceAttaqueMagique = (this.getAgilite() + this.getIntelligence()) / 2; // Chance d'un coup critique
-    int degatsBase = this.getForce(); // Dégâts de base basés sur la force
+    int chanceAttaqueMagique = (this.getAgility() + this.getIntelligence()) / 2; // Chance d'un coup critique
+    int degatsBase = this.getStrength(); // Dégâts de base basés sur la force
     boolean estCritique = (new Random().nextInt(100) < chanceAttaqueMagique); // Génère une chance de coup critique
 
     int degats = estCritique ? degatsBase * 2 : degatsBase; // Dégâts doublés en cas de coup critique
-    ennemi.subirDegats(degats);
+
     if (estCritique) {
         System.out.println("Coup critique! Le mage inflige " + degats + " points de dégâts!");
     } else {
         System.out.println("Le mage attaque avec ineligence et inflige " + degats + " points de dégâts!");
     }
     }
+    */
 }
 
