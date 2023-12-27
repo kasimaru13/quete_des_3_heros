@@ -37,9 +37,9 @@ import main.java.com.quete_des_3_heros.element.Monster;
 
 public class Warrior extends Hero {
 
-    public Warrior(int x, int y) {
-        super(x,
-                y,
+    public Warrior() {
+        super(0,
+                0,
                 "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
                 200,
                 200,

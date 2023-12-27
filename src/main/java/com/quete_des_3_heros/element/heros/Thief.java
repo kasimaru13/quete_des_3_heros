@@ -40,7 +40,7 @@ import java.util.Random;
 public class Thief extends Hero {
     // Constructeur de Thief
     public Thief() {
-        super(3,
+        super(0,
                 0,
                 "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
                 100,
