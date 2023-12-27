@@ -78,6 +78,7 @@ public class Board extends JPanel implements MouseMotionListener{
 
         // Draw sprites
         addEntity(g, warrior);
+        moveEntity(warrior, 4, 4);
 
         // Draw possible moves
         drawPossibleMoves(possibleMoves, g);
@@ -147,7 +148,7 @@ public class Board extends JPanel implements MouseMotionListener{
         g.drawImage(entity.getSprite(), entity.getX() + (entity.getX()*48), entity.getY() + (entity.getY()*48), null);
     }
 
-    public void moveEntity(Graphics g, Entity entity, int newX, int newY){
+    public void moveEntity(Entity entity, int newX, int newY){
         board[entity.getX()][entity.getY()] = null;
         entity.setX(newX);
         entity.setY(newY);
