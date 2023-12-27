@@ -2,6 +2,7 @@ package main.java.com.quete_des_3_heros.factory;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Element;
+import main.java.com.quete_des_3_heros.element.heros.Mage;
 import main.java.com.quete_des_3_heros.element.heros.Warrior;
 
 /**
@@ -9,6 +10,6 @@ import main.java.com.quete_des_3_heros.element.heros.Warrior;
  */
 public class ConcreteCreatorHero extends Creator {
     public Element createElement(){
-        return new Warrior();
+        return new Mage();
     }
 }

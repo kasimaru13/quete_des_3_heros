@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
+import main.java.com.quete_des_3_heros.element.heros.Warrior;
 import main.java.com.quete_des_3_heros.view.Constants;
 
 /**
@@ -24,7 +25,7 @@ public class Board extends JPanel implements MouseMotionListener{
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
 
-    private Image warrior; // TO GET RID OF WHEN BACKEND IS COMPLETE
+    private Warrior warrior; // TO GET RID OF WHEN BACKEND IS COMPLETE
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
 
     /**
@@ -45,11 +46,12 @@ public class Board extends JPanel implements MouseMotionListener{
         // Import background image and player sprites (GET RID OF THE PLAYER SPRITE WHEN BACKEND IS COMPLETE)
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png")).getSubimage(0, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
-            warrior = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png"));
         } catch (IOException e) {
             System.out.println("Erreur dans la lecture des images du jeu");
             System.exit(0);
         }
+
+        warrior = new Warrior(0, 0);
 
         addMouseMotionListener(this);
     }
@@ -75,7 +77,7 @@ public class Board extends JPanel implements MouseMotionListener{
         }
 
         // Draw sprites
-        g.drawImage(warrior, 672+14, 0, null);
+        addEntity(g, warrior);
 
         // Draw possible moves
         drawPossibleMoves(possibleMoves, g);
@@ -140,13 +142,12 @@ public class Board extends JPanel implements MouseMotionListener{
         }
     }
 
-    public void addEntity(Entity entity, int x, int y){
-        entity.setX(x);
-        entity.setY(y);
+    public void addEntity(Graphics g, Entity entity){
         board[entity.getX()][entity.getY()] = entity;
+        g.drawImage(entity.getSprite(), (entity.getX()*48)+14, (entity.getY()), null);
     }
 
-    public void moveEntity(Entity entity, int newX, int newY){
+    public void moveEntity(Graphics g, Entity entity, int newX, int newY){
         board[entity.getX()][entity.getY()] = null;
         entity.setX(newX);
         entity.setY(newY);

@@ -38,12 +38,24 @@ import main.java.com.quete_des_3_heros.element.Monster;
 import java.util.Random;
 
 public class Thief extends Hero {
-    private int furtivite; // Niveau de furtivité spécifique au voleur
-
     // Constructeur de Thief
     public Thief() {
-        super(100, 100, "image.png", 30, 15, 20, 40, 10, 40, 50, 90, 11, 1, 1, 100, 200);
-        this.furtivite = 50;
+        super(3,
+                0,
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
+                100,
+                100,
+                100,
+                100,
+                10,
+                5,
+                30,
+                10,
+                15,
+                30,
+                1,
+                0,
+                200);
     }
 
     /*

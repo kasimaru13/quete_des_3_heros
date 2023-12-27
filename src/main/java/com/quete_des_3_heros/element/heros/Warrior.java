@@ -37,8 +37,23 @@ import main.java.com.quete_des_3_heros.element.Monster;
 
 public class Warrior extends Hero {
 
-    public Warrior() {
-        super(100, 100, "image.pnj", 30, 20, 8, 10, 15, 8, 5, 12, 10, 1, 1, 0, 200);
+    public Warrior(int x, int y) {
+        super(x,
+                y,
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
+                200,
+                200,
+                50,
+                50,
+                30,
+                5,
+                10,
+                15,
+                10,
+                15,
+                1,
+                0,
+                200);
     }
 
     /*

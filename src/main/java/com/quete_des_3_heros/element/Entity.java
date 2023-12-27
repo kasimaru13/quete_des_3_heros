@@ -1,8 +1,13 @@
 package main.java.com.quete_des_3_heros.element;
 
+import javax.imageio.ImageIO;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
 public abstract class Entity implements Element{
     private int x, y; // Position on the grid
-    private String sprite; // url of the sprite
+    private Image sprite; // image of the sprite
     private int health; // health points of the entity
     private int maxHealth; // maximum health points of the entity
     private int mana; // mana points of the entity
@@ -45,7 +50,12 @@ public abstract class Entity implements Element{
                   int precision){
         this.x = x;
         this.y = y;
-        this.sprite = sprite;
+        try{
+            this.sprite = ImageIO.read(new File(sprite));
+        } catch (IOException e) {
+            System.out.println("Erreur dans la lecture des images du jeu");
+            System.exit(0);
+        }
         this.health = health;
         this.maxHealth = maxHealth;
         this.mana = mana;
@@ -75,11 +85,11 @@ public abstract class Entity implements Element{
     }
 
     @Override
-    public String getSprite() {
+    public Image getSprite() {
         return sprite;
     }
 
-    public void setSprite(String sprite) {
+    public void setSprite(Image sprite) {
         this.sprite = sprite;
     }
 

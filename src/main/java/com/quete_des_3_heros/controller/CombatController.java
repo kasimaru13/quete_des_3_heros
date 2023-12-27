@@ -1,5 +1,6 @@
 package main.java.com.quete_des_3_heros.controller;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,15 +22,16 @@ import main.java.com.quete_des_3_heros.element.Entity;
 public class CombatController {
     private Board board;
 
-    public CombatController(int length, int width){
-        this.board = new Board(length, width);
+
+    public CombatController(Board board){
+        this.board = board;
     }
 
-    public void addEntity(Entity entity, int x, int y){
-        board.addEntity(entity, x, y);
+    public void addEntity(Graphics g, Entity entity){
+        board.addEntity(g, entity);
     }
-    public void moveEntity(Entity entity, int newX, int newY){
-        board.moveEntity(entity, newX, newY);
+    public void moveEntity(Graphics g, Entity entity, int newX, int newY){
+        board.moveEntity(g, entity, newX, newY);
     }
 
     /*

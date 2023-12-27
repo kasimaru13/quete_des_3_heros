@@ -39,7 +39,22 @@ import java.util.Random;
 public class Mage extends Hero {
 
     public Mage() {
-        super(100, 100, "mage.png", 50, 10, 30, 20, 15, 25, 10, 80, 10, 1, 1, 100, 200);
+        super(5,
+                0,
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
+                50,
+                50,
+                150,
+                150,
+                5,
+                30,
+                10,
+                5,
+                13,
+                30,
+                1,
+                0,
+                200);
     }
 
     /*
