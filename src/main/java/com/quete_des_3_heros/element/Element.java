@@ -9,6 +9,6 @@ import java.awt.*;
  */
 public interface Element {
     public Image getSprite();
-    public void damage(Board board, int targetX, int targetY);
+    public void damage(Board board, int targetX, int targetY, int damage);
     public void hurt(int damage);
 }

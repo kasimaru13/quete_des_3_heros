@@ -73,13 +73,14 @@ public abstract class Entity implements Element{
         this.alive = true;
     }
 
-    public void damage(Board board, int targetX, int targetY){
+    public void damage(Board board, int targetX, int targetY, int damage){
         // Vérifiez si les coordonnées de la cible sont valides
         if (targetX >= 0 && targetX < board.getWidth() && targetY >= 0 && targetY < board.getHeight()) {
             System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
             if((target = board.getEntity(targetX, targetY)) != null){
-                target.hurt(10);
+                target.hurt(damage);
+                System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " !");
             }
             else {
                 System.out.println("Cible ratée !");
