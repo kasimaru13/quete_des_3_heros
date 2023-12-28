@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import main.java.com.quete_des_3_heros.controller.CombatController;
 import main.java.com.quete_des_3_heros.element.Hero;
@@ -39,13 +39,7 @@ public class CombatUI extends JPanel implements ActionListener {
     private Skeleton skeleton;
     private Dragon dragon;
 
-
-    
-
     public CombatUI(){
-        // Initialise CombatUI preferences
-        initCombatUI();
-
         // Heroes
         warrior = new Warrior();
         mage = new Mage();
@@ -64,7 +58,21 @@ public class CombatUI extends JPanel implements ActionListener {
         monsters.add(skeleton);
         monsters.add(dragon);
 
-        combatController.setPriorityList(heroes, monsters);
+        combatController.setEntities(heroes, monsters);
+
+        // Initialise CombatUI preferences
+        initCombatUI();
+
+        combatController.addEntity(warrior, 8, 2);
+        combatController.addEntity(mage, 9, 2);
+        combatController.addEntity(thief, 10, 2);
+        combatController.addEntity(goblin, 8, 13);
+        combatController.addEntity(skeleton, 9, 13);
+        combatController.addEntity(dragon, 10, 13);
+
+        updateCombatUI();
+
+        combatController.moveEntity(dragon, 12, 13);
     }
 
     private void initCombatUI(){
@@ -72,7 +80,7 @@ public class CombatUI extends JPanel implements ActionListener {
         setFocusable(true);
 
         // Initialise different panels
-        board = new Board(16, 16);
+        board = new Board(16, 16, combatController.getEntities());
         leftPanel = new LeftPanel();
         rightPanel = new RightPanel();
 
@@ -95,11 +103,17 @@ public class CombatUI extends JPanel implements ActionListener {
         setVisible(true);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Here, 'g' is the Graphics object that you can use for custom painting
-        // Perform custom drawing/painting using 'g' here
+    private void updateCombatUI() {
+        for (int i = 0; i < board.getBoardLength(); i++) {
+            for (int j = 0; j < board.getBoardWidth(); j++) {
+                if (board.getEntity(i, j) != null) {
+                    System.out.print(" " + board.getEntity(i, j).getClass().getSimpleName().charAt(0) + " ");
+                } else {
+                    System.out.print(" - ");
+                }
+            }
+            System.out.println();
+        }
     }
 
 
