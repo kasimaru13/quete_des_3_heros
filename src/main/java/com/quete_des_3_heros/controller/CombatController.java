@@ -3,39 +3,45 @@ package main.java.com.quete_des_3_heros.controller;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
-import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.element.Hero;
-import main.java.com.quete_des_3_heros.element.heros.Mage;
-import main.java.com.quete_des_3_heros.element.heros.Thief;
-import main.java.com.quete_des_3_heros.element.heros.Warrior;
-
+import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 
 import main.java.com.quete_des_3_heros.element.Entity;
+import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 
 
 public class CombatController {
-    private Board board;
+    private CombatUI combatUI;
+    private ArrayList<Entity> entities;
 
-
-    public CombatController(Board board){
-        this.board = board;
+    public CombatController(CombatUI combatUI){
+        this.combatUI = combatUI;
+        this.entities = new ArrayList<>();
     }
 
-    public void addEntity(Graphics g, Entity entity){
-        board.addEntity(g, entity);
+    public void addEntity(Entity entity, int x, int y){
+        combatUI.getBoard().addEntity(combatUI.getGraphics(), entity, x, y);
     }
-    public void moveEntity(Graphics g, Entity entity, int newX, int newY){
-        board.moveEntity(g, entity, newX, newY);
+
+    public void moveEntity(Entity entity, int newX, int newY){
+        combatUI.getBoard().moveEntity(entity, newX, newY);
+    }
+
+    public void setPriorityList(ArrayList<Hero> heroes, ArrayList<Monster> monsters){
+        entities.addAll(heroes);
+        entities.addAll(monsters);
+        entities.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
+        for (Entity e : entities) {
+            String typeEntity = e instanceof Hero ? "Héros" : "Monstre";
+            System.out.println(typeEntity + " - " + e.getClass().getSimpleName() + " (Vitesse: " + e.getSpeed() + ")");
+        }
     }
 
     /*
-    private List<Entity> Entities;
+
 
     // Constructeur
     public CombatController(List<Hero> heros, List<Monster> monstres) {

@@ -18,7 +18,7 @@ import main.java.com.quete_des_3_heros.element.Monster;
 public class Skeleton extends Monster {
 
     public Skeleton() {
-        super(3, 3, "image.pnj", 100, 100, 30, 30,
+        super(0, 0, "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png", 100, 100, 30, 30,
                 20, 10, 10, 10, 10, 10, 2);
     }
 }

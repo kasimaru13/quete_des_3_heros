@@ -18,9 +18,9 @@ import main.java.com.quete_des_3_heros.element.Monster;
 public class Dragon extends Monster {
 
     public Dragon() {
-        super(4,
-                4,
-                "image.pnj",
+        super(0,
+                0,
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png",
                 100,
                 100,
                 30,

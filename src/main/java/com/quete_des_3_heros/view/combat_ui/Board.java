@@ -21,7 +21,7 @@ import main.java.com.quete_des_3_heros.view.Constants;
  * When the player can move, his available moves are displayed on the grid as green squares.
  */
 public class Board extends JPanel implements MouseMotionListener{
-    private Element[][] board; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
+    private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
 
@@ -34,7 +34,7 @@ public class Board extends JPanel implements MouseMotionListener{
      * @param width width of the board
      */
     public Board(int length, int width){
-        board = new Element[length][width];
+        grid = new Element[length][width];
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -51,13 +51,11 @@ public class Board extends JPanel implements MouseMotionListener{
             System.exit(0);
         }
 
-        warrior = new Warrior(2, 15);
-
         addMouseMotionListener(this);
     }
 
-    public Element[][] getBoard() {
-        return board;
+    public Element[][] getGrid() {
+        return grid;
     }
 
     @Override
@@ -77,8 +75,7 @@ public class Board extends JPanel implements MouseMotionListener{
         }
 
         // Draw sprites
-        addEntity(g, warrior);
-        moveEntity(warrior, 4, 4);
+
 
         // Draw possible moves
         drawPossibleMoves(possibleMoves, g);
@@ -143,15 +140,21 @@ public class Board extends JPanel implements MouseMotionListener{
         }
     }
 
-    public void addEntity(Graphics g, Entity entity){
-        board[entity.getX()][entity.getY()] = entity;
-        g.drawImage(entity.getSprite(), entity.getX() + (entity.getX()*48), entity.getY() + (entity.getY()*48), null);
+    public void addEntity(Graphics g, Entity entity, int x, int y){
+        entity.setX(x);
+        entity.setY(y);
+        grid[entity.getX()][entity.getY()] = entity;
+        // g.drawImage(entity.getSprite(), entity.getX() + (entity.getX()*48), entity.getY() + (entity.getY()*48), null);
     }
 
     public void moveEntity(Entity entity, int newX, int newY){
-        board[entity.getX()][entity.getY()] = null;
+        grid[entity.getX()][entity.getY()] = null;
         entity.setX(newX);
         entity.setY(newY);
-        board[entity.getX()][entity.getY()] = entity;
+        grid[entity.getX()][entity.getY()] = entity;
+    }
+
+    public Element getEntity(int x, int y){
+        return grid[x][y];
     }
 }
