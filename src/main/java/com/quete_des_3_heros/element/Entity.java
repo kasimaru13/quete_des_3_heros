@@ -74,13 +74,14 @@ public abstract class Entity implements Element{
     }
 
     public void damage(Board board, int targetX, int targetY, int damage){
-        // Vérifiez si les coordonnées de la cible sont valides
+        // Verify if coordinates of the target are valid
         if (targetX >= 0 && targetX < board.getWidth() && targetY >= 0 && targetY < board.getHeight()) {
             System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
+            // Verify if there is a target at the coordinates
             if((target = board.getEntity(targetX, targetY)) != null){
                 target.hurt(damage);
-                System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " !");
+                System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
             }
             else {
                 System.out.println("Cible ratée !");
@@ -91,6 +92,7 @@ public abstract class Entity implements Element{
     }
 
     public void hurt(int damage) {
+        // Lower the health by the amount of damage
         this.health -= damage;
         if (health <= 0) {
             alive = false;

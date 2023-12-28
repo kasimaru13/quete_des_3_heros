@@ -10,6 +10,23 @@ public class Obstacle extends Entity {
      * @param sprite       url of the sprite
      */
     public Obstacle(int x, int y, String sprite) {
-        super(x, y, sprite, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        super(x,
+                y,
+                sprite,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0);
+    }
+
+    @Override
+    public void hurt(int damage) {
+        System.out.println("C'est un obtacle !");
     }
 }
