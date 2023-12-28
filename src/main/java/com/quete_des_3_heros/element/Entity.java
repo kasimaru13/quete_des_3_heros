@@ -1,23 +1,27 @@
 package main.java.com.quete_des_3_heros.element;
 
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
+
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
 public abstract class Entity implements Element{
-    private int x, y; // Position on the grid
-    private Image sprite; // image of the sprite
-    private int health; // health points of the entity
-    private int maxHealth; // maximum health points of the entity
-    private int mana; // mana points of the entity
-    private int maxMana; // maximum mana points of the entity
-    private int strength; // attribute strength of the entity
-    private int intelligence; // attribute intelligence of the entity
-    private int agility; // attribute agility of the entity
-    private int resistance; // attribute resistance of the entity
-    private int speed; // attribute speed of the entity
-    private int precision; // attribute precision of the entity
+    protected int x, y; // Position on the grid
+    protected Image sprite; // image of the sprite
+    protected int health; // health points of the entity
+    protected int maxHealth; // maximum health points of the entity
+    protected int mana; // mana points of the entity
+    protected int maxMana; // maximum mana points of the entity
+    protected int strength; // attribute strength of the entity
+    protected int intelligence; // attribute intelligence of the entity
+    protected int agility; // attribute agility of the entity
+    protected int resistance; // attribute resistance of the entity
+    protected int speed; // attribute speed of the entity
+    protected int precision; // attribute precision of the entity
+    protected boolean alive; // entity alive or not
+
 
     /**
      * Constructor of Entity
@@ -66,6 +70,31 @@ public abstract class Entity implements Element{
         this.resistance = resistance;
         this.speed = speed;
         this.precision = precision;
+        this.alive = true;
+    }
+
+    public void damage(Board board, int targetX, int targetY){
+        // Vérifiez si les coordonnées de la cible sont valides
+        if (targetX >= 0 && targetX < board.getWidth() && targetY >= 0 && targetY < board.getHeight()) {
+            System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
+            Element target;
+            if((target = board.getEntity(targetX, targetY)) != null){
+                target.hurt(10);
+            }
+            else {
+                System.out.println("Cible ratée !");
+            }
+        } else {
+            System.out.println("Coordonnées de la cible invalides !");
+        }
+    }
+
+    public void hurt(int damage) {
+        this.health -= damage;
+        if (health <= 0) {
+            alive = false;
+            System.out.println(this.getClass().getSimpleName() + " est mort.");
+        }
     }
 
     public int getX() {
@@ -171,6 +200,14 @@ public abstract class Entity implements Element{
 
     public void setPrecision(int precision) {
         this.precision = precision;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }
 
