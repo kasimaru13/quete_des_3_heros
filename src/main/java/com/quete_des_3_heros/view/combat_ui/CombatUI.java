@@ -25,12 +25,12 @@ import main.java.com.quete_des_3_heros.view.Constants;
  */
 public class CombatUI extends JPanel implements ActionListener {
     private Board board;
-    LeftPanel leftPanel;
-    RightPanel rightPanel;
+    private LeftPanel leftPanel;
+    private RightPanel rightPanel;
 
-    ArrayList<Hero> heroes = new ArrayList<>();
-    ArrayList<Monster> monsters = new ArrayList<>();
-    CombatController combatController = new CombatController(this);
+    private ArrayList<Hero> heroes = new ArrayList<>();
+    private ArrayList<Monster> monsters = new ArrayList<>();
+    private CombatController combatController = new CombatController(this);
 
     private Warrior warrior;
     private Mage mage;
@@ -43,32 +43,8 @@ public class CombatUI extends JPanel implements ActionListener {
     
 
     public CombatUI(){
-        setBackground(Color.blue);
-        setFocusable(true);
-
-        // Initialise different panels
-        setBoard(new Board(16, 16));
-        leftPanel = new LeftPanel();
-        rightPanel = new RightPanel();
-
-        // ActionListner on RightPanel's Buttons
-        rightPanel.getAttackButton().addActionListener(this);
-        rightPanel.getDefendButton().addActionListener(this);
-        rightPanel.getSkillButton().addActionListener(this);
-        rightPanel.getItemButton().addActionListener(this);
-        
-
-        // Set size of the panels
-        setLayout(null);
-        leftPanel.setBounds(0, 0, Constants.LEFTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
-        getBoard().setBounds(280, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
-        rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
-
-        // Add the panels to the UI
-        add(leftPanel);
-        add(getBoard());
-        add(rightPanel);
-        setVisible(true);
+        // Initialise CombatUI preferences
+        initCombatUI();
 
         // Heroes
         warrior = new Warrior();
@@ -89,6 +65,34 @@ public class CombatUI extends JPanel implements ActionListener {
         monsters.add(dragon);
 
         combatController.setPriorityList(heroes, monsters);
+    }
+
+    private void initCombatUI(){
+        setBackground(Color.blue);
+        setFocusable(true);
+
+        // Initialise different panels
+        board = new Board(16, 16);
+        leftPanel = new LeftPanel();
+        rightPanel = new RightPanel();
+
+        // ActionListner on RightPanel's Buttons
+        rightPanel.getAttackButton().addActionListener(this);
+        rightPanel.getDefendButton().addActionListener(this);
+        rightPanel.getSkillButton().addActionListener(this);
+        rightPanel.getItemButton().addActionListener(this);
+
+        // Set size of the panels
+        setLayout(null);
+        leftPanel.setBounds(0, 0, Constants.LEFTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
+        board.setBounds(280, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
+        rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
+
+        // Add the panels to the UI
+        add(leftPanel);
+        add(board);
+        add(rightPanel);
+        setVisible(true);
     }
 
     @Override

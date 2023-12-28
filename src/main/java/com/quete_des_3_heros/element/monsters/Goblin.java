@@ -19,6 +19,6 @@ public class Goblin extends Monster {
 
     public Goblin() {
         super(0, 0, "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png", 100, 100, 30, 30,
-         20, 10, 10, 10, 10, 10, 2);
+         20, 10, 10, 10, 14, 10, 2);
     }
 }

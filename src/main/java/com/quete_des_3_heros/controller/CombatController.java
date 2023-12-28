@@ -15,11 +15,11 @@ import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 
 public class CombatController {
     private CombatUI combatUI;
-    private ArrayList<Entity> entities;
+    private ArrayList<Entity> priorityList;
 
     public CombatController(CombatUI combatUI){
         this.combatUI = combatUI;
-        this.entities = new ArrayList<>();
+        this.priorityList = new ArrayList<>();
     }
 
     public void addEntity(Entity entity, int x, int y){
@@ -30,11 +30,15 @@ public class CombatController {
         combatUI.getBoard().moveEntity(entity, newX, newY);
     }
 
+    public ArrayList<Entity> getPriorityList(){
+        return priorityList;
+    }
     public void setPriorityList(ArrayList<Hero> heroes, ArrayList<Monster> monsters){
-        entities.addAll(heroes);
-        entities.addAll(monsters);
-        entities.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
-        for (Entity e : entities) {
+        priorityList.clear();
+        priorityList.addAll(heroes);
+        priorityList.addAll(monsters);
+        priorityList.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
+        for (Entity e : priorityList) {
             String typeEntity = e instanceof Hero ? "Héros" : "Monstre";
             System.out.println(typeEntity + " - " + e.getClass().getSimpleName() + " (Vitesse: " + e.getSpeed() + ")");
         }
