@@ -14,6 +14,7 @@ public class Dragon extends Monster {
 package main.java.com.quete_des_3_heros.element.monsters;
 
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Dragon extends Monster {
 
@@ -31,7 +32,13 @@ public class Dragon extends Monster {
                 10,
                 20,
                 10,
+                0.3,
                 2);
+    }
+
+    @Override
+    public void attack(Board board, int targetX, int targetY) {
+        getDamage(board, targetX, targetY, this.strength);
     }
 }
 

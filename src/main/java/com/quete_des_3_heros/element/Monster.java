@@ -174,6 +174,7 @@ public abstract class Monster extends Entity {
      * @param speed        attribute speed of the entity
      * @param precision    attribute precision of the entity
      * @param rangeAttack distance range of the base attack of the entity
+     * @param criticalRate attribute critical rate of the entity
      */
     public Monster(int x,
                    int y,
@@ -188,8 +189,9 @@ public abstract class Monster extends Entity {
                    int resistance,
                    int speed,
                    int precision,
+                   double criticalRate,
                    int rangeAttack) {
-        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision);
+        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate);
         this.rangeAttack = rangeAttack;
     }
 

@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public abstract class Entity implements Element{
     protected int x, y; // Position on the grid
@@ -20,8 +21,8 @@ public abstract class Entity implements Element{
     protected int resistance; // attribute resistance of the entity
     protected int speed; // attribute speed of the entity
     protected int precision; // attribute precision of the entity
+    protected double criticalRate; // attribute critical rate of the entity
     protected boolean alive; // entity alive or not
-
 
     /**
      * Constructor of Entity
@@ -38,6 +39,7 @@ public abstract class Entity implements Element{
      * @param resistance attribute resistance of the entity
      * @param speed attribute speed of the entity
      * @param precision attribute precision of the entity
+     * @param criticalRate attribute critical rate of the entity
      */
     public Entity(int x,
                   int y,
@@ -51,7 +53,8 @@ public abstract class Entity implements Element{
                   int agility,
                   int resistance,
                   int speed,
-                  int precision){
+                  int precision,
+                  double criticalRate){
         this.x = x;
         this.y = y;
         try{
@@ -70,12 +73,31 @@ public abstract class Entity implements Element{
         this.resistance = resistance;
         this.speed = speed;
         this.precision = precision;
+        this.criticalRate = criticalRate;
         this.alive = true;
     }
 
-    public void damage(Board board, int targetX, int targetY, int damage){
+    public void attack(Board board, int targetX, int targetY) {
+        int damage = 10;
+        getDamage(board, targetX, targetY, getCriticalDamage(damage)); // For example, Warrior main's stat is strength
+    }
+
+    public int getCriticalDamage(int damage){
+        Random random = new Random();
+        double criticalValue = random.nextDouble(); // Value between 0 and 1
+        if (criticalValue < criticalRate) {
+            // The damage are critical
+            double multiplier = 1.5;
+            return (int) (damage * multiplier);
+        } else {
+            // The damage are not critical
+            return damage;
+        }
+    }
+
+    public void getDamage(Board board, int targetX, int targetY, int damage){
         // Verify if coordinates of the target are valid
-        if (targetX >= 0 && targetX < board.getWidth() && targetY >= 0 && targetY < board.getHeight()) {
+        if (targetX >= 0 && targetX < board.getBoardLength() && targetY >= 0 && targetY < board.getBoardWidth()) {
             System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
             // Verify if there is a target at the coordinates
@@ -203,6 +225,14 @@ public abstract class Entity implements Element{
 
     public void setPrecision(int precision) {
         this.precision = precision;
+    }
+
+    public double getCriticalRate() {
+        return criticalRate;
+    }
+
+    public void setCriticalRate(int criticalRate) {
+        this.criticalRate = criticalRate;
     }
 
     public boolean isAlive() {

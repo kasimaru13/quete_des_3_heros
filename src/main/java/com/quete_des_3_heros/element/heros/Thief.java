@@ -35,6 +35,8 @@ package main.java.com.quete_des_3_heros.element.heros;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
+
 import java.util.Random;
 
 public class Thief extends Hero {
@@ -53,31 +55,14 @@ public class Thief extends Hero {
                 10,
                 15,
                 30,
+                0.3,
                 1,
                 0,
                 200);
     }
 
-    /*
-    public void attaquer(Entity cible) {
-        if (cible instanceof Monster) {
-            attaqueRapide((Monster) cible);
-        }
-        // Autres logiques d'attaque si nécessaire
+    @Override
+    public void attack(Board board, int targetX, int targetY) {
+        getDamage(board, targetX, targetY, this.agility);
     }
-
-    public void attaqueRapide(Monster ennemi) {
-    int chanceCritique = (this.getAgility() + this.furtivite) / 3; // Chance d'un coup critique
-    int degatsBase = this.getStrength(); // Dégâts de base basés sur la force
-    boolean estCritique = (new Random().nextInt(100) < chanceCritique); // Génère une chance de coup critique
-
-    int degats = estCritique ? degatsBase * 2 : degatsBase; // Dégâts doublés en cas de coup critique
-
-    if (estCritique) {
-        System.out.println("Coup critique! Le voleur inflige " + degats + " points de dégâts!");
-    } else {
-        System.out.println("Le voleur attaque rapidement et inflige " + degats + " points de dégâts!");
-    }
-    }
-     */
 }

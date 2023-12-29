@@ -191,6 +191,8 @@ public void defendre() {
 
 package main.java.com.quete_des_3_heros.element;
 
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
+
 public abstract class Hero extends Entity {
 
     private int level; // level of the hero
@@ -213,6 +215,7 @@ public abstract class Hero extends Entity {
      * @param resistance   attribute resistance of the entity
      * @param speed        attribute speed of the entity
      * @param precision    attribute precision of the entity
+     * @param criticalRate attribute critical rate of the entity
      */
     public Hero(int x,
                 int y,
@@ -227,10 +230,11 @@ public abstract class Hero extends Entity {
                 int resistance,
                 int speed,
                 int precision,
+                double criticalRate,
                 int level,
                 int xp,
                 int xpMaxLevel) {
-        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision);
+        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate);
         this.level = level;
         this.xp = xp;
         this.xpMaxLevel = xpMaxLevel;

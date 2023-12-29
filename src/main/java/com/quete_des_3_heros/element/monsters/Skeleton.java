@@ -14,11 +14,30 @@ public class Skeleton extends Monster {
 package main.java.com.quete_des_3_heros.element.monsters;
 
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Skeleton extends Monster {
 
     public Skeleton() {
-        super(0, 0, "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png", 100, 100, 30, 30,
-                20, 10, 10, 10, 10, 10, 2);
+        super(0,
+                0,
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png",
+                100,
+                100,
+                30,
+                30,
+                20,
+                10,
+                10,
+                10,
+                10,
+                10,
+                0.15,
+                2);
+    }
+
+    @Override
+    public void attack(Board board, int targetX, int targetY) {
+        getDamage(board, targetX, targetY, this.strength);
     }
 }

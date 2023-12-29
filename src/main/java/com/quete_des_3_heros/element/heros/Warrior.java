@@ -34,6 +34,7 @@ import java.util.Random;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Warrior extends Hero {
 
@@ -51,30 +52,14 @@ public class Warrior extends Hero {
                 15,
                 10,
                 15,
+                0.15,
                 1,
                 0,
                 200);
     }
 
-    /*
-    public void attaquer(Entity cible) {
-        if (cible instanceof Monster) {
-            attaqueForte((Monster) cible);
-        }
+    @Override
+    public void attack(Board board, int targetX, int targetY) {
+        getDamage(board, targetX, targetY, this.strength);
     }
-
-    public void attaqueForte(Monster ennemi) {
-    int chanceCritique = (this.getResistance() + this.getStrength()); // Chance d'un coup critique
-    int degatsBase = this.getStrength() - 12; // Dégâts de base basés sur la force
-    boolean estCritique = (new Random().nextInt(100) < chanceCritique); // Génère une chance de coup critique
-
-    int degats = estCritique ? degatsBase * 2 : degatsBase; // Dégâts doublés en cas de coup critique
-    if (estCritique) {
-        System.out.println("Coup critique! Le warrior inflige " + degats + " points de dégâts!");
-    } else {
-        System.out.println("Le warrior attaque fortement et inflige " + degats + " points de dégâts!");
-    }
-    }
-
-     */
 }

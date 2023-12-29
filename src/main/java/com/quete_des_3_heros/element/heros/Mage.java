@@ -34,6 +34,8 @@ package main.java.com.quete_des_3_heros.element.heros;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
+
 import java.util.Random;
 
 public class Mage extends Hero {
@@ -52,31 +54,15 @@ public class Mage extends Hero {
                 5,
                 13,
                 30,
+                0.2,
                 1,
                 0,
                 200);
     }
 
-    /*
-    public void attaquer(Entity cible) {
-        if (cible instanceof Monster) {
-            attaqueMagique((Monster) cible);
-        }
+    @Override
+    public void attack(Board board, int targetX, int targetY) {
+        getDamage(board, targetX, targetY, this.intelligence);
     }
-
-    public void attaqueMagique(Monster ennemi) {
-    int chanceAttaqueMagique = (this.getAgility() + this.getIntelligence()) / 2; // Chance d'un coup critique
-    int degatsBase = this.getStrength(); // Dégâts de base basés sur la force
-    boolean estCritique = (new Random().nextInt(100) < chanceAttaqueMagique); // Génère une chance de coup critique
-
-    int degats = estCritique ? degatsBase * 2 : degatsBase; // Dégâts doublés en cas de coup critique
-
-    if (estCritique) {
-        System.out.println("Coup critique! Le mage inflige " + degats + " points de dégâts!");
-    } else {
-        System.out.println("Le mage attaque avec ineligence et inflige " + degats + " points de dégâts!");
-    }
-    }
-    */
 }
 
