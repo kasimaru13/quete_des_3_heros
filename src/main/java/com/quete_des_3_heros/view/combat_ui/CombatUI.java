@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import main.java.com.quete_des_3_heros.controller.CombatController;
+import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.element.heros.Mage;
@@ -32,37 +33,21 @@ public class CombatUI extends JPanel implements ActionListener {
     private ArrayList<Monster> monsters = new ArrayList<>();
     private CombatController combatController = new CombatController(this);
 
-    private Warrior warrior;
-    private Mage mage;
-    private Thief thief;
-    private Goblin goblin;
-    private Skeleton skeleton;
-    private Dragon dragon;
+    private Warrior warrior = new Warrior();
+    private Mage mage = new Mage();
+    private Thief thief = new Thief();
+    private Goblin goblin = new Goblin();
+    private Skeleton skeleton = new Skeleton();
+    private Dragon dragon = new Dragon();
 
     public CombatUI(){
-        // Heroes
-        warrior = new Warrior();
-        mage = new Mage();
-        thief = new Thief();
-        // ArrayList of Heroes
-        heroes.add(warrior);
-        heroes.add(mage);
-        heroes.add(thief);
+        // Add the entities in their own list and add all the entities in the priority list
+        initListEntities();
 
-        // Monsters
-        goblin = new Goblin();
-        skeleton = new Skeleton();
-        dragon = new Dragon();
-        // ArrayList of Monsters
-        monsters.add(goblin);
-        monsters.add(skeleton);
-        monsters.add(dragon);
+        // Initiate CombatUI preferences
+        initCombatUI(combatController.getEntitiesPriorityList());
 
-        combatController.setEntities(heroes, monsters);
-
-        // Initialise CombatUI preferences
-        initCombatUI();
-
+        // Add Entity on the grid
         combatController.addEntity(warrior, 8, 2);
         combatController.addEntity(mage, 9, 2);
         combatController.addEntity(thief, 10, 2);
@@ -72,15 +57,17 @@ public class CombatUI extends JPanel implements ActionListener {
 
         updateCombatUI();
 
-        combatController.moveEntity(dragon, 12, 13);
     }
 
-    private void initCombatUI(){
+    /**
+     * Initiate Combat Interface
+     */
+    private void initCombatUI(ArrayList<Entity> entities){
         setBackground(Color.blue);
         setFocusable(true);
 
         // Initialise different panels
-        board = new Board(16, 16, combatController.getEntities());
+        board = new Board(16, 16, entities);
         leftPanel = new LeftPanel();
         rightPanel = new RightPanel();
 
@@ -103,6 +90,27 @@ public class CombatUI extends JPanel implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Initiate ArrayList of all entities
+     */
+    private void initListEntities(){
+        // ArrayList of Heroes
+        heroes.add(warrior);
+        heroes.add(mage);
+        heroes.add(thief);
+
+        // ArrayList of Monsters
+        monsters.add(goblin);
+        monsters.add(skeleton);
+        monsters.add(dragon);
+
+        // ArrayList of all Entities for the Priority Order
+        combatController.setEntitiesPriorityList(heroes, monsters);
+    }
+
+    /**
+     * Update Combat Textual Interface for the moment
+     */
     private void updateCombatUI() {
         for (int i = 0; i < board.getBoardLength(); i++) {
             for (int j = 0; j < board.getBoardWidth(); j++) {
@@ -114,6 +122,7 @@ public class CombatUI extends JPanel implements ActionListener {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
 

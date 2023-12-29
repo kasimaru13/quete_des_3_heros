@@ -26,8 +26,6 @@ public class Board extends JPanel implements MouseMotionListener{
     private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
-
-    private Warrior warrior; // TO GET RID OF WHEN BACKEND IS COMPLETE
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
 
     private ArrayList<Entity> entities; // Entities alive on the board
@@ -59,10 +57,6 @@ public class Board extends JPanel implements MouseMotionListener{
         }
 
         addMouseMotionListener(this);
-    }
-
-    public Element[][] getGrid() {
-        return grid;
     }
 
     @Override
@@ -150,13 +144,24 @@ public class Board extends JPanel implements MouseMotionListener{
         }
     }
 
-    public void addEntity(Graphics g, Entity entity, int x, int y){
+    /**
+     * Function addEntity() add Entity on the coordinates indicated on the grid
+     * @param entity Entity (Hero, Monster, Obstacle)
+     * @param x x-axis position on the grid
+     * @param y y-axis position on the grid
+     */
+    public void addEntity(Entity entity, int x, int y){
         entity.setX(x);
         entity.setY(y);
         grid[entity.getX()][entity.getY()] = entity;
-        // g.drawImage(entity.getSprite(), entity.getX() + (entity.getX()*48), entity.getY() + (entity.getY()*48), null);
     }
 
+    /**
+     * Function moveEntity() move the Entity on new coordinates indicated on the grid
+     * @param entity Entity (Hero, Monster, Obstacle)
+     * @param newX new x-axis position on the grid
+     * @param newY new y-axis position on the grid
+     */
     public void moveEntity(Entity entity, int newX, int newY){
         grid[entity.getX()][entity.getY()] = null;
         entity.setX(newX);
@@ -164,6 +169,12 @@ public class Board extends JPanel implements MouseMotionListener{
         grid[entity.getX()][entity.getY()] = entity;
     }
 
+    /**
+     * Function getEntity() return the Element of the coordinates indicated on the grid
+     * @param x x-axis position on the grid
+     * @param y y-axis position on the grid
+     * @return Element
+     */
     public Element getEntity(int x, int y){
         return grid[x][y];
     }
@@ -182,5 +193,12 @@ public class Board extends JPanel implements MouseMotionListener{
 
     public void setBoardWidth(int width){
         this.width = width;
+    }
+
+    public Element[][] getGrid() {
+        return grid;
+    }
+    public void setGrid(Element[][] grid){
+        this.grid = grid;
     }
 }

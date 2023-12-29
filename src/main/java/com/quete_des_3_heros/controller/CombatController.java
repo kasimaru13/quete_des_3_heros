@@ -15,56 +15,36 @@ import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 
 public class CombatController {
     private CombatUI combatUI;
-    private ArrayList<Entity> entities;
+    private ArrayList<Entity> entitiesPriorityList;
 
     public CombatController(CombatUI combatUI){
         this.combatUI = combatUI;
-        this.entities = new ArrayList<>();
+        this.entitiesPriorityList = new ArrayList<>();
     }
 
     public void addEntity(Entity entity, int x, int y){
-        combatUI.getBoard().addEntity(combatUI.getGraphics(), entity, x, y);
+        combatUI.getBoard().addEntity(entity, x, y);
     }
 
     public void moveEntity(Entity entity, int newX, int newY){
         combatUI.getBoard().moveEntity(entity, newX, newY);
     }
 
-    public ArrayList<Entity> getEntities(){
-        return entities;
+    public ArrayList<Entity> getEntitiesPriorityList(){
+        return entitiesPriorityList;
     }
-    public void setEntities(ArrayList<Hero> heroes, ArrayList<Monster> monsters){
-        entities.clear();
-        entities.addAll(heroes);
-        entities.addAll(monsters);
-        entities.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
-        for (Entity e : entities) {
+    public void setEntitiesPriorityList(ArrayList<Hero> heroes, ArrayList<Monster> monsters){
+        entitiesPriorityList.clear();
+        entitiesPriorityList.addAll(heroes);
+        entitiesPriorityList.addAll(monsters);
+        entitiesPriorityList.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
+        for (Entity e : entitiesPriorityList) {
             String typeEntity = e instanceof Hero ? "Héros" : "Monstre";
             System.out.println(typeEntity + " - " + e.getClass().getSimpleName() + " (Vitesse: " + e.getSpeed() + ")");
         }
     }
 
     /*
-
-
-    // Constructeur
-    public CombatController(List<Hero> heros, List<Monster> monstres) {
-        // Fusionner les héros et les monstres en une seule liste
-        Entities = new ArrayList<>();
-        Entities.addAll(heros);
-        Entities.addAll(monstres);
-
-        // Trier les combattants par leur vitesse
-        Collections.sort(Entities, (c1, c2) -> c2.getVitesse() - c1.getVitesse());
-        Collections.sort(Entities, (c1, c2) -> c2.getVitesse() - c1.getVitesse());
-
-        System.out.println("Ordre des combattants après le tri par vitesse :");
-        for (Entity c : Entities) {
-        String typeCombattant = c instanceof Hero ? "Héros" : "Monstre";
-        System.out.println(typeCombattant + " - " + c.getClass().getSimpleName() + " (Vitesse: " + c.getVitesse() + ")");
-        }
-
-    }
 
     // Méthode pour démarrer le combat
     public void demarrerCombat() {
