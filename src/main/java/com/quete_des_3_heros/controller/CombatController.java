@@ -16,10 +16,14 @@ import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 public class CombatController {
     private CombatUI combatUI;
     private ArrayList<Entity> entitiesPriorityList;
+    private ArrayList<Hero> heroes;
+    private ArrayList<Monster> monsters;
 
     public CombatController(CombatUI combatUI){
         this.combatUI = combatUI;
         this.entitiesPriorityList = new ArrayList<>();
+        this.heroes = new ArrayList<>();
+        this.monsters = new ArrayList<>();
     }
 
     public void addEntity(Entity entity, int x, int y){
@@ -33,15 +37,34 @@ public class CombatController {
     public ArrayList<Entity> getEntitiesPriorityList(){
         return entitiesPriorityList;
     }
-    public void setEntitiesPriorityList(ArrayList<Hero> heroes, ArrayList<Monster> monsters){
+    public void setEntitiesPriorityList(){
         entitiesPriorityList.clear();
-        entitiesPriorityList.addAll(heroes);
-        entitiesPriorityList.addAll(monsters);
+        entitiesPriorityList.addAll(this.heroes);
+        entitiesPriorityList.addAll(this.monsters);
+
+        // Sorting by the speed of the entities
         entitiesPriorityList.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
+
         for (Entity e : entitiesPriorityList) {
             String typeEntity = e instanceof Hero ? "Héros" : "Monstre";
             System.out.println(typeEntity + " - " + e.getClass().getSimpleName() + " (Vitesse: " + e.getSpeed() + ")");
         }
+    }
+
+    public void startCombat(){
+        while(heroesStillAlive() && monstersStillAlive()){
+            for (Entity entity : entitiesPriorityList) {
+
+            }
+        }
+    }
+
+    public boolean heroesStillAlive(){
+        return this.heroes.stream().anyMatch(Entity::isAlive);
+    }
+
+    public boolean monstersStillAlive(){
+        return this.monsters.stream().anyMatch(Entity::isAlive);
     }
 
     /*
@@ -171,4 +194,18 @@ public class CombatController {
         return choix; // Retourne un choix valide
     }
     */
+
+    public ArrayList<Hero> getHeroes(){
+        return heroes;
+    }
+    public void setHeroes(ArrayList<Hero> heroes){
+        this.heroes = heroes;
+    }
+
+    public ArrayList<Monster> getMonsters(){
+        return monsters;
+    }
+    public void setMonsters(ArrayList<Monster> monsters){
+        this.monsters = monsters;
+    }
 }

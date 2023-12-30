@@ -29,8 +29,7 @@ public class CombatUI extends JPanel implements ActionListener {
     private LeftPanel leftPanel;
     private RightPanel rightPanel;
 
-    private ArrayList<Hero> heroes = new ArrayList<>();
-    private ArrayList<Monster> monsters = new ArrayList<>();
+
     private CombatController combatController = new CombatController(this);
 
     private Warrior warrior = new Warrior();
@@ -56,7 +55,6 @@ public class CombatUI extends JPanel implements ActionListener {
         combatController.addEntity(dragon, 10, 13);
 
         updateCombatUI();
-
     }
 
     /**
@@ -95,17 +93,17 @@ public class CombatUI extends JPanel implements ActionListener {
      */
     private void initListEntities(){
         // ArrayList of Heroes
-        heroes.add(warrior);
-        heroes.add(mage);
-        heroes.add(thief);
+        combatController.getHeroes().add(warrior);
+        combatController.getHeroes().add(mage);
+        combatController.getHeroes().add(thief);
 
         // ArrayList of Monsters
-        monsters.add(goblin);
-        monsters.add(skeleton);
-        monsters.add(dragon);
+        combatController.getMonsters().add(goblin);
+        combatController.getMonsters().add(skeleton);
+        combatController.getMonsters().add(dragon);
 
         // ArrayList of all Entities for the Priority Order
-        combatController.setEntitiesPriorityList(heroes, monsters);
+        combatController.setEntitiesPriorityList();
     }
 
     /**

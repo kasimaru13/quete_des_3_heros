@@ -22,6 +22,7 @@ public class Obstacle extends Entity {
                 0,
                 0,
                 0,
+                0,
                 0);
     }
 

@@ -23,7 +23,7 @@ import main.java.com.quete_des_3_heros.view.Constants;
  */
 public class Board extends JPanel implements MouseMotionListener{
     private int length, width;
-    private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
+    private Entity[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
@@ -39,7 +39,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.length = length;
         this.width = width;
         this.entities = entities;
-        grid = new Element[this.length][this.width];
+        grid = new Entity[this.length][this.width];
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -175,7 +175,7 @@ public class Board extends JPanel implements MouseMotionListener{
      * @param y y-axis position on the grid
      * @return Element
      */
-    public Element getEntity(int x, int y){
+    public Entity getEntity(int x, int y){
         return grid[x][y];
     }
 
@@ -195,10 +195,10 @@ public class Board extends JPanel implements MouseMotionListener{
         this.width = width;
     }
 
-    public Element[][] getGrid() {
+    public Entity[][] getGrid() {
         return grid;
     }
-    public void setGrid(Element[][] grid){
+    public void setGrid(Entity[][] grid){
         this.grid = grid;
     }
 }
