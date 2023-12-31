@@ -39,8 +39,8 @@ public class CombatController {
     }
     public void setEntitiesPriorityList(){
         entitiesPriorityList.clear();
-        entitiesPriorityList.addAll(this.heroes);
-        entitiesPriorityList.addAll(this.monsters);
+        entitiesPriorityList.addAll(heroes.stream().filter(Hero::isAlive).toList());
+        entitiesPriorityList.addAll(monsters.stream().filter(Monster::isAlive).toList());
 
         // Sorting by the speed of the entities
         entitiesPriorityList.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
@@ -52,10 +52,20 @@ public class CombatController {
     }
 
     public void startCombat(){
+        int tour = 0;
         while(heroesStillAlive() && monstersStillAlive()){
+            tour += 1;
             for (Entity entity : entitiesPriorityList) {
-
+                giveEntityTurn(entity);
             }
+            setEntitiesPriorityList();
+        }
+        if(heroesStillAlive()){
+            System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
+        } else if(monstersStillAlive()){
+            System.out.println("Vous avez perdu le combat ! Le combat a duré " + tour + " tours !");
+        } else {
+            System.out.println("Erreur !");
         }
     }
 
@@ -65,6 +75,10 @@ public class CombatController {
 
     public boolean monstersStillAlive(){
         return this.monsters.stream().anyMatch(Entity::isAlive);
+    }
+
+    private void giveEntityTurn(Entity entity){
+
     }
 
     /*
@@ -82,14 +96,6 @@ public class CombatController {
             System.out.println(type + " - " + c.getClass().getSimpleName() + " (PV: " + c.getPv() + ")");
             }
         }
-    }
-
-    // Vérifie si le combat est terminé
-    private boolean combatTermine() {
-        boolean tousLesHerosVaincus = Entities.stream().filter(c -> c instanceof Hero).allMatch(h -> h.getPv() <= 0);
-        boolean tousLesMonstresVaincus = Entities.stream().filter(c -> c instanceof Monster).allMatch(m -> m.getPv() <= 0);
-    
-        return tousLesHerosVaincus || tousLesMonstresVaincus;
     }
     
 

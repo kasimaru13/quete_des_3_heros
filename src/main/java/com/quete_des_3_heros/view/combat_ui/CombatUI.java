@@ -47,14 +47,16 @@ public class CombatUI extends JPanel implements ActionListener {
         initCombatUI(combatController.getEntitiesPriorityList());
 
         // Add Entity on the grid
-        combatController.addEntity(warrior, 8, 2);
-        combatController.addEntity(mage, 9, 2);
-        combatController.addEntity(thief, 10, 2);
-        combatController.addEntity(goblin, 8, 13);
-        combatController.addEntity(skeleton, 9, 13);
-        combatController.addEntity(dragon, 10, 13);
+        combatController.addEntity(warrior, 7, 2);
+        combatController.addEntity(mage, 8, 2);
+        combatController.addEntity(thief, 9, 2);
+        combatController.addEntity(goblin, 7, 13);
+        combatController.addEntity(skeleton, 8, 13);
+        combatController.addEntity(dragon, 9, 13);
 
         updateCombatUI();
+
+        combatController.startCombat();
     }
 
     /**
