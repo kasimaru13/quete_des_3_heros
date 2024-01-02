@@ -33,6 +33,7 @@ public class Dragon extends Monster {
                 20,
                 10,
                 0.3,
+                4,
                 2);
     }
 

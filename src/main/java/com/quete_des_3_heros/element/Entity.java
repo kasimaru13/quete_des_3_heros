@@ -22,6 +22,7 @@ public abstract class Entity implements Element{
     protected int speed; // attribute speed of the entity
     protected int precision; // attribute precision of the entity
     protected double criticalRate; // attribute critical rate of the entity
+    protected int movementRange; // distance of the movement, one movement point is one cell
     protected boolean alive; // entity alive or not
 
     /**
@@ -40,6 +41,7 @@ public abstract class Entity implements Element{
      * @param speed attribute speed of the entity
      * @param precision attribute precision of the entity
      * @param criticalRate attribute critical rate of the entity
+     * @param movementRange distance of the movement, one movement point is one cell
      */
     public Entity(int x,
                   int y,
@@ -54,7 +56,8 @@ public abstract class Entity implements Element{
                   int resistance,
                   int speed,
                   int precision,
-                  double criticalRate){
+                  double criticalRate,
+                  int movementRange){
         this.x = x;
         this.y = y;
         try{
@@ -74,6 +77,7 @@ public abstract class Entity implements Element{
         this.speed = speed;
         this.precision = precision;
         this.criticalRate = criticalRate;
+        this.movementRange = movementRange;
         this.alive = true;
     }
 
@@ -233,6 +237,14 @@ public abstract class Entity implements Element{
 
     public void setCriticalRate(int criticalRate) {
         this.criticalRate = criticalRate;
+    }
+
+    public int getMovementRange(){
+        return movementRange;
+    }
+
+    public void setMovementRange(int movementRange){
+        this.movementRange = movementRange;
     }
 
     public boolean isAlive() {

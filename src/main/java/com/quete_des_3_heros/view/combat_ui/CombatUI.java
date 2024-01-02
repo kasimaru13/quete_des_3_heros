@@ -47,7 +47,7 @@ public class CombatUI extends JPanel implements ActionListener {
         initListEntities();
 
         // Initiate CombatUI preferences
-        initCombatUI(combatController.getEntitiesPriorityList());
+        initCombatUI();
 
         // Add Entity on the grid
         addEntitiesToGrid();
@@ -84,12 +84,12 @@ public class CombatUI extends JPanel implements ActionListener {
     /**
      * Initiate Combat Interface
      */
-    private void initCombatUI(ArrayList<Entity> entities){
+    private void initCombatUI(){
         setBackground(Color.blue);
         setFocusable(true);
 
         // Initialise different panels
-        board = new Board(16, 16, entities);
+        board = new Board(16, 16, combatController.getEntitiesPriorityList());
         leftPanel = new LeftPanel();
         rightPanel = new RightPanel();
 
@@ -148,7 +148,7 @@ public class CombatUI extends JPanel implements ActionListener {
     /**
      * Update Combat Textual Interface for the moment
      */
-    private void updateCombatUI() {
+    public void updateCombatUI() {
         for (int i = 0; i < board.getBoardLength(); i++) {
             for (int j = 0; j < board.getBoardWidth(); j++) {
                 if (board.getEntity(i, j) != null) {

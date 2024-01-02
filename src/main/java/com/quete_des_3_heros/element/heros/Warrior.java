@@ -53,6 +53,7 @@ public class Warrior extends Hero {
                 10,
                 15,
                 0.15,
+                2,
                 1,
                 0,
                 200);
