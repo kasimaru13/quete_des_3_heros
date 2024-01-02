@@ -47,16 +47,33 @@ public class CombatUI extends JPanel implements ActionListener {
         initCombatUI(combatController.getEntitiesPriorityList());
 
         // Add Entity on the grid
-        combatController.addEntity(warrior, 7, 2);
-        combatController.addEntity(mage, 8, 2);
-        combatController.addEntity(thief, 9, 2);
-        combatController.addEntity(goblin, 7, 13);
-        combatController.addEntity(skeleton, 8, 13);
-        combatController.addEntity(dragon, 9, 13);
+        addEntitiesToGrid();
 
-        updateCombatUI();
+        SwingUtilities.invokeLater(this::startCombat);
+    }
 
-        combatController.startCombat();
+    /**
+     * En utilisant un SwingWorker, la méthode startCombat() sera exécutée dans un thread distinct,
+     * ce qui permettra à l'interface utilisateur de rester réactive pendant le combat.
+     * Vous pouvez également utiliser la méthode done() du SwingWorker pour effectuer des opérations
+     * supplémentaires après la fin du combat, comme la mise à jour de l'interface utilisateur.
+     */
+    private void startCombat() {
+        SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Exécutez la logique de combat dans ce thread
+                combatController.startCombat();
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Mettez à jour l'UI ou effectuez d'autres opérations après la fin du combat ici
+            }
+        };
+
+        swingWorker.execute();
     }
 
     /**
@@ -108,6 +125,15 @@ public class CombatUI extends JPanel implements ActionListener {
         combatController.setEntitiesPriorityList();
     }
 
+    private void addEntitiesToGrid() {
+        combatController.addEntity(warrior, 7, 2);
+        combatController.addEntity(mage, 8, 2);
+        combatController.addEntity(thief, 9, 2);
+        combatController.addEntity(goblin, 7, 13);
+        combatController.addEntity(skeleton, 8, 13);
+        combatController.addEntity(dragon, 9, 13);
+    }
+
     /**
      * Update Combat Textual Interface for the moment
      */
@@ -142,6 +168,8 @@ public class CombatUI extends JPanel implements ActionListener {
             System.out.println("Item");
         }
     }
+
+
 
     public Board getBoard() {
         return board;

@@ -52,12 +52,15 @@ public class CombatController {
     }
 
     public void startCombat(){
-        int tour = 0;
+        int tour = 1;
+
         while(heroesStillAlive() && monstersStillAlive()){
-            tour += 1;
+            System.out.println("TOUR " + tour);
             for (Entity entity : entitiesPriorityList) {
                 giveEntityTurn(entity);
+
             }
+            tour += 1;
             setEntitiesPriorityList();
         }
         if(heroesStillAlive()){
@@ -78,60 +81,19 @@ public class CombatController {
     }
 
     private void giveEntityTurn(Entity entity){
+        if(entity instanceof Hero){
+            while(true){
 
+            }
+        } else if (entity instanceof Monster){
+            return;
+        }
     }
 
     /*
-
-    // Méthode pour démarrer le combat
-    public void demarrerCombat() {
-        // Boucle du combat
-        while (!combatTermine()) {
-            for (Entity Entity : Entities) {
-                executerTourCombattant(Entity);
-            }
-            System.out.println("\nÉtat actuel des combattants:");
-            for (Entity c : Entities) {
-            String type = c instanceof Hero ? "Héros" : "Monstre";
-            System.out.println(type + " - " + c.getClass().getSimpleName() + " (PV: " + c.getPv() + ")");
-            }
-        }
-    }
-    
-
     // Exécuter le tour d'un combattant
     private void executerTourCombattant(Entity Entity) {
-        if (Entity instanceof Hero) {
-            Hero hero = (Hero) Entity;
-            
-            // Demander au joueur de choisir entre attaquer ou se défendre
-            System.out.println("Tour de " + hero.getClass().getSimpleName() + ":");
-            System.out.println("1. Attaquer");
-            System.out.println("2. Défendre");
-            System.out.print("Entrez votre choix (1-2): ");
-    
-            int choix = lireChoixJoueur(2);
-    
-            if (choix == 1) {
-                // Choix d'attaque
-                if (hero instanceof Mage) {
-                    ((Mage) hero).attaqueMagique(trouverCibleMonstre());
-                } else if (hero instanceof Warrior) {
-                    ((Warrior) hero).attaqueForte(trouverCibleMonstre());
-                } else if (hero instanceof Thief) {
-                    ((Thief) hero).attaqueRapide(trouverCibleMonstre());
-                }
-                // Ajouter ici d'autres conditions pour d'autres types de héros
-            } else {
-                // Choix de défense
-                hero.defendre();
-            }
-    
-        } else if (Entity instanceof Monster) {
-            // Logique pour un monstre
-            Monster monstre = (Monster) Entity;
-            monstre.attaquer(trouverCibleHero());
-        }
+
     }
     
 
