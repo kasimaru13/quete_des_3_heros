@@ -51,6 +51,7 @@ public class Mage extends Hero {
                 13,
                 30,
                 0.2,
+                3,
                 1,
                 0,
                 200,

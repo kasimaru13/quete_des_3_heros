@@ -58,6 +58,7 @@ public class PathfindingController {
         boolean finished = false;
         List<Point> used = new ArrayList<>();
         used.add(start);
+
         while (!finished) {
             List<Point> newOpen = new ArrayList<>();
             for(int i = 0; i < used.size(); ++i){

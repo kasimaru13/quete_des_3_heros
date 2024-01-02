@@ -21,7 +21,7 @@ public class Skeleton extends Monster {
     public Skeleton() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/skeleton.png",
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png",
                 100,
                 100,
                 30,
@@ -34,7 +34,7 @@ public class Skeleton extends Monster {
                 10,
                 0.15,
                 2,
-                "Squelette");
+                2);
     }
 
     @Override

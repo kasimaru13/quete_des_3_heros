@@ -21,7 +21,7 @@ public class Dragon extends Monster {
     public Dragon() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/dragon.png",
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png",
                 100,
                 100,
                 30,
@@ -33,8 +33,8 @@ public class Dragon extends Monster {
                 20,
                 10,
                 0.3,
-                2,
-                "Dragon");
+                4,
+                2);
     }
 
     @Override

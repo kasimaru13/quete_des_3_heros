@@ -32,7 +32,15 @@ public class CombatController {
     }
 
     public void moveEntity(Entity entity, int newX, int newY){
-        combatUI.getBoard().moveEntity(entity, newX, newY);
+        PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
+        PathfindingController.Point end = new PathfindingController.Point(newX, newY, null);
+        List<PathfindingController.Point> path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
+        if (path != null) {
+            for(int i = 0; i < entity.getMovementRange(); i++){
+                combatUI.getBoard().moveEntity(entity, path.get(i).x, path.get(i).y);
+                combatUI.updateCombatUI();
+            }
+        }
     }
 
     public ArrayList<Entity> getEntitiesPriorityList(){
@@ -60,9 +68,10 @@ public class CombatController {
         while(heroesStillAlive() && monstersStillAlive()){
             System.out.println("TOUR " + tour);
 
-            giveEntityTurn(getEntitiesPriorityList().get(0));
+            giveEntityTurn(entitiesPriorityList.get(0));
 
             tour += 1;
+
             setEntitiesPriorityList();
             return;
         }
@@ -84,24 +93,10 @@ public class CombatController {
     }
 
     private void giveEntityTurn(Entity entity){
-        String typeEntity = entity instanceof Hero ? "Héros" : "Monstre";
-        System.out.println(typeEntity + " - " + entity.getClass().getSimpleName() + " (Vitesse: " + entity.getSpeed() + ")");
         if(entity instanceof Hero){
             return;
         } else if (entity instanceof Monster){
-            while(true){
-                PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
-                PathfindingController.Point end = new PathfindingController.Point(6, 13, null);
-                List<PathfindingController.Point> path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
-                if (path != null) {
-                    for (PathfindingController.Point point : path) {
-                        System.out.println(point);
-                    }
-                    return;
-                }
-                else
-                    System.out.println("No path found");
-            }
+            moveEntity(entity, 6, 6);
         }
     }
 

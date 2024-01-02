@@ -21,7 +21,7 @@ public class Goblin extends Monster {
     public Goblin() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/goblin.png",
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png",
                 100,
                 100,
                 30,
@@ -33,8 +33,8 @@ public class Goblin extends Monster {
                 14,
                 10,
                 0.2,
-                2,
-                "Obstacle");
+                3,
+                2);
     }
 
     @Override
