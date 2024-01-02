@@ -3,6 +3,7 @@ package main.java.com.quete_des_3_heros.controller;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
@@ -58,12 +59,12 @@ public class CombatController {
 
         while(heroesStillAlive() && monstersStillAlive()){
             System.out.println("TOUR " + tour);
-            for (Entity entity : entitiesPriorityList) {
-                giveEntityTurn(entity);
 
-            }
+            giveEntityTurn(getEntitiesPriorityList().get(0));
+
             tour += 1;
             setEntitiesPriorityList();
+            return;
         }
         if(heroesStillAlive()){
             System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
@@ -83,14 +84,28 @@ public class CombatController {
     }
 
     private void giveEntityTurn(Entity entity){
+        String typeEntity = entity instanceof Hero ? "Héros" : "Monstre";
+        System.out.println(typeEntity + " - " + entity.getClass().getSimpleName() + " (Vitesse: " + entity.getSpeed() + ")");
         if(entity instanceof Hero){
-            while(true){
-
-            }
-        } else if (entity instanceof Monster){
             return;
+        } else if (entity instanceof Monster){
+            while(true){
+                PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
+                PathfindingController.Point end = new PathfindingController.Point(6, 13, null);
+                List<PathfindingController.Point> path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
+                if (path != null) {
+                    for (PathfindingController.Point point : path) {
+                        System.out.println(point);
+                    }
+                    return;
+                }
+                else
+                    System.out.println("No path found");
+            }
         }
     }
+
+
 
     /*
     // Exécuter le tour d'un combattant
