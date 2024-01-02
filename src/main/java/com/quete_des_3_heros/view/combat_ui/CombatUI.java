@@ -52,6 +52,8 @@ public class CombatUI extends JPanel implements ActionListener {
         // Add Entity on the grid
         addEntitiesToGrid();
 
+        updateCombatUI();
+
         SwingUtilities.invokeLater(this::startCombat);
     }
 
