@@ -2,6 +2,7 @@ package main.java.com.quete_des_3_heros.controller;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
+
+import static java.awt.geom.Point2D.distance;
 
 
 public class CombatController {
@@ -36,9 +39,9 @@ public class CombatController {
         PathfindingController.Point end = new PathfindingController.Point(newX, newY, null);
         List<PathfindingController.Point> path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
         if (path != null) {
-            for(int i = 0; i < entity.getMovementRange(); i++){
+            for(int i = 0; i < entity.getMovementRange(); i++){ // A revoir
+                if(path.get(i) == null) return;
                 combatUI.getBoard().moveEntity(entity, path.get(i).x, path.get(i).y);
-                combatUI.updateCombatUI();
             }
         }
     }
@@ -67,8 +70,7 @@ public class CombatController {
 
         while(heroesStillAlive() && monstersStillAlive()){
             System.out.println("TOUR " + tour);
-
-            giveEntityTurn(entitiesPriorityList.get(0));
+            for(int i = 0; i<4; i++)  giveEntityTurn(entitiesPriorityList.get(0));
 
             tour += 1;
 
@@ -96,11 +98,29 @@ public class CombatController {
         if(entity instanceof Hero){
             return;
         } else if (entity instanceof Monster){
-            moveEntity(entity, 6, 6);
+            Hero target = targetClosestHero((Monster) entity);
+            moveEntity(entity, target.getX(), target.getY());
+
         }
     }
 
+    private Hero targetClosestHero(Monster monster){
+        ArrayList<Hero> heroesStillAlive = new ArrayList<>();
+        for(Entity e : entitiesPriorityList){
+            if(e instanceof Hero) heroesStillAlive.add((Hero) e);
+        }
+        Hero closestHero = null;
+        int closestDistance = Integer.MAX_VALUE;
 
+        for(Hero hero : heroesStillAlive){
+            int distance = (int) distance(monster.getX(), monster.getY(), hero.getX(), hero.getY());
+            if(distance < closestDistance){
+                closestDistance = distance;
+                closestHero = hero;
+            }
+        }
+        return closestHero;
+    }
 
     /*
     // Exécuter le tour d'un combattant
