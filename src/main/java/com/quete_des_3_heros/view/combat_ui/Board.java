@@ -27,6 +27,7 @@ public class Board extends JPanel implements MouseMotionListener{
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
+    private boolean moveStep; // Indicates that we need to display possible moves
 
     private ArrayList<Entity> entities; // Entities alive on the board
 
@@ -40,6 +41,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.width = width;
         this.entities = entities;
         grid = new Entity[this.length][this.width];
+        moveStep = false;
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -48,7 +50,7 @@ public class Board extends JPanel implements MouseMotionListener{
 
         possibleMoves = new int[16][16]; // TO GET RID OF WHEN BACKEND IS COMPLETE
 
-        // Import background image and player sprites (GET RID OF THE PLAYER SPRITE WHEN BACKEND IS COMPLETE)
+        // Import background image (TO CHANGE TO PATH PARAMETER)
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png")).getSubimage(0, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
         } catch (IOException e) {
@@ -82,7 +84,9 @@ public class Board extends JPanel implements MouseMotionListener{
 
 
         // Draw possible moves
-        drawPossibleMoves(possibleMoves, g);
+        if (moveStep){
+            drawPossibleMoves(possibleMoves, g);
+        }
     }
 
     /**
