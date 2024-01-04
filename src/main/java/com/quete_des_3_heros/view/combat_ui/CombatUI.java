@@ -100,6 +100,8 @@ public class CombatUI extends JPanel implements ActionListener {
         board.setBounds(280, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
         rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
 
+        leftPanel.setPriority(entities);
+
         // Add the panels to the UI
         add(leftPanel);
         add(board);
@@ -177,5 +179,9 @@ public class CombatUI extends JPanel implements ActionListener {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
     }
 }
