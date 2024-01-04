@@ -23,7 +23,7 @@ import main.java.com.quete_des_3_heros.view.Constants;
  */
 public class Board extends JPanel implements MouseMotionListener{
     private int length, width;
-    private Entity[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
+    private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
@@ -78,8 +78,12 @@ public class Board extends JPanel implements MouseMotionListener{
         }
 
         // Draw sprites
-        for(Entity e : entities){
-            g.drawImage(e.getSprite(), e.getX() + (e.getX()*48), e.getY() + (e.getY()*48), null);
+        for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++){
+            for (int j = 0; j < Constants.NUMBER_OF_SQUARES; j++){
+                if (grid[i][j] != null) {
+                    g.drawImage(grid[i][j].getSprite(), i * (Constants.SPRITE_SIZE + Constants.GRID), j * (Constants.SPRITE_SIZE + Constants.GRID), null);
+                }
+            }
         }
 
 
@@ -179,7 +183,7 @@ public class Board extends JPanel implements MouseMotionListener{
      * @param y y-axis position on the grid
      * @return Element
      */
-    public Entity getEntity(int x, int y){
+    public Element getEntity(int x, int y){
         return grid[x][y];
     }
 
@@ -199,7 +203,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.width = width;
     }
 
-    public Entity[][] getGrid() {
+    public Element[][] getGrid() {
         return grid;
     }
     public void setGrid(Entity[][] grid){
