@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.awt.geom.Point2D.distance;
+
 public class PathfindingController {
     public static class Point{
         public int x;
@@ -77,6 +79,51 @@ public class PathfindingController {
                     break;
                 }
             }
+
+            if (!finished && newOpen.isEmpty())
+                return null;
+        }
+
+        List<Point> path = new ArrayList<>();
+        Point point = used.get(used.size() - 1);
+        while(point.previous != null) {
+            path.add(0, point);
+            point = point.previous;
+        }
+        return path;
+    }
+
+    public static List<Point> FindPathMonster(Entity[][] grid, Point start, Point end, int proximityThreshold) {
+        boolean finished = false;
+        List<Point> used = new ArrayList<>();
+        used.add(start);
+
+        while (!finished) {
+            List<Point> newOpen = new ArrayList<>();
+            for(int i = 0; i < used.size(); ++i){
+                Point point = used.get(i);
+                for (Point neighbor : FindNeighbors(grid, point)) {
+                    if (!used.contains(neighbor) && !newOpen.contains(neighbor)) {
+                        newOpen.add(neighbor);
+                    }
+                }
+            }
+
+            for(Point point : newOpen) {
+                used.add(point);
+
+                int distanceToTarget = (int) distance(point.x, point.y, end.x, end.y);
+                if (distanceToTarget <= proximityThreshold) {
+                    finished = true;
+                    break;
+                }
+
+                if (end.equals(point)) {
+                    finished = true;
+                    break;
+                }
+            }
+
 
             if (!finished && newOpen.isEmpty())
                 return null;
