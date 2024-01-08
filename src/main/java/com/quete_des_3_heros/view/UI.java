@@ -13,9 +13,10 @@ public class UI extends JFrame {
     static UI instance;
 
     private UI(){
-        TitleScreen titleScreen = new TitleScreen();
-        add(titleScreen);
+        // TitleScreen titleScreen = new TitleScreen();
+        // add(titleScreen);
         setTitle("La quête des 3 héros");
+        add(new CombatUI());
 
         // Constant size of the window
         getContentPane().setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));

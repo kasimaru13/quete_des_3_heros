@@ -98,10 +98,10 @@ public class CombatController {
     
 
     private Hero trouverCibleHero() {
-    List<Hero> herosVivants = new ArrayList<>();
-    for (Entity c : Entities) {
-        if (c instanceof Hero && c.getPv() > 0) {
-            herosVivants.add((Hero) c);
+        List<Hero> herosVivants = new ArrayList<>();
+        for (Entity c : Entities) {
+            if (c instanceof Hero && c.getPv() > 0) {
+                herosVivants.add((Hero) c);
         }
     }
 

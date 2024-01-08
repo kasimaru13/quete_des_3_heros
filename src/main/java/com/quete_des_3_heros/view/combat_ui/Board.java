@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
-import main.java.com.quete_des_3_heros.element.heros.Warrior;
 import main.java.com.quete_des_3_heros.view.Constants;
 
 /**
@@ -23,10 +22,11 @@ import main.java.com.quete_des_3_heros.view.Constants;
  */
 public class Board extends JPanel implements MouseMotionListener{
     private int length, width;
-    private Entity[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
+    private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
+    private boolean moveStep; // Indicates that we need to display possible moves
 
     private ArrayList<Entity> entities; // Entities alive on the board
 
@@ -40,6 +40,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.width = width;
         this.entities = entities;
         grid = new Entity[this.length][this.width];
+        moveStep = false;
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -48,7 +49,7 @@ public class Board extends JPanel implements MouseMotionListener{
 
         possibleMoves = new int[16][16]; // TO GET RID OF WHEN BACKEND IS COMPLETE
 
-        // Import background image and player sprites (GET RID OF THE PLAYER SPRITE WHEN BACKEND IS COMPLETE)
+        // Import background image (TO CHANGE TO PATH PARAMETER)
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png")).getSubimage(0, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
         } catch (IOException e) {
@@ -76,13 +77,19 @@ public class Board extends JPanel implements MouseMotionListener{
         }
 
         // Draw sprites
-        for(Entity e : entities){
-            g.drawImage(e.getSprite(), e.getX() + (e.getX()*48), e.getY() + (e.getY()*48), null);
+        for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++){
+            for (int j = 0; j < Constants.NUMBER_OF_SQUARES; j++){
+                if (grid[i][j] != null) {
+                    g.drawImage(grid[i][j].getSprite(), i * (Constants.SPRITE_SIZE + Constants.GRID), j * (Constants.SPRITE_SIZE + Constants.GRID), null);
+                }
+            }
         }
 
 
         // Draw possible moves
-        drawPossibleMoves(possibleMoves, g);
+        if (moveStep){
+            drawPossibleMoves(possibleMoves, g);
+        }
     }
 
     /**
@@ -144,6 +151,10 @@ public class Board extends JPanel implements MouseMotionListener{
         }
     }
 
+
+
+
+
     /**
      * Function addEntity() add Entity on the coordinates indicated on the grid
      * @param entity Entity (Hero, Monster, Obstacle)
@@ -175,7 +186,7 @@ public class Board extends JPanel implements MouseMotionListener{
      * @param y y-axis position on the grid
      * @return Element
      */
-    public Entity getEntity(int x, int y){
+    public Element getEntity(int x, int y){
         return grid[x][y];
     }
 
@@ -195,7 +206,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.width = width;
     }
 
-    public Entity[][] getGrid() {
+    public Element[][] getGrid() {
         return grid;
     }
     public void setGrid(Entity[][] grid){

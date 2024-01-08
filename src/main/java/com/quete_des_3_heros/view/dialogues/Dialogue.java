@@ -92,8 +92,6 @@ public class Dialogue extends JPanel implements KeyListener{
 
             setPreferredSize(new Dimension(Constants.WINDOW_WIDTH * 60/100, Constants.WINDOW_HEIGHT * 70/100));
             setFont(new Font(getFont().getName(), Font.PLAIN, 22));
-            // setOpaque(true);
-            // setBackground(new Color(0, 0, 0, 50));
             setForeground(Color.white);
             setBorder(new EmptyBorder(50, 50, 50, 50));
             setIcon(arrow);

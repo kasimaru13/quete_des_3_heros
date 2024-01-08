@@ -1,21 +1,55 @@
 package main.java.com.quete_des_3_heros.view.combat_ui;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import main.java.com.quete_des_3_heros.element.Entity;
+import main.java.com.quete_des_3_heros.view.Constants;
+import main.java.com.quete_des_3_heros.view.components.Profile;
 
 /**
  * Panel on the left of the combat UI. Contains the playing order, displaying it with characters' profiles.
  */
 public class LeftPanel extends JPanel{
+    private ArrayList<Entity> priority;
+    private JLabel title;
+
     public LeftPanel(){
+        priority = new ArrayList<>();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        title = new JLabel("Ordre de jeu :");
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setAlignmentX(CENTER_ALIGNMENT);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        // drawArrowLine(g, 0, 0, 100, 100, 20, 10);
+        if (!priority.isEmpty()) {
+            removeAll();
+
+            // add(Box.createRigidArea(new Dimension(0, 10)));
+            add(title);
+            // add(Box.createRigidArea(new Dimension(0, 50)));
+            int i = 1;
+            for (Entity e : priority) {
+                add(new Profile("test", e.getHealth(), e.getMana(), e.getSprite()));
+                add(Box.createRigidArea(new Dimension(0, 50)));
+                if (priority.indexOf(e) != priority.size() - 1){
+                    drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, 24 + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, 24 + i * (75 + 50) - 45, 10, 5);
+                }
+                i++;
+            }
+        }
     }
 
     /**
@@ -49,4 +83,7 @@ public class LeftPanel extends JPanel{
         g.fillPolygon(xpoints, ypoints, 3);
     }    
 
+    public void setPriority(ArrayList<Entity> entitiesPriorityList) {
+        this.priority = entitiesPriorityList;
+    }
 }
