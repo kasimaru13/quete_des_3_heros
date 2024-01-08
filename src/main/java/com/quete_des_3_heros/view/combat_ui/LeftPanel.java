@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,31 +21,36 @@ import main.java.com.quete_des_3_heros.view.components.Profile;
 public class LeftPanel extends JPanel{
     private ArrayList<Entity> priority;
     private JLabel title;
+    private List<Profile> priority_queue;
+    private JPanel profile_queue;
 
     public LeftPanel(){
-        priority = new ArrayList<>();
+        priority = new ArrayList<>(); 
+        priority_queue = new ArrayList<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         title = new JLabel("Ordre de jeu :");
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setAlignmentX(CENTER_ALIGNMENT);
+
+        profile_queue = new JPanel();
+        profile_queue.setLayout(new BoxLayout(profile_queue, BoxLayout.Y_AXIS));
+
+        add(title);
+        add(profile_queue);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        if (!priority.isEmpty()) {
-            removeAll();
-
-            // add(Box.createRigidArea(new Dimension(0, 10)));
-            add(title);
-            // add(Box.createRigidArea(new Dimension(0, 50)));
+        if (!priority_queue.isEmpty()) {
             int i = 1;
-            for (Entity e : priority) {
-                add(new Profile("test", e.getHealth(), e.getMana(), e.getSprite()));
-                add(Box.createRigidArea(new Dimension(0, 50)));
-                if (priority.indexOf(e) != priority.size() - 1){
+            profile_queue.removeAll();
+            for (Profile prof : priority_queue) {
+                profile_queue.add(prof);
+                profile_queue.add(Box.createRigidArea(new Dimension(0, 50)));
+                if (priority_queue.indexOf(prof) != priority_queue.size() - 1){
                     drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, 24 + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, 24 + i * (75 + 50) - 45, 10, 5);
                 }
                 i++;
@@ -85,5 +91,13 @@ public class LeftPanel extends JPanel{
 
     public void setPriority(ArrayList<Entity> entitiesPriorityList) {
         this.priority = entitiesPriorityList;
+    }
+
+    public void setPriority_queue(List<Profile> priority_queue) {
+        if (this.priority_queue != null) {
+            this.priority_queue = priority_queue;
+            revalidate();
+            repaint();
+        } 
     }
 }

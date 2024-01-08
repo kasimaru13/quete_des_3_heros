@@ -59,8 +59,6 @@ public class RightPanel extends JPanel{
         buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
 
         buttonPanel.setMinimumSize(new Dimension(Constants.RIGHTPANEL_WIDTH, buttonPanel.getHeight()));
-        buttonPanel.setBackground(Color.blue);
-        setBackground(Color.red);
 
         add(buttonPanel);
         add(Box.createVerticalGlue());

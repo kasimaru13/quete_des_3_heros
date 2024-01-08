@@ -49,6 +49,8 @@ public class CombatController {
             String typeEntity = e instanceof Hero ? "Héros" : "Monstre";
             System.out.println(typeEntity + " - " + e.getClass().getSimpleName() + " (Vitesse: " + e.getSpeed() + ")");
         }
+
+        combatUI.updatePriorityQueue(entitiesPriorityList);
     }
 
     public void startCombat(){

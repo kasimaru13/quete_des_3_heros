@@ -72,7 +72,7 @@ public class Profile extends JPanel {
         description.setText(
             "<html>" + name + " :<br/>" +
             "&nbsp;&nbsp;HP: " + hp + "/" + total_hp + "<br/>" +
-            "&nbsp;&nbsp;MP: " + mp + "/" + total_mp
+            "&nbsp;&nbsp;MP: " + mp + "/" + total_mp + "</html>"
         );
     }
 

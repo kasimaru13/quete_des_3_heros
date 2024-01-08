@@ -105,9 +105,7 @@ public class CombatUI extends JPanel implements ActionListener {
         rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
 
         profile_queue = new ArrayList<Profile>();
-        for (Entity entity : entities){
-            profile_queue.add(new Profile("test", entity.getHealth(), entity.getMana(), entity.getSprite()));
-        }
+        updatePriorityQueue(entities);
 
         // Add the panels to the UI
         add(leftPanel);
@@ -193,5 +191,15 @@ public class CombatUI extends JPanel implements ActionListener {
 
     public LeftPanel getLeftPanel() {
         return leftPanel;
+    }
+
+    public void updatePriorityQueue(ArrayList<Entity> entities){
+        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
+            for (Entity entity : entities){
+                profile_queue.add(new Profile("test", entity.getHealth(), entity.getMana(), entity.getSprite()));
+            }
+
+            leftPanel.setPriority_queue(profile_queue);
+        }
     }
 }
