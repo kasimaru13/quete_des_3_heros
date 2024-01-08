@@ -43,7 +43,7 @@ public class Mage extends Hero {
     public Mage() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/mage.png",
                 50,
                 50,
                 150,
@@ -57,7 +57,8 @@ public class Mage extends Hero {
                 0.2,
                 1,
                 0,
-                200);
+                200,
+                "Mage");
     }
 
     @Override

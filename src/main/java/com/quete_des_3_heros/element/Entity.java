@@ -23,6 +23,7 @@ public abstract class Entity implements Element{
     protected int precision; // attribute precision of the entity
     protected double criticalRate; // attribute critical rate of the entity
     protected boolean alive; // entity alive or not
+    protected String name;
 
     /**
      * Constructor of Entity
@@ -54,7 +55,8 @@ public abstract class Entity implements Element{
                   int resistance,
                   int speed,
                   int precision,
-                  double criticalRate){
+                  double criticalRate,
+                  String name){
         this.x = x;
         this.y = y;
         try{
@@ -75,6 +77,7 @@ public abstract class Entity implements Element{
         this.precision = precision;
         this.criticalRate = criticalRate;
         this.alive = true;
+        this.name = name;
     }
 
     public void attack(Board board, int targetX, int targetY) {
@@ -173,6 +176,10 @@ public abstract class Entity implements Element{
 
     public int getMaxMana() {
         return maxMana;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setMaxMana(int maxMana) {

@@ -1,6 +1,5 @@
 package main.java.com.quete_des_3_heros.view.combat_ui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -9,9 +8,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.view.Constants;
@@ -23,8 +22,8 @@ import main.java.com.quete_des_3_heros.view.components.Profile;
  * Panel on the right of the combat UI. Contains the player's characters' profiles, actions buttons and rewind move button.
  */
 public class RightPanel extends JPanel{
+    private JPanel profilesPanel; // Panel containing profiles of heroes
     private JPanel buttonPanel; // Panel containing actions buttons
-    private JPanel profilesPanel;
 
     // Actions buttons :
     private GameButton attack;
@@ -34,6 +33,8 @@ public class RightPanel extends JPanel{
 
     private JButton rewind_button;
 
+    private Profile[] profiles;
+
     public RightPanel(ArrayList<Hero> heroes){
         // Whole panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -42,9 +43,14 @@ public class RightPanel extends JPanel{
         // Profiles Panel
         profilesPanel = new JPanel();
         profilesPanel.setLayout(new BoxLayout(profilesPanel, BoxLayout.Y_AXIS));
+        profiles = new Profile[heroes.size()];
+        int i = 0;
         for (Hero hero : heroes) {
+            Profile tmp = new Profile(hero.getName(), hero.getHealth(), hero.getMana(), hero.getSprite());
+            profiles[i] = tmp;
             profilesPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-            profilesPanel.add(new Profile("test", hero.getHealth(), hero.getMana(), hero.getSprite()));
+            profilesPanel.add(tmp);
+            i++;
         }
         add(profilesPanel);
         add(Box.createVerticalGlue());
@@ -75,23 +81,23 @@ public class RightPanel extends JPanel{
         add(Box.createVerticalGlue());
 
         // Rewind Move button
-        rewind_button = new JButton("<html><p>Annuler de dernier déplacement</p></html>");
+        rewind_button = new GameButton("<html><p>Annuler de dernier déplacement</p></html>");
+        rewind_button.setPreferredSize(new Dimension(Constants.RIGHTPANEL_WIDTH - 30, 40));
+        rewind_button.setFont(new JLabel().getFont());
         rewind_button.setIcon(new ImageIcon(new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/icons/white_refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        rewind_button.setMaximumSize(new Dimension(Constants.RIGHTPANEL_WIDTH - 30, 40));
-        rewind_button.setFocusable(false);
-        rewind_button.setBackground(Color.gray);
         rewind_button.setIconTextGap(20);
-        rewind_button.setForeground(Color.white);
-        rewind_button.setBorder(new LineBorder(Color.lightGray));
         rewind_button.setBorder(new EmptyBorder(10, 10, 10, 10));
-        rewind_button.setAlignmentX(CENTER_ALIGNMENT);
 
         add(rewind_button);
         add(Box.createRigidArea(new Dimension(0,15)));
     } 
 
     public void updateProfiles(ArrayList<Hero> heroes) {
-
+        Hero hero;
+        for (int i = 0; i < profiles.length; i++) {
+            hero = heroes.get(i);
+            profiles[i].updateProfile(hero.getHealth(), hero.getMana());
+        }
     }
 
     public GameButton getAttackButton() {

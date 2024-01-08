@@ -201,7 +201,7 @@ public class CombatUI extends JPanel implements ActionListener {
     public void updatePriorityQueue(ArrayList<Entity> entities){
         if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
             for (Entity entity : entities){
-                profile_queue.add(new Profile("test", entity.getHealth(), entity.getMana(), entity.getSprite()));
+                profile_queue.add(new Profile(entity.getName(), entity.getHealth(), entity.getMana(), entity.getSprite()));
             }
 
             leftPanel.setPriority_queue(profile_queue);

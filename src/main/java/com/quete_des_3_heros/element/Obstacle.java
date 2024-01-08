@@ -1,33 +1,16 @@
 package main.java.com.quete_des_3_heros.element;
 
-public class Obstacle extends Entity {
+// public class Obstacle implements Element {
 
-    /**
-     * Constructor of Obstacle inherits Entity
-     *
-     * @param x            position of x-axis on the grid
-     * @param y            position of y-axis on the grid
-     * @param sprite       url of the sprite
-     */
-    public Obstacle(int x, int y, String sprite) {
-        super(x,
-                y,
-                sprite,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0);
-    }
+//     /**
+//      * Constructor of Obstacle inherits Entity
+//      */
+//     public Obstacle(int x, int y, String sprite) {
+        
+//     }
 
-    @Override
-    public void hurt(int damage) {
-        System.out.println("C'est un obtacle !");
-    }
-}
+//     @Override
+//     public void hurt(int damage) {
+//         System.out.println("C'est un obtacle !");
+//     }
+// }

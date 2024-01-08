@@ -233,8 +233,9 @@ public abstract class Hero extends Entity {
                 double criticalRate,
                 int level,
                 int xp,
-                int xpMaxLevel) {
-        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate);
+                int xpMaxLevel,
+                String name) {
+        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate, name);
         this.level = level;
         this.xp = xp;
         this.xpMaxLevel = xpMaxLevel;

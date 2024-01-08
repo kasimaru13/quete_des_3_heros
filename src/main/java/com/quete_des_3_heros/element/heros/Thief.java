@@ -44,7 +44,7 @@ public class Thief extends Hero {
     public Thief() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
+                "src/main/java/com/quete_des_3_heros/ressources/sprites/rogue.png",
                 100,
                 100,
                 100,
@@ -58,7 +58,8 @@ public class Thief extends Hero {
                 0.3,
                 1,
                 0,
-                200);
+                200,
+                "Voleur");
     }
 
     @Override
