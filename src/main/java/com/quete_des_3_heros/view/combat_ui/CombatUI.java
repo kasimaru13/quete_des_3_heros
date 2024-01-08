@@ -52,8 +52,6 @@ public class CombatUI extends JPanel implements ActionListener {
         // Add Entity on the grid
         addEntitiesToGrid();
 
-        updateCombatUI();
-
         SwingUtilities.invokeLater(this::startCombat);
     }
 
@@ -74,6 +72,7 @@ public class CombatUI extends JPanel implements ActionListener {
 
             @Override
             protected void done() {
+                System.out.println("fin du thread");
                 // Mettez à jour l'UI ou effectuez d'autres opérations après la fin du combat ici
             }
         };
@@ -112,7 +111,6 @@ public class CombatUI extends JPanel implements ActionListener {
             profile_queue.add(new Profile("test", entity.getHealth(), entity.getMana(), entity.getSprite()));
         }
 
-
         // Add the panels to the UI
         add(leftPanel);
         add(board);
@@ -139,12 +137,12 @@ public class CombatUI extends JPanel implements ActionListener {
     }
 
     private void addEntitiesToGrid() {
-        if(warrior.isAlive()) combatController.addEntity(warrior, 7, 2);
+        if(warrior.isAlive()) combatController.addEntity(warrior, 5, 2);
         if(mage.isAlive()) combatController.addEntity(mage, 8, 2);
-        if(thief.isAlive()) combatController.addEntity(thief, 9, 2);
-        if(goblin.isAlive()) combatController.addEntity(goblin, 7, 13);
+        if(thief.isAlive()) combatController.addEntity(thief, 13, 2);
+        if(goblin.isAlive()) combatController.addEntity(goblin, 5, 13);
         if(skeleton.isAlive()) combatController.addEntity(skeleton, 8, 13);
-        if(dragon.isAlive()) combatController.addEntity(dragon, 9, 13);
+        if(dragon.isAlive()) combatController.addEntity(dragon, 13, 13);
     }
 
     /**
