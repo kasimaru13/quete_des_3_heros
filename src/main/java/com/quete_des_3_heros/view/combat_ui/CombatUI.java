@@ -99,7 +99,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         setFocusable(true);
 
         // Initialise different panels
-        board = new Board(16, 16, combatController.getEntitiesPriorityList());
+        board = new Board(16, 16, entities);
         leftPanel = new LeftPanel();
         rightPanel = new RightPanel(combatController.getHeroes());
 
@@ -119,8 +119,10 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         board.setBounds(280, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
         rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
 
+        leftPanel.setPriority(entities);
         profile_queue = new ArrayList<Profile>();
         updatePriorityQueue(entities);
+
 
         // Add the panels to the UI
         add(leftPanel);
