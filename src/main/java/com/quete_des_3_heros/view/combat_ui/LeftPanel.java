@@ -19,13 +19,11 @@ import main.java.com.quete_des_3_heros.view.components.Profile;
  * Panel on the left of the combat UI. Contains the playing order, displaying it with characters' profiles.
  */
 public class LeftPanel extends JPanel{
-    private ArrayList<Entity> priority;
     private JLabel title;
     private List<Profile> priority_queue;
     private JPanel profile_queue;
 
     public LeftPanel(){
-        priority = new ArrayList<>(); 
         priority_queue = new ArrayList<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -87,10 +85,6 @@ public class LeftPanel extends JPanel{
 
         g.drawLine(x1, y1, x2, y2);
         g.fillPolygon(xpoints, ypoints, 3);
-    }    
-
-    public void setPriority(ArrayList<Entity> entitiesPriorityList) {
-        this.priority = entitiesPriorityList;
     }
 
     public void setPriority_queue(List<Profile> priority_queue) {
