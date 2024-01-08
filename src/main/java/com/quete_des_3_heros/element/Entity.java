@@ -105,7 +105,7 @@ public abstract class Entity implements Element{
             Element target;
             // Verify if there is a target at the coordinates
             if((target = board.getEntity(targetX, targetY)) != null){
-                target.hurt(damage);
+                ((Entity)target).hurt(damage);
                 System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
             }
             else {
