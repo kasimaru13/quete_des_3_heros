@@ -148,12 +148,12 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     }
 
     private void addEntitiesToGrid() {
-        combatController.addEntity(warrior, 7, 2);
-        combatController.addEntity(mage, 8, 2);
-        combatController.addEntity(thief, 9, 2);
-        combatController.addEntity(goblin, 7, 13);
-        combatController.addEntity(skeleton, 8, 13);
-        combatController.addEntity(dragon, 9, 13);
+        if(warrior.isAlive()) combatController.addEntity(warrior, 7, 2);
+        if(mage.isAlive()) combatController.addEntity(mage, 8, 2);
+        if(thief.isAlive()) combatController.addEntity(thief, 9, 2);
+        if(goblin.isAlive()) combatController.addEntity(goblin, 7, 13);
+        if(skeleton.isAlive()) combatController.addEntity(skeleton, 8, 13);
+        if(dragon.isAlive()) combatController.addEntity(dragon, 9, 13);
     }
 
     /**
