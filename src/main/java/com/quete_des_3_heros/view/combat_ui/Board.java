@@ -28,8 +28,6 @@ public class Board extends JPanel implements MouseMotionListener{
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
     private boolean moveStep; // Indicates that we need to display possible moves
 
-    private ArrayList<Entity> entities; // Entities alive on the board
-
     /**
      *
      * @param length length of the board
@@ -38,7 +36,6 @@ public class Board extends JPanel implements MouseMotionListener{
     public Board(int length, int width, ArrayList<Entity> entities){
         this.length = length;
         this.width = width;
-        this.entities = entities;
         grid = new Entity[this.length][this.width];
         moveStep = false;
 
