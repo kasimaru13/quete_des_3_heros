@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import main.java.com.quete_des_3_heros.controller.CombatController;
 import main.java.com.quete_des_3_heros.element.Entity;
+import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.heros.Mage;
 import main.java.com.quete_des_3_heros.element.heros.Thief;
 import main.java.com.quete_des_3_heros.element.heros.Warrior;
@@ -89,7 +90,7 @@ public class CombatUI extends JPanel implements ActionListener {
         // Initialise different panels
         board = new Board(16, 16, entities);
         leftPanel = new LeftPanel();
-        rightPanel = new RightPanel();
+        rightPanel = new RightPanel(combatController.getHeroes());
 
         // ActionListner on RightPanel's Buttons
         rightPanel.getAttackButton().addActionListener(this);
@@ -191,6 +192,10 @@ public class CombatUI extends JPanel implements ActionListener {
 
     public LeftPanel getLeftPanel() {
         return leftPanel;
+    }
+
+    public void updateProfiles(ArrayList<Hero> heroes){
+        rightPanel.updateProfiles(heroes);
     }
 
     public void updatePriorityQueue(ArrayList<Entity> entities){

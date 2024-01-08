@@ -1,23 +1,22 @@
 package main.java.com.quete_des_3_heros.view.combat_ui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.GameButton;
+import main.java.com.quete_des_3_heros.view.components.Profile;
 
 
 /**
@@ -25,6 +24,8 @@ import main.java.com.quete_des_3_heros.view.components.GameButton;
  */
 public class RightPanel extends JPanel{
     private JPanel buttonPanel; // Panel containing actions buttons
+    private JPanel profilesPanel;
+
     // Actions buttons :
     private GameButton attack;
     private GameButton defend;
@@ -33,10 +34,20 @@ public class RightPanel extends JPanel{
 
     private JButton rewind_button;
 
-    public RightPanel(){
+    public RightPanel(ArrayList<Hero> heroes){
         // Whole panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(Box.createRigidArea(new Dimension(0,15)));
+        add(Box.createRigidArea(new Dimension(0, 10)));
+
+        // Profiles Panel
+        profilesPanel = new JPanel();
+        profilesPanel.setLayout(new BoxLayout(profilesPanel, BoxLayout.Y_AXIS));
+        for (Hero hero : heroes) {
+            profilesPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            profilesPanel.add(new Profile("test", hero.getHealth(), hero.getMana(), hero.getSprite()));
+        }
+        add(profilesPanel);
+        add(Box.createVerticalGlue());
 
         // Container of the buttons
         buttonPanel = new JPanel();
@@ -78,6 +89,10 @@ public class RightPanel extends JPanel{
         add(rewind_button);
         add(Box.createRigidArea(new Dimension(0,15)));
     } 
+
+    public void updateProfiles(ArrayList<Hero> heroes) {
+
+    }
 
     public GameButton getAttackButton() {
         return attack;

@@ -11,7 +11,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.Profile;
 
@@ -34,7 +33,9 @@ public class LeftPanel extends JPanel{
         profile_queue = new JPanel();
         profile_queue.setLayout(new BoxLayout(profile_queue, BoxLayout.Y_AXIS));
 
+        add(Box.createRigidArea(new Dimension(0,15)));
         add(title);
+        add(Box.createRigidArea(new Dimension(0, 15)));
         add(profile_queue);
     }
 
@@ -49,7 +50,7 @@ public class LeftPanel extends JPanel{
                 profile_queue.add(prof);
                 profile_queue.add(Box.createRigidArea(new Dimension(0, 50)));
                 if (priority_queue.indexOf(prof) != priority_queue.size() - 1){
-                    drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, 24 + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, 24 + i * (75 + 50) - 45, 10, 5);
+                    drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, profile_queue.getY() + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, profile_queue.getY() + i * (75 + 50) - 45, 10, 5);
                 }
                 i++;
             }

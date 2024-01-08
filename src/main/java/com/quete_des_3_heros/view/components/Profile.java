@@ -35,6 +35,7 @@ public class Profile extends JPanel {
      */
     public Profile(String character_name, int hp, int mp, Image character_sprite){
         setBackground(new Color(215,215,215));
+        setMinimumSize(new Dimension(Constants.LEFTPANEL_WIDTH * 65/100, 75));
         setPreferredSize(new Dimension(Constants.LEFTPANEL_WIDTH * 65/100, 75));
         setMaximumSize(new Dimension(Constants.LEFTPANEL_WIDTH * 65/100, 75));
 
