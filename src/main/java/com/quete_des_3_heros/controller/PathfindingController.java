@@ -1,5 +1,6 @@
 package main.java.com.quete_des_3_heros.controller;
 
+import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
 
 import java.util.ArrayList;
@@ -37,13 +38,13 @@ public class PathfindingController {
         }
     }
 
-    public static boolean IsWalkable(Entity[][] grid, Point point) {
+    public static boolean IsWalkable(Element[][] grid, Point point) {
         if (point.x < 0 || point.x > grid.length - 1) return false;
         if (point.y < 0 || point.y > grid[0].length - 1) return false;
         return grid[point.x][point.y] == null;
     }
 
-    public static List<Point> FindNeighbors(Entity[][] grid, Point point) {
+    public static List<Point> FindNeighbors(Element[][] grid, Point point) {
         List<Point> neighbors = new ArrayList<>();
         Point up = point.offset(0,  1);
         Point down = point.offset(0,  -1);
@@ -56,7 +57,7 @@ public class PathfindingController {
         return neighbors;
     }
 
-    public static List<Point> FindPath(Entity[][] grid, Point start, Point end) {
+    public static List<Point> FindPath(Element[][] grid, Point start, Point end) {
         boolean finished = false;
         List<Point> used = new ArrayList<>();
         used.add(start);
@@ -93,7 +94,7 @@ public class PathfindingController {
         return path;
     }
 
-    public static List<Point> FindPathMonster(Entity[][] grid, Point start, Point end, int proximityThreshold) {
+    public static List<Point> FindPathMonster(Element[][] grid, Point start, Point end, int proximityThreshold) {
         boolean finished = false;
         List<Point> used = new ArrayList<>();
         used.add(start);

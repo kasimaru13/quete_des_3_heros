@@ -57,7 +57,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         initListEntities();
 
         // Initiate CombatUI preferences
-        initCombatUI();
+        initCombatUI(combatController.getEntitiesPriorityList());
 
         // Add Entity on the grid
         addEntitiesToGrid();
@@ -94,7 +94,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     /**
      * Initiate Combat Interface
      */
-    private void initCombatUI(){
+    private void initCombatUI(ArrayList<Entity> entities){
         setBackground(Color.blue);
         setFocusable(true);
 
