@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
-import main.java.com.quete_des_3_heros.element.heros.Warrior;
 import main.java.com.quete_des_3_heros.view.Constants;
 
 /**
@@ -151,6 +150,10 @@ public class Board extends JPanel implements MouseMotionListener{
             repaint();
         }
     }
+
+
+
+
 
     /**
      * Function addEntity() add Entity on the coordinates indicated on the grid

@@ -1,17 +1,14 @@
 package main.java.com.quete_des_3_heros.view.combat_ui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Label;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.text.Style;
 
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.Constants;
