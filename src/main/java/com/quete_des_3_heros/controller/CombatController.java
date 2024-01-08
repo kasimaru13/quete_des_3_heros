@@ -37,10 +37,18 @@ public class CombatController {
     public void moveEntity(Entity entity, int newX, int newY){
         PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
         PathfindingController.Point end = new PathfindingController.Point(newX, newY, null);
-        List<PathfindingController.Point> path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
+        List<PathfindingController.Point> path;
+        if(entity instanceof Monster){
+            path = PathfindingController.FindPathMonster(combatUI.getBoard().getGrid(), start, end, ((Monster) entity).getRangeAttack());
+        } else if (entity instanceof Hero){
+            path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
+        } else {
+            path = null;
+        }
+
         if (path != null) {
             for(int i = 0; i < entity.getMovementRange(); i++){ // A revoir
-                if(path.get(i) == null) return;
+                if(path.get(i) == null) return; // boolean hasMoved
                 combatUI.getBoard().moveEntity(entity, path.get(i).x, path.get(i).y);
             }
         }
@@ -70,7 +78,7 @@ public class CombatController {
 
         while(heroesStillAlive() && monstersStillAlive()){
             System.out.println("TOUR " + tour);
-            for(int i = 0; i<4; i++)  giveEntityTurn(entitiesPriorityList.get(0));
+            for(int i = 0; i<1; i++)  giveEntityTurn(entitiesPriorityList.get(0));
 
             tour += 1;
 
