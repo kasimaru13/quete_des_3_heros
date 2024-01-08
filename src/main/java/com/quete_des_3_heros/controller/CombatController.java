@@ -47,9 +47,11 @@ public class CombatController {
         }
 
         if (path != null) {
-            for(int i = 0; i < entity.getMovementRange(); i++){ // A revoir
-                if(path.get(i) == null) return; // boolean hasMoved
+            if(path.size() > entity.getMovementRange()) {
+                int i = entity.getMovementRange();
                 combatUI.getBoard().moveEntity(entity, path.get(i).x, path.get(i).y);
+            } else {
+                combatUI.getBoard().moveEntity(entity, path.getLast().x, path.getLast().y);
             }
         }
     }
@@ -76,14 +78,15 @@ public class CombatController {
     public void startCombat(){
         int tour = 1;
 
-        while(heroesStillAlive() && monstersStillAlive()){
+        while(tour <= 4){
             System.out.println("TOUR " + tour);
-            for(int i = 0; i<1; i++)  giveEntityTurn(entitiesPriorityList.get(0));
-
+            for(int i = 0; i<entitiesPriorityList.size(); i++) {
+                giveEntityTurn(entitiesPriorityList.get(i));
+            }
             tour += 1;
 
             setEntitiesPriorityList();
-            return;
+            combatUI.updateCombatUI();
         }
         if(heroesStillAlive()){
             System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
@@ -104,11 +107,10 @@ public class CombatController {
 
     private void giveEntityTurn(Entity entity){
         if(entity instanceof Hero){
-            return;
+
         } else if (entity instanceof Monster){
             Hero target = targetClosestHero((Monster) entity);
             moveEntity(entity, target.getX(), target.getY());
-
         }
     }
 
