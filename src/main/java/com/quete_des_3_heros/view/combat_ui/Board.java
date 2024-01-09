@@ -37,7 +37,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.length = length;
         this.width = width;
         grid = new Entity[this.length][this.width];
-        step = 2;
+        step = 0;
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];

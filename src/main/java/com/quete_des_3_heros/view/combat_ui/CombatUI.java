@@ -4,6 +4,8 @@ package main.java.com.quete_des_3_heros.view.combat_ui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ import main.java.com.quete_des_3_heros.view.components.Profile;
  * Panel for the combat phase. Contains two sides panels displaying information for the player, and in the center of the
  * panel the board.
  */
-public class CombatUI extends JPanel implements ActionListener {
+public class CombatUI extends JPanel implements ActionListener, MouseListener {
     private Board board;
     private LeftPanel leftPanel;
     private RightPanel rightPanel;
@@ -98,6 +100,9 @@ public class CombatUI extends JPanel implements ActionListener {
         rightPanel.getSkillButton().addActionListener(this);
         rightPanel.getItemButton().addActionListener(this);
         rightPanel.getRewind_button().addActionListener(this);
+
+        // Board mouse click listener
+        board.addMouseListener(this);
 
         // Set size of the panels
         setLayout(null);
@@ -206,5 +211,34 @@ public class CombatUI extends JPanel implements ActionListener {
 
             leftPanel.setPriority_queue(profile_queue);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX() % Constants.SPRITE_SIZE;
+        int y = e.getY() / Constants.SPRITE_SIZE;
+
+        // Do something with it
+        System.out.println(y);
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent arg0) {
+        // DO NOTHING
+    }
+
+    @Override
+    public void mouseExited(MouseEvent arg0) {
+        // DO NOTHING
+    }
+
+    @Override
+    public void mousePressed(MouseEvent arg0) {
+        // DO NOTHING
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent arg0) {
+        // DO NOTHING
     }
 }
