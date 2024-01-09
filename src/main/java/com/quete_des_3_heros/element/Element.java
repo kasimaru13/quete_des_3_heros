@@ -1,7 +1,5 @@
 package main.java.com.quete_des_3_heros.element;
 
-import main.java.com.quete_des_3_heros.view.combat_ui.Board;
-
 import java.awt.*;
 
 /**

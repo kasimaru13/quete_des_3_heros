@@ -33,11 +33,7 @@ public class Thief extends Hero {
 package main.java.com.quete_des_3_heros.element.heros;
 
 import main.java.com.quete_des_3_heros.element.Hero;
-import main.java.com.quete_des_3_heros.element.Entity;
-import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
-
-import java.util.Random;
 
 public class Thief extends Hero {
     // Constructeur de Thief

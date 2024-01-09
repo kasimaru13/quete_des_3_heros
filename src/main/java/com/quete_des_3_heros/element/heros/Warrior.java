@@ -29,11 +29,8 @@ public class Warrior extends Hero {
 
 package main.java.com.quete_des_3_heros.element.heros;
 
-import java.util.Random;
 
 import main.java.com.quete_des_3_heros.element.Hero;
-import main.java.com.quete_des_3_heros.element.Entity;
-import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Warrior extends Hero {
