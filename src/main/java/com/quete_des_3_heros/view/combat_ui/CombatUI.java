@@ -215,11 +215,10 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX() % Constants.SPRITE_SIZE;
+        int x = e.getX() % Constants.SPRITE_SIZE; // x in pixel -> x in squares
         int y = e.getY() / Constants.SPRITE_SIZE;
 
         // Do something with it
-        System.out.println(y);
     }
 
     @Override
