@@ -26,7 +26,7 @@ public class Board extends JPanel implements MouseMotionListener{
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
     private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
-    private boolean moveStep; // Indicates that we need to display possible moves
+    private int step; // 1 is move step, 2 is attack step
 
     /**
      *
@@ -37,7 +37,7 @@ public class Board extends JPanel implements MouseMotionListener{
         this.length = length;
         this.width = width;
         grid = new Entity[this.length][this.width];
-        moveStep = false;
+        step = 2;
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -84,7 +84,7 @@ public class Board extends JPanel implements MouseMotionListener{
 
 
         // Draw possible moves
-        if (moveStep){
+        if (step != 0){
             drawPossibleMoves(possibleMoves, g);
         }
     }
@@ -99,6 +99,9 @@ public class Board extends JPanel implements MouseMotionListener{
      */
     private void drawPossibleMoves(int positions[][], Graphics g){
         int x,y;
+        Color col, col_hover;
+        if (step == 1) {col = new Color(0, 125, 0, 125); col_hover = new Color(0, 175, 0, 125);}
+        else {col = new Color(125, 0, 0, 125); col_hover = new Color(175, 0, 0, 125);}
 
         for (int i[] : positions){
             // Calculation of x and y in pixels :
@@ -108,10 +111,10 @@ public class Board extends JPanel implements MouseMotionListener{
 
             // Select color of rectangle
             if (i[0] == mousePosition[0] && i[1] == mousePosition[1]){
-                g.setColor(new Color(0, 125, 0, 125)); // If mouse hover
+                g.setColor(col); // If mouse hover
             }
             else{
-                g.setColor(new Color(0, 175, 0, 125)); // If not mouse hover
+                g.setColor(col_hover); // If not mouse hover
             }
 
             // Draw the square
