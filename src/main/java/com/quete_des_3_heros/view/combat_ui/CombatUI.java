@@ -171,17 +171,45 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         if (e.getSource() == rightPanel.getAttackButton()){
             System.out.println("Attack");
         }
-        if (e.getSource() == rightPanel.getDefendButton()){
+        else if (e.getSource() == rightPanel.getDefendButton()){
             System.out.println("Defend");
         }
-        if (e.getSource() == rightPanel.getSkillButton()){
+        else if (e.getSource() == rightPanel.getSkillButton()){
             System.out.println("Skill");
+
+            // Get skills names in backend
+
+            ArrayList<String> testNames = new ArrayList<>(); // TO GET RID OF, CALL THE BACKEND
+            testNames.add("Technique 1"); // TO GET RID OF, CALL THE BACKEND
+            testNames.add("Technique 2"); // TO GET RID OF, CALL THE BACKEND
+
+            // Show the skills on the interface
+            showSkills(testNames);
         }
-        if (e.getSource() == rightPanel.getItemButton()){
+        else if (e.getSource() == rightPanel.getItemButton()){
             System.out.println("Item");
         }
-        if (e.getSource() == rightPanel.getRewind_button()){
+        else if (e.getSource() == rightPanel.getRewind_button()){
             System.out.println("Rewind");
+        }
+
+        // Skill/Inventory buttons
+        else if (rightPanel.getAlternativeButtons().contains(e.getSource())) {
+            int index = rightPanel.getAlternativeButtons().indexOf(e.getSource());
+            if (index == rightPanel.getAlternativeButtons().size() - 1) rightPanel.actionButtonsToPanel(); // Return
+            else System.out.println(rightPanel.getAlternativeButtons().get(index).getText());// Do something
+        }
+    }
+
+    /**
+     * Shows skill buttons on UI (and sets action listeners on them)
+     * @param skillsName List of skills as strings
+     */
+    private void showSkills(ArrayList<String> skillsName) {
+        rightPanel.skillButtonsToPanel(skillsName);
+
+        for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
+            rightPanel.getAlternativeButtons().get(i).addActionListener(this);
         }
     }
 

@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import main.java.com.quete_des_3_heros.element.Hero;
@@ -24,6 +25,7 @@ import main.java.com.quete_des_3_heros.view.components.Profile;
 public class RightPanel extends JPanel{
     private JPanel profilesPanel; // Panel containing profiles of heroes
     private JPanel buttonPanel; // Panel containing actions buttons
+    private JScrollPane scrollbuttonPanel;
 
     // Actions buttons :
     private GameButton attack;
@@ -34,6 +36,8 @@ public class RightPanel extends JPanel{
     private JButton rewind_button;
 
     private Profile[] profiles;
+
+    private ArrayList<JButton> alternativeButtons; // Skills buttons / Inventory buttons
 
     public RightPanel(ArrayList<Hero> heroes){
         // Whole panel
@@ -58,6 +62,9 @@ public class RightPanel extends JPanel{
         // Container of the buttons
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));   // Layout for vertical buttons
+        scrollbuttonPanel = new JScrollPane(buttonPanel);
+        buttonPanel.setAutoscrolls(true);
+        scrollbuttonPanel.setBorder(new EmptyBorder(0,0,0,0));
 
         // Creation of the buttons
         attack = new GameButton("Attaquer");
@@ -66,18 +73,13 @@ public class RightPanel extends JPanel{
         item = new GameButton("Objet");
 
         // Adding buttons to the container
-        buttonPanel.add(attack);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
-        buttonPanel.add(defend);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
-        buttonPanel.add(skill);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
-        buttonPanel.add(item);
+        actionButtonsToPanel();
+
         buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
-
         buttonPanel.setMinimumSize(new Dimension(Constants.RIGHTPANEL_WIDTH, buttonPanel.getHeight()));
+        scrollbuttonPanel.setPreferredSize(new Dimension(Constants.RIGHTPANEL_WIDTH - 1, Constants.WINDOW_HEIGHT / 3));
 
-        add(buttonPanel);
+        add(scrollbuttonPanel);
         add(Box.createVerticalGlue());
 
         // Rewind Move button
@@ -92,12 +94,62 @@ public class RightPanel extends JPanel{
         add(Box.createRigidArea(new Dimension(0,15)));
     } 
 
+    /**
+     * Update the profiles shown on RightPanel
+     * @param heroes The list of all heroes
+     */
     public void updateProfiles(ArrayList<Hero> heroes) {
         Hero hero;
         for (int i = 0; i < profiles.length; i++) {
             hero = heroes.get(i);
             profiles[i].updateProfile(hero.getHealth(), hero.getMana());
         }
+    }
+
+    /**
+     * Displays action buttons on the right panel of the UI
+     */
+    public void actionButtonsToPanel() {
+        // Add buttons to button panel
+        buttonPanel.removeAll();
+        buttonPanel.add(attack);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
+        buttonPanel.add(defend);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
+        buttonPanel.add(skill);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
+        buttonPanel.add(item);
+
+        // Remove all buttons from alternativeButtons (to free space)
+        alternativeButtons = null;
+
+        // Repaint
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * Displays the skills on the right panel of the UI (with back button)
+     * @param skillsNames
+     */
+    public void skillButtonsToPanel(ArrayList<String> skillsNames) {
+        alternativeButtons = new ArrayList<JButton>();
+        buttonPanel.removeAll(); // Remove all buttons from ui
+
+        // Add each skill to alternativeButtons and to UI
+        for (String skill : skillsNames) {
+            alternativeButtons.add(new GameButton(skill));
+            buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
+            buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
+        }
+
+        // Add back button
+        alternativeButtons.add(new GameButton("Retour"));
+        buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
+
+        // Repaint
+        revalidate();
+        repaint();
     }
 
     public GameButton getAttackButton() {
@@ -118,5 +170,9 @@ public class RightPanel extends JPanel{
 
     public JButton getRewind_button() {
         return rewind_button;
+    }
+
+    public ArrayList<JButton> getAlternativeButtons() {
+        return alternativeButtons;
     }
 }
