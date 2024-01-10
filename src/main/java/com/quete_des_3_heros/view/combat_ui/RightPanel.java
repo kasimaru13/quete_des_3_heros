@@ -14,8 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.inventory.Item;
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.GameButton;
+import main.java.com.quete_des_3_heros.view.components.InventoryButton;
 import main.java.com.quete_des_3_heros.view.components.Profile;
 
 
@@ -37,7 +39,7 @@ public class RightPanel extends JPanel{
 
     private Profile[] profiles;
 
-    private ArrayList<JButton> alternativeButtons; // Skills buttons / Inventory buttons
+    private ArrayList<GameButton> alternativeButtons; // Skills buttons / Inventory buttons
 
     public RightPanel(ArrayList<Hero> heroes){
         // Whole panel
@@ -133,12 +135,32 @@ public class RightPanel extends JPanel{
      * @param skillsNames
      */
     public void skillButtonsToPanel(ArrayList<String> skillsNames) {
-        alternativeButtons = new ArrayList<JButton>();
+        alternativeButtons = new ArrayList<GameButton>();
         buttonPanel.removeAll(); // Remove all buttons from ui
 
         // Add each skill to alternativeButtons and to UI
         for (String skill : skillsNames) {
             alternativeButtons.add(new GameButton(skill));
+            buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
+            buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
+        }
+
+        // Add back button
+        alternativeButtons.add(new GameButton("Retour"));
+        buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
+
+        // Repaint
+        revalidate();
+        repaint();
+    }
+
+    public void itemsButtonsToPanel(ArrayList<Item> items) {
+        alternativeButtons = new ArrayList<GameButton>();
+        buttonPanel.removeAll();
+
+        // Add each item to alternativeButtons and to UI
+        for (Item item : items) {
+            alternativeButtons.add(new InventoryButton(item.getName(), item.getDescription(), item.getSprite()));
             buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
             buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
         }
@@ -172,7 +194,7 @@ public class RightPanel extends JPanel{
         return rewind_button;
     }
 
-    public ArrayList<JButton> getAlternativeButtons() {
+    public ArrayList<GameButton> getAlternativeButtons() {
         return alternativeButtons;
     }
 }

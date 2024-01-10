@@ -20,7 +20,14 @@ import main.java.com.quete_des_3_heros.element.heros.Warrior;
 import main.java.com.quete_des_3_heros.element.monsters.Dragon;
 import main.java.com.quete_des_3_heros.element.monsters.Goblin;
 import main.java.com.quete_des_3_heros.element.monsters.Skeleton;
+import main.java.com.quete_des_3_heros.inventory.Item;
+import main.java.com.quete_des_3_heros.inventory.potions.PotionItem;
+import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.BasePotionDecorator;
+import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ConcretePotion;
+import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.HealingPotion;
+import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ManaPotion;
 import main.java.com.quete_des_3_heros.view.Constants;
+import main.java.com.quete_des_3_heros.view.components.InventoryButton;
 import main.java.com.quete_des_3_heros.view.components.Profile;
 
 
@@ -168,16 +175,19 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // Actions when pressing right panel's buttons
+
+        // Attack
         if (e.getSource() == rightPanel.getAttackButton()){
             System.out.println("Attack");
         }
+
+        // Defend
         else if (e.getSource() == rightPanel.getDefendButton()){
             System.out.println("Defend");
         }
-        else if (e.getSource() == rightPanel.getSkillButton()){
-            System.out.println("Skill");
 
-            // Get skills names in backend
+        // Skills
+        else if (e.getSource() == rightPanel.getSkillButton()){// Get skills names in backend
 
             ArrayList<String> testNames = new ArrayList<>(); // TO GET RID OF, CALL THE BACKEND
             testNames.add("Technique 1"); // TO GET RID OF, CALL THE BACKEND
@@ -186,18 +196,54 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             // Show the skills on the interface
             showSkills(testNames);
         }
+
+        // Items
         else if (e.getSource() == rightPanel.getItemButton()){
-            System.out.println("Item");
+            // Get inventory in backend
+
+            ArrayList<Item> testItems = new ArrayList<>();
+            PotionItem healingPotion = new PotionItem(
+                "Potion de soin basique", 
+                "Potion soignant peu de HP", 
+                new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png").getImage(), 
+                new HealingPotion(new ConcretePotion(), 10)
+                );
+            PotionItem manaPotion = new PotionItem(
+                "Potion de mana basique", 
+                "Potion soignant peu de MP", 
+                new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/mana_potion.png").getImage(),
+                new ManaPotion(new ConcretePotion(), 10)
+                );
+            testItems.add(healingPotion);
+            testItems.add(manaPotion);
+
+            // Show items on UI
+            showInventory(testItems);
         }
+
+        // Rewind
         else if (e.getSource() == rightPanel.getRewind_button()){
             System.out.println("Rewind");
         }
 
-        // Skill/Inventory buttons
+
+        // Skill/Inventory sub-buttons
         else if (rightPanel.getAlternativeButtons().contains(e.getSource())) {
             int index = rightPanel.getAlternativeButtons().indexOf(e.getSource());
-            if (index == rightPanel.getAlternativeButtons().size() - 1) rightPanel.actionButtonsToPanel(); // Return
-            else System.out.println(rightPanel.getAlternativeButtons().get(index).getText());// Do something
+
+            if (index == rightPanel.getAlternativeButtons().size() - 1) rightPanel.actionButtonsToPanel(); // Back
+            else {
+                if (rightPanel.getAlternativeButtons().get(0) instanceof InventoryButton) {
+                    // Inventory button
+                    // DO SOMETHING WITH NAME
+                    System.out.println(((InventoryButton)(rightPanel.getAlternativeButtons().get(index))).getItemName());
+                }
+                else {
+                    // Skill button
+                    // DO SOMETHING WITH SKILL NAME (TEXT OF BUTTON)
+                    System.out.println(rightPanel.getAlternativeButtons().get(index).getText());
+                }
+            }
         }
     }
 
@@ -213,6 +259,31 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         }
     }
 
+    /**
+     * Shows skill buttons on UI (and sets action listeners on them)
+     * @param items Inventory as a list of items
+     */
+    private void showInventory(ArrayList<Item> items) {
+        rightPanel.itemsButtonsToPanel(items);
+
+        for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
+            rightPanel.getAlternativeButtons().get(i).addActionListener(this);
+        }
+    }
+
+    /**
+     * Update priority queue profiles of leftpanel
+     * @param entities Entity list in order of play
+     */
+    public void updatePriorityQueue(ArrayList<Entity> entities){
+        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
+            for (Entity entity : entities){
+                profile_queue.add(new Profile(entity.getName(), entity.getHealth(), entity.getMana(), entity.getSprite()));
+            }
+
+            leftPanel.setPriority_queue(profile_queue);
+        }
+    }
 
 
     public Board getBoard() {
@@ -229,16 +300,6 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
     public void updateProfiles(ArrayList<Hero> heroes){
         rightPanel.updateProfiles(heroes);
-    }
-
-    public void updatePriorityQueue(ArrayList<Entity> entities){
-        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
-            for (Entity entity : entities){
-                profile_queue.add(new Profile(entity.getName(), entity.getHealth(), entity.getMana(), entity.getSprite()));
-            }
-
-            leftPanel.setPriority_queue(profile_queue);
-        }
     }
 
     @Override

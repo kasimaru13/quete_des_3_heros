@@ -13,13 +13,10 @@ import javax.swing.border.LineBorder;
  * Button component with specific styling.
  */
 public class GameButton extends JButton implements MouseListener {
-    String text;
-
     public GameButton(String text){
         super(text);
 
         setFocusable(false);
-        setSize(new Dimension(500, 80));
         setFont(new Font("Arial", Font.PLAIN, 18));
         setBackground(Color.gray);
         setForeground(Color.WHITE);

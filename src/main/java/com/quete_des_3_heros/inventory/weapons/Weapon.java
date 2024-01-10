@@ -1,5 +1,7 @@
 package main.java.com.quete_des_3_heros.inventory.weapons;
 
+import java.awt.Image;
+
 import main.java.com.quete_des_3_heros.inventory.Item;
 
 /**
@@ -10,8 +12,8 @@ public class Weapon extends Item {
     private int damage;
     private int range;
 
-    public Weapon(String _name, String _description, int _damage, int _range){
-        super(_name, _description);
+    public Weapon(String _name, String _description, int _damage, int _range, Image _sprite){
+        super(_name, _description, _sprite);
         damage = _damage;
         range = _range;
     }

@@ -1,18 +1,13 @@
-## Getting Started
+## Source des Images :
+# Fond d'écrans :
+Fond de plaine verte: https://opengameart.org/content/grass-8
+Fond de l’écran titre (château): https://urlich.art/projects/zOWqld 
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+# Sprites :
+Sprite de guerrier: https://opengameart.org/content/animated-warrior
+Sprite de mage : https://br.pinterest.com/pin/438678819937102971/
+Sprite de voleur : https://opengameart.org/content/wind-rogue
+Sprites de potions : https://opengameart.org/content/16x16px-pixelart-potions
+Sprite de dragon : https://www.pinterest.fr/pin/671951206889656837/
+Sprite de squelette : https://opengameart.org/content/lpc-skeleton
+Sprite de gobelin : https://opengameart.org/content/lpc-goblin
