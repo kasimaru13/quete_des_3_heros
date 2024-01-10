@@ -171,6 +171,66 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         System.out.println();
     }
 
+    /**
+     * Shows skill buttons on UI (and sets action listeners on them)
+     * @param skillsName List of skills as strings
+     */
+    private void showSkills(ArrayList<String> skillsName) {
+        rightPanel.skillButtonsToPanel(skillsName);
+
+        for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
+            rightPanel.getAlternativeButtons().get(i).addActionListener(this);
+        }
+    }
+
+    /**
+     * Shows skill buttons on UI (and sets action listeners on them)
+     * @param items Inventory as a list of items
+     */
+    private void showInventory(ArrayList<Item> items) {
+        rightPanel.itemsButtonsToPanel(items);
+
+        for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
+            rightPanel.getAlternativeButtons().get(i).addActionListener(this);
+        }
+    }
+
+    /**
+     * Update priority queue profiles of leftpanel
+     * @param entities Entity list in order of play
+     */
+    public void updatePriorityQueue(ArrayList<Entity> entities){
+        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
+            for (Entity entity : entities){
+                profile_queue.add(new Profile(entity.getName(), entity.getHealth(), entity.getMana(), entity.getSprite()));
+            }
+
+            leftPanel.setPriority_queue(profile_queue);
+        }
+    }
+
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
+    }
+
+    public void updateProfiles(ArrayList<Hero> heroes){
+        rightPanel.updateProfiles(heroes);
+    }
+
+
+
+    
+
+    // Buttons listener -------------------------------------------------------------
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -247,60 +307,12 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         }
     }
 
-    /**
-     * Shows skill buttons on UI (and sets action listeners on them)
-     * @param skillsName List of skills as strings
-     */
-    private void showSkills(ArrayList<String> skillsName) {
-        rightPanel.skillButtonsToPanel(skillsName);
-
-        for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
-            rightPanel.getAlternativeButtons().get(i).addActionListener(this);
-        }
-    }
-
-    /**
-     * Shows skill buttons on UI (and sets action listeners on them)
-     * @param items Inventory as a list of items
-     */
-    private void showInventory(ArrayList<Item> items) {
-        rightPanel.itemsButtonsToPanel(items);
-
-        for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
-            rightPanel.getAlternativeButtons().get(i).addActionListener(this);
-        }
-    }
-
-    /**
-     * Update priority queue profiles of leftpanel
-     * @param entities Entity list in order of play
-     */
-    public void updatePriorityQueue(ArrayList<Entity> entities){
-        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
-            for (Entity entity : entities){
-                profile_queue.add(new Profile(entity.getName(), entity.getHealth(), entity.getMana(), entity.getSprite()));
-            }
-
-            leftPanel.setPriority_queue(profile_queue);
-        }
-    }
 
 
-    public Board getBoard() {
-        return board;
-    }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
 
-    public LeftPanel getLeftPanel() {
-        return leftPanel;
-    }
 
-    public void updateProfiles(ArrayList<Hero> heroes){
-        rightPanel.updateProfiles(heroes);
-    }
+    // Mouse listener ------------------------------------------------------------------------------
 
     @Override
     public void mouseClicked(MouseEvent e) {
