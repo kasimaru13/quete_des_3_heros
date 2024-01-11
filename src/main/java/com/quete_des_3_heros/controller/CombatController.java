@@ -20,72 +20,120 @@ import static java.awt.geom.Point2D.distance;
 public class CombatController {
     private CombatUI combatUI;
     private ArrayList<Entity> entitiesPriorityList;
-
     private Entity entityPlaying;
     private boolean hasSkipped;
     private boolean hasMoved;
     private ArrayList<Hero> heroes;
     private ArrayList<Monster> monsters;
 
-    public CombatController(CombatUI combatUI){
+    /**
+     * Constructs a CombatController associated with a specific CombatUI.
+     *
+     * @param combatUI The CombatUI instance associated with this controller.
+     */
+    public CombatController(CombatUI combatUI) {
         this.combatUI = combatUI;
         this.entitiesPriorityList = new ArrayList<>();
         this.heroes = new ArrayList<>();
         this.monsters = new ArrayList<>();
     }
 
-    public void addEntity(Entity entity, int x, int y){
+    /**
+     * Adds an entity to the game board at the specified coordinates.
+     *
+     * @param entity The entity to be added to the game board.
+     * @param x      The X-coordinate for the entity's initial position.
+     * @param y      The Y-coordinate for the entity's initial position.
+     */
+    public void addEntity(Entity entity, int x, int y) {
+        // Add the entity to the game board at the specified coordinates
         combatUI.getBoard().addEntity(entity, x, y);
     }
 
-    public void showEntityMovements(Entity entity){
+
+    /**
+     * Shows possible movements for an entity on the game board within its movement range.
+     *
+     * @param entity The entity for which possible movements are to be displayed.
+     */
+    public void showEntityMovements(Entity entity) {
+        // Get the maximum movement distance for the entity
         int maxDistance = entity.getMovementRange();
+
+        // Create a starting point for pathfinding based on the entity's current position
         PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
+
+        // Find all paths within the movement range and set them as possible movements on the game board
         combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, maxDistance));
+
+        // Enable the move step on the game board to visualize possible movements
         combatUI.getBoard().setMoveStep(true);
     }
 
-    public void moveOnPathEntity(Entity entity, int targetX, int targetY){
+
+    /**
+     * Moves an entity on a path to a target location.
+     *
+     * @param entity    The entity to be moved.
+     * @param targetX   The target X-coordinate of the destination.
+     * @param targetY   The target Y-coordinate of the destination.
+     */
+    public void moveOnPathEntity(Entity entity, int targetX, int targetY) {
+        // Create start and end points for pathfinding
         PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
         PathfindingController.Point end = new PathfindingController.Point(targetX, targetY, null);
         List<PathfindingController.Point> path;
-        if(entity instanceof Monster){
-            path = PathfindingController.FindPathMonster(combatUI.getBoard().getGrid(), start, end, ((Monster) entity).getRangeAttack());
-        } else if (entity instanceof Hero){
-            path = PathfindingController.FindPath(combatUI.getBoard().getGrid(), start, end);
-        } else {
-            path = null;
-        }
 
-        if (path != null) {
-            if(path.size() > entity.getMovementRange()) {
-                int i = entity.getMovementRange();
-                combatUI.getBoard().moveEntity(entity, path.get(i).x, path.get(i).y);
-            } else {
-                combatUI.getBoard().moveEntity(entity, path.getLast().x, path.getLast().y);
+        // Check if the entity is a Monster
+        if (entity instanceof Monster) {
+            // Find the path using the Monster-specific pathfinding method
+            path = PathfindingController.FindPathMonster(combatUI.getBoard().getGrid(), start, end, ((Monster) entity).getRangeAttack());
+
+            // Move the entity along the path if a valid path is found
+            if (path != null) {
+                int maxDistance = entity.getMovementRange();
+                if (path.size() > maxDistance) {
+                    // Move to the furthest reachable point within the movement range
+                    combatUI.getBoard().moveEntity(entity, path.get(maxDistance).x, path.get(maxDistance).y);
+                } else {
+                    // Move to the last point in the path
+                    combatUI.getBoard().moveEntity(entity, path.get(path.size() - 1).x, path.get(path.size() - 1).y);
+                }
             }
+        } else if (entity instanceof Hero) {
+            // Move the Hero directly to the possible target location
+            combatUI.getBoard().moveEntity(entity, targetX, targetY);
         }
-        hasSkipped = true;
     }
 
-    public ArrayList<Entity> getEntitiesPriorityList(){
+
+    /**
+     * Retrieves the list of entities in the combat with their priority order.
+     *
+     * @return An ArrayList containing entities sorted by their priority in the combat.
+     */
+    public ArrayList<Entity> getEntitiesPriorityList() {
         return entitiesPriorityList;
     }
-    public void setEntitiesPriorityList(){
+
+    /**
+     * Sets the list of entities in the combat with their priority order based on speed.
+     * Dead entities are excluded from the priority list.
+     */
+    public void setEntitiesPriorityList() {
+        // Clear the existing priority list
         entitiesPriorityList.clear();
+
+        // Add alive heroes to the priority list
         entitiesPriorityList.addAll(heroes.stream().filter(Hero::isAlive).toList());
+
+        // Add alive monsters to the priority list
         entitiesPriorityList.addAll(monsters.stream().filter(Monster::isAlive).toList());
 
-        // Sorting by the speed of the entities
-        entitiesPriorityList.sort((c1, c2) -> c2.getSpeed() - c1.getSpeed());
-
-        for (Entity e : entitiesPriorityList) {
-            String typeEntity = e instanceof Hero ? "Héros" : "Monstre";
-            System.out.println(typeEntity + " - " + e.getClass().getSimpleName() + " (Vitesse: " + e.getSpeed() + ")");
-        }
-
-        combatUI.updatePriorityQueue(entitiesPriorityList);
+        // Sort the priority list based on the entities' speed in descending order
+        entitiesPriorityList.sort((entity1, entity2) -> entity2.getSpeed() - entity1.getSpeed());
     }
+
 
     public void startCombat(){
         int tour = 1;
@@ -110,41 +158,72 @@ public class CombatController {
         }
     }
 
-    public boolean heroesStillAlive(){
+    /**
+     * Checks if there are still living heroes in the combat.
+     *
+     * @return True if there is at least one living hero; false otherwise.
+     */
+    public boolean heroesStillAlive() {
         return this.heroes.stream().anyMatch(Entity::isAlive);
     }
 
-    public boolean monstersStillAlive(){
+    /**
+     * Checks if there are still living monsters in the combat.
+     *
+     * @return True if there is at least one living monster; false otherwise.
+     */
+    public boolean monstersStillAlive() {
         return this.monsters.stream().anyMatch(Entity::isAlive);
     }
 
-    private void giveEntityTurn(Entity entity){
+
+    /**
+     * Gives the turn to a specific entity in the combat, allowing it to perform actions.
+     * Depending on the entity type, it may show possible movements for heroes or move monsters towards heroes.
+     *
+     * @param entity The entity to receive the turn.
+     */
+    private void giveEntityTurn(Entity entity) {
         setHasSkipped(false);
         setHasMoved(false);
-        if(entity instanceof Hero){
-            while(!hasSkipped){
-                if(!hasMoved) {
+
+        // Check if the entity is a hero or a monster
+        if (entity instanceof Hero) {
+            // Loop until the hero has skipped
+            while (!hasSkipped) {
+                if (!hasMoved) { // Show the possible movements of the entity until he performed a movement
                     showEntityMovements(entity);
                 }
             }
-
-        } else if (entity instanceof Monster){
+        } else if (entity instanceof Monster) {
+            // Find the closest hero and move the monster towards the target
             Hero target = targetClosestHero((Monster) entity);
             moveOnPathEntity(entity, target.getX(), target.getY());
         }
     }
 
-    private Hero targetClosestHero(Monster monster){
+
+    /**
+     * Finds the closest living hero to a given monster.
+     *
+     * @param monster The monster for which the closest hero is to be determined.
+     * @return The closest living hero to the monster, or null if no living heroes are present.
+     */
+    private Hero targetClosestHero(Monster monster) {
         ArrayList<Hero> heroesStillAlive = new ArrayList<>();
-        for(Entity e : entitiesPriorityList){
-            if(e instanceof Hero) heroesStillAlive.add((Hero) e);
+
+        // Filter living heroes from the priority list
+        for (Entity e : entitiesPriorityList) {
+            if (e instanceof Hero) heroesStillAlive.add((Hero) e);
         }
+
         Hero closestHero = null;
         int closestDistance = Integer.MAX_VALUE;
 
-        for(Hero hero : heroesStillAlive){
+        // Iterate through living heroes to find the closest one
+        for (Hero hero : heroesStillAlive) {
             int distance = (int) distance(monster.getX(), monster.getY(), hero.getX(), hero.getY());
-            if(distance < closestDistance){
+            if (distance < closestDistance) {
                 closestDistance = distance;
                 closestHero = hero;
             }
@@ -152,114 +231,94 @@ public class CombatController {
         return closestHero;
     }
 
-    /*
-    // Exécuter le tour d'un combattant
-    private void executerTourCombattant(Entity Entity) {
-
-    }
-    
-
-    private Hero trouverCibleHero() {
-        List<Hero> herosVivants = new ArrayList<>();
-        for (Entity c : Entities) {
-            if (c instanceof Hero && c.getPv() > 0) {
-                herosVivants.add((Hero) c);
-        }
-    }
-
-    if (!herosVivants.isEmpty()) {
-        // Choisir un héros au hasard parmi les héros vivants
-        Random rand = new Random();
-        return herosVivants.get(rand.nextInt(herosVivants.size()));
-    }
-
-    return null; // Aucun héros vivant trouvé
-    }
-
-    private Monster trouverCibleMonstre() {
-        List<Monster> monstresVivants = new ArrayList<>();
-        for (Entity c : Entities) {
-            if (c instanceof Monster && c.getPv() > 0) {
-                monstresVivants.add((Monster) c);
-            }
-        }
-    
-        if (monstresVivants.isEmpty()) {
-            System.out.println("Il n'y a plus de monstres vivants.");
-            return null; // Aucun monstre vivant trouvé
-        }
-    
-        // Affichage des monstres vivants pour que le joueur puisse choisir
-        System.out.println("Choisissez un monstre à attaquer:");
-        for (int i = 0; i < monstresVivants.size(); i++) {
-            System.out.println(i + 1 + ". " + monstresVivants.get(i).getClass().getSimpleName() + " (PV: " + monstresVivants.get(i).getPv() + ")");
-        }
-    
-        // Lire le choix du joueur
-        int choix = lireChoixJoueur(monstresVivants.size());
-        return monstresVivants.get(choix - 1);
-    }
-    
-    private int lireChoixJoueur(int max) {
-    Scanner scanner = new Scanner(System.in);
-    int choix = 0;
-    boolean choixValide = false;
-
-    while (!choixValide) {
-        try {
-            System.out.print("Entrez votre choix (1-" + max + "): ");
-            choix = scanner.nextInt();
-
-            // Vérifier si le choix est dans la plage valide
-            if (choix >= 1 && choix <= max) {
-                choixValide = true;
-            } else {
-                System.out.println("Choix invalide. Veuillez réessayer.");
-            }
-        } catch (Exception e) {
-            System.out.println("Entrée invalide. Veuillez entrer un nombre.");
-            scanner.nextLine(); // Pour consommer l'entrée incorrecte et éviter une boucle infinie
-        }
-    }
-        return choix; // Retourne un choix valide
-    }
-    */
-
-    public Entity getEntityPlaying(){
+    /**
+     * Retrieves the currently playing entity in the combat.
+     *
+     * @return The entity currently taking its turn in the combat.
+     */
+    public Entity getEntityPlaying() {
         return entityPlaying;
     }
 
-    public void setEntityPlaying(Entity entityPlaying){
+    /**
+     * Sets the currently playing entity in the combat.
+     *
+     * @param entityPlaying The entity to be set as the currently playing entity.
+     */
+    public void setEntityPlaying(Entity entityPlaying) {
         this.entityPlaying = entityPlaying;
     }
 
-    public boolean hasSkipped(){
+    /**
+     * Checks if the currently playing entity has skipped its turn.
+     *
+     * @return True if the entity has skipped its turn; false otherwise.
+     */
+    public boolean hasSkipped() {
         return hasSkipped;
     }
 
-    public void setHasSkipped(boolean hasSkipped){
+    /**
+     * Sets whether the currently playing entity has skipped its turn.
+     *
+     * @param hasSkipped True if the entity has skipped its turn; false otherwise.
+     */
+    public void setHasSkipped(boolean hasSkipped) {
         this.hasSkipped = hasSkipped;
     }
 
-    public boolean hasMoved(){
+    /**
+     * Checks if the currently playing entity has moved.
+     *
+     * @return True if the entity has moved; false otherwise.
+     */
+    public boolean hasMoved() {
         return hasMoved;
     }
 
-    public void setHasMoved(boolean hasMoved){
+    /**
+     * Sets whether the currently playing entity has moved.
+     *
+     * @param hasMoved True if the entity has moved; false otherwise.
+     */
+    public void setHasMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }
 
-    public ArrayList<Hero> getHeroes(){
+    /**
+     * Retrieves the list of heroes in the combat.
+     *
+     * @return An ArrayList containing the heroes participating in the combat.
+     */
+    public ArrayList<Hero> getHeroes() {
         return heroes;
     }
-    public void setHeroes(ArrayList<Hero> heroes){
+
+    /**
+     * Sets the list of heroes in the combat.
+     *
+     * @param heroes The ArrayList containing the heroes to be set in the combat.
+     */
+    public void setHeroes(ArrayList<Hero> heroes) {
         this.heroes = heroes;
     }
 
-    public ArrayList<Monster> getMonsters(){
+    /**
+     * Retrieves the list of monsters in the combat.
+     *
+     * @return An ArrayList containing the monsters participating in the combat.
+     */
+    public ArrayList<Monster> getMonsters() {
         return monsters;
     }
-    public void setMonsters(ArrayList<Monster> monsters){
+
+    /**
+     * Sets the list of monsters in the combat.
+     *
+     * @param monsters The ArrayList containing the monsters to be set in the combat.
+     */
+    public void setMonsters(ArrayList<Monster> monsters) {
         this.monsters = monsters;
     }
+
 }
