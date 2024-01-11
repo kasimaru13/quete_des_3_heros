@@ -3,9 +3,7 @@ package main.java.com.quete_des_3_heros.controller;
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static java.awt.geom.Point2D.distance;
 
@@ -93,6 +91,64 @@ public class PathfindingController {
         }
         return path;
     }
+
+    public static int[][] FindAllPaths(Element[][] grid, Point start, int maxDistance) {
+        List<int[]> allPointsList = new ArrayList<>();
+        List<Point> currentPath = new ArrayList<>();
+
+        FindPathsRecursively(grid, start, maxDistance, currentPath, allPointsList);
+
+        // Convertir la liste de points en tableau d'entiers
+        int[][] allPathsArray = new int[allPointsList.size()][2];
+        for (int i = 0; i < allPointsList.size(); i++) {
+            allPathsArray[i][0] = allPointsList.get(i)[0];
+            allPathsArray[i][1] = allPointsList.get(i)[1];
+        }
+
+        return removeRedundantElements(allPathsArray);
+    }
+
+    private static void FindPathsRecursively(Element[][] grid, Point current, int maxDistance,
+                                             List<Point> currentPath, List<int[]> allPointsList) {
+        if (maxDistance == 0) {
+            // Ajouter tous les points du chemin à la liste
+            for (Point point : currentPath) {
+                allPointsList.add(new int[]{point.x, point.y});
+            }
+            return;
+        }
+
+        for (Point neighbor : FindNeighbors(grid, current)) {
+            if (!currentPath.contains(neighbor)) {
+                currentPath.add(neighbor);
+                FindPathsRecursively(grid, neighbor, maxDistance - 1, currentPath, allPointsList);
+                currentPath.remove(currentPath.size() - 1);
+            }
+        }
+    }
+
+    public static int[][] removeRedundantElements(int[][] inputArray) {
+        Set<String> uniquePairs = new HashSet<>();
+        List<int[]> result = new ArrayList<>();
+
+        for (int[] pair : inputArray) {
+            String pairString = pair[0] + "," + pair[1];
+
+            if (uniquePairs.add(pairString)) {
+                // Si la paire n'est pas déjà présente, on l'ajoute au résultat
+                result.add(pair);
+            }
+        }
+
+        // Convertir la liste résultante en un tableau
+        int[][] resultArray = new int[result.size()][2];
+        for (int i = 0; i < result.size(); i++) {
+            resultArray[i] = result.get(i);
+        }
+
+        return resultArray;
+    }
+
 
     public static List<Point> FindPathMonster(Element[][] grid, Point start, Point end, int proximityThreshold) {
         boolean finished = false;

@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
@@ -82,7 +83,6 @@ public class Board extends JPanel implements MouseMotionListener{
             }
         }
 
-
         // Draw possible moves
         if (step != 0){
             drawPossibleMoves(possibleMoves, g);
@@ -151,10 +151,6 @@ public class Board extends JPanel implements MouseMotionListener{
         }
     }
 
-
-
-
-
     /**
      * Function addEntity() add Entity on the coordinates indicated on the grid
      * @param entity Entity (Hero, Monster, Obstacle)
@@ -211,5 +207,21 @@ public class Board extends JPanel implements MouseMotionListener{
     }
     public void setGrid(Entity[][] grid){
         this.grid = grid;
+    }
+
+    public boolean getMoveStep(){
+        return moveStep;
+    }
+
+    public void setMoveStep(boolean moveStep){
+        this.moveStep = moveStep;
+    }
+
+    public int[][] getPossibleMoves(){
+        return possibleMoves;
+    }
+
+    public void setPossibleMoves(int[][] possibleMoves){
+        this.possibleMoves = possibleMoves;
     }
 }

@@ -20,6 +20,10 @@ import static java.awt.geom.Point2D.distance;
 public class CombatController {
     private CombatUI combatUI;
     private ArrayList<Entity> entitiesPriorityList;
+
+    private Entity entityPlaying;
+    private boolean hasSkipped;
+    private boolean hasMoved;
     private ArrayList<Hero> heroes;
     private ArrayList<Monster> monsters;
 
@@ -34,9 +38,16 @@ public class CombatController {
         combatUI.getBoard().addEntity(entity, x, y);
     }
 
-    public void moveEntity(Entity entity, int newX, int newY){
+    public void showEntityMovements(Entity entity){
+        int maxDistance = entity.getMovementRange();
         PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
-        PathfindingController.Point end = new PathfindingController.Point(newX, newY, null);
+        combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, maxDistance));
+        combatUI.getBoard().setMoveStep(true);
+    }
+
+    public void moveOnPathEntity(Entity entity, int targetX, int targetY){
+        PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
+        PathfindingController.Point end = new PathfindingController.Point(targetX, targetY, null);
         List<PathfindingController.Point> path;
         if(entity instanceof Monster){
             path = PathfindingController.FindPathMonster(combatUI.getBoard().getGrid(), start, end, ((Monster) entity).getRangeAttack());
@@ -54,6 +65,7 @@ public class CombatController {
                 combatUI.getBoard().moveEntity(entity, path.getLast().x, path.getLast().y);
             }
         }
+        hasSkipped = true;
     }
 
     public ArrayList<Entity> getEntitiesPriorityList(){
@@ -78,10 +90,11 @@ public class CombatController {
     public void startCombat(){
         int tour = 1;
 
-        while(tour <= 4){
+        while(tour <= 3){
             System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
-                giveEntityTurn(entitiesPriorityList.get(i));
+                entityPlaying = entitiesPriorityList.get(i);
+                giveEntityTurn(entityPlaying);
             }
             tour += 1;
 
@@ -106,11 +119,18 @@ public class CombatController {
     }
 
     private void giveEntityTurn(Entity entity){
+        setHasSkipped(false);
+        setHasMoved(false);
         if(entity instanceof Hero){
+            while(!hasSkipped){
+                if(!hasMoved) {
+                    showEntityMovements(entity);
+                }
+            }
 
         } else if (entity instanceof Monster){
             Hero target = targetClosestHero((Monster) entity);
-            moveEntity(entity, target.getX(), target.getY());
+            moveOnPathEntity(entity, target.getX(), target.getY());
         }
     }
 
@@ -204,6 +224,30 @@ public class CombatController {
         return choix; // Retourne un choix valide
     }
     */
+
+    public Entity getEntityPlaying(){
+        return entityPlaying;
+    }
+
+    public void setEntityPlaying(Entity entityPlaying){
+        this.entityPlaying = entityPlaying;
+    }
+
+    public boolean hasSkipped(){
+        return hasSkipped;
+    }
+
+    public void setHasSkipped(boolean hasSkipped){
+        this.hasSkipped = hasSkipped;
+    }
+
+    public boolean hasMoved(){
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved){
+        this.hasMoved = hasMoved;
+    }
 
     public ArrayList<Hero> getHeroes(){
         return heroes;
