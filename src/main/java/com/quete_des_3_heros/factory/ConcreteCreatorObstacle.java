@@ -8,6 +8,6 @@ import main.java.com.quete_des_3_heros.element.Obstacle;
  */
 public class ConcreteCreatorObstacle extends Creator {
     public Element createElement(){
-        return new Obstacle(0,0, "image.png");
+        return new Obstacle(0,0);
     }
 }

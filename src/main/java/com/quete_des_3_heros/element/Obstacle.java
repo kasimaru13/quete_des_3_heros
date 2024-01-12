@@ -7,14 +7,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Obstacle implements Element {
+    private int x,y;
     private Image sprite;
 
     /**
-     * Constructor of Obstacle inherits Entity
+     * Constructor of Obstacle inherits Element
      */
-    public Obstacle(int x, int y, String sprite) {
+    public Obstacle(int x, int y) {
+        this.x = x;
+        this.y = y;
         try{
-            this.sprite = ImageIO.read(new File(sprite));
+            this.sprite = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png"));
         } catch (IOException e) {
             System.out.println("Erreur dans la lecture des images du jeu");
             System.exit(0);
@@ -24,6 +27,22 @@ public class Obstacle implements Element {
     @Override
     public Image getSprite() {
         return sprite;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public void setY(int y){
+        this.y = y;
     }
 
     @Override
