@@ -34,7 +34,8 @@ public class Goblin extends Monster {
                 10,
                 0.2,
                 3,
-                2);
+                2,
+                "Goblin");
     }
 
     @Override

@@ -192,8 +192,9 @@ public abstract class Monster extends Entity {
                    int precision,
                    double criticalRate,
                    int movementRange,
-                   int rangeAttack) {
-        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate, movementRange);
+                   int rangeAttack,
+                   String name) {
+        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate, movementRange, name);
         this.rangeAttack = rangeAttack;
     }
 

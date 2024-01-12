@@ -34,7 +34,8 @@ public class Dragon extends Monster {
                 10,
                 0.3,
                 4,
-                2);
+                2,
+                "Dragon");
     }
 
     @Override

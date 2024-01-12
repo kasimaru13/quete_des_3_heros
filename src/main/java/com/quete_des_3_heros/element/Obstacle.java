@@ -25,4 +25,9 @@ public class Obstacle implements Element {
     public Image getSprite() {
         return sprite;
     }
+
+    @Override
+    public void hurt(int damage) {
+        System.out.println("C'est un obstacle, il ne prend pas de dégâts !");
+    }
 }

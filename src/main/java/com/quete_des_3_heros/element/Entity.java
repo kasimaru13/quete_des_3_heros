@@ -25,6 +25,8 @@ public abstract class Entity implements Element{
     protected int movementRange; // distance of the movement, one movement point is one cell
     protected boolean alive; // entity alive or not
 
+    protected String name;
+
     /**
      * Constructor of Entity
      * @param x position of x-axis on the grid
@@ -57,7 +59,8 @@ public abstract class Entity implements Element{
                   int speed,
                   int precision,
                   double criticalRate,
-                  int movementRange){
+                  int movementRange,
+                  String name){
         this.x = x;
         this.y = y;
         try{
@@ -79,6 +82,7 @@ public abstract class Entity implements Element{
         this.criticalRate = criticalRate;
         this.movementRange = movementRange;
         this.alive = true;
+        this.name = name;
     }
 
     public void attack(Board board, int targetX, int targetY) {
@@ -253,6 +257,14 @@ public abstract class Entity implements Element{
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }
 

@@ -209,19 +209,18 @@ public class Board extends JPanel implements MouseMotionListener{
         this.grid = grid;
     }
 
-    public boolean getMoveStep(){
-        return moveStep;
-    }
-
-    public void setMoveStep(boolean moveStep){
-        this.moveStep = moveStep;
-    }
-
     public int[][] getPossibleMoves(){
         return possibleMoves;
     }
 
     public void setPossibleMoves(int[][] possibleMoves){
         this.possibleMoves = possibleMoves;
+    }
+
+    public int getStep(){
+        return step;
+    }
+    public void setStep(int step){
+        this.step = step;
     }
 }

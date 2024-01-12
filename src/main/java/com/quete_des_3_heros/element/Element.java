@@ -40,5 +40,5 @@ public interface Element {
      * Function hurt() that lower the health of the entity
      * @param damage amount of damage of the attack
      */
-    // void hurt(int damage);
+    void hurt(int damage);
 }

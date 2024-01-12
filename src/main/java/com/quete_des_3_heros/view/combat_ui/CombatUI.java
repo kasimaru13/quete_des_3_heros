@@ -118,7 +118,6 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         board.setBounds(280, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
         rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
 
-        leftPanel.setPriority(entities);
         profile_queue = new ArrayList<Profile>();
         updatePriorityQueue(entities);
 
@@ -310,18 +309,24 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     }
 
 
-
-
-
-
     // Mouse listener ------------------------------------------------------------------------------
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX() % Constants.SPRITE_SIZE; // x in pixel -> x in squares
+        int x = e.getX() / Constants.SPRITE_SIZE; // x in pixel -> x in squares
         int y = e.getY() / Constants.SPRITE_SIZE;
 
-        // Do something with it
+        if(getBoard().getStep() == 1){
+            Entity entity = combatController.getEntityPlaying();
+            for(int i[] : getBoard().getPossibleMoves()){
+                if(i[0] == x && i[1] == y){
+                    getBoard().setStep(0);
+                    combatController.moveOnPathEntity(entity, x , y);
+                    combatController.setHasMoved(true);
+                    combatController.setHasSkipped(true);
+                }
+            }
+        }
     }
 
     @Override

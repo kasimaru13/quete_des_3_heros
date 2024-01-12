@@ -67,7 +67,7 @@ public class CombatController {
         combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, maxDistance));
 
         // Enable the move step on the game board to visualize possible movements
-        combatUI.getBoard().setMoveStep(true);
+        combatUI.getBoard().setStep(1);
     }
 
 
