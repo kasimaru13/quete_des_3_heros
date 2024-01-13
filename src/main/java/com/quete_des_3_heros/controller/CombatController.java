@@ -163,7 +163,6 @@ public class CombatController {
             tour += 1;
 
             setEntitiesPriorityList();
-            combatUI.updateCombatUI();
         }
         if(heroesStillAlive()){
             System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
@@ -212,17 +211,18 @@ public class CombatController {
         if (entity instanceof Hero) {
             // Loop until the hero has skipped
             while (!hasSkipped) {
-                if (!movesShown) { // Show the possible movements of the entity until he performed a movement
-                    showEntityMovements(entity);
-                    if(isMoving) {
-                        movesShown = true;
-                        setHasMoved(false);
+                if(!hasMoved) {
+                    if (!movesShown) { // Show the possible movements of the entity until he performed a movement
+                        showEntityMovements(entity);
+                        if (isMoving) {
+                            movesShown = true;
+                            setHasMoved(false);
+                        }
                     }
                 }
                 if(hasMoved && hasAttacked){
                     setHasSkipped(true);
                 }
-
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target
@@ -342,7 +342,7 @@ public class CombatController {
         this.isAttacking = isAttacking;
     }
 
-    public boolean HasAttacked(){
+    public boolean hasAttacked(){
         return hasAttacked;
     }
 

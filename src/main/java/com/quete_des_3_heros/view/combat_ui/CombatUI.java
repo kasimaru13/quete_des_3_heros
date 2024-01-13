@@ -42,16 +42,16 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     private RightPanel rightPanel;
 
 
-    private CombatController combatController = new CombatController(this);
+    private final CombatController combatController = new CombatController(this);
 
-    private Warrior warrior = new Warrior();
-    private Mage mage = new Mage();
-    private Thief thief = new Thief();
-    private Goblin goblin = new Goblin();
-    private Skeleton skeleton = new Skeleton();
-    private Dragon dragon = new Dragon();
+    private final Warrior warrior = new Warrior();
+    private final Mage mage = new Mage();
+    private final Thief thief = new Thief();
+    private final Goblin goblin = new Goblin();
+    private final Skeleton skeleton = new Skeleton();
+    private final Dragon dragon = new Dragon();
 
-    private Obstacle obstacle = new Obstacle(0,0);
+    private final Obstacle obstacle = new Obstacle(0,0);
 
     private List<Profile> profile_queue;
 
@@ -242,8 +242,9 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         // Attack
         if (e.getSource() == rightPanel.getAttackButton()){
-            System.out.println("Attack");
-            combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
+            if(!combatController.hasAttacked()){
+                combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
+            }
         }
 
         // Defend
@@ -322,7 +323,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         if(getBoard().getStep() == 1){
             Entity entity = combatController.getEntityPlaying();
-            for(int i[] : getBoard().getPossibleMoves()){
+            for(int[] i : getBoard().getPossibleMoves()){
                 if(i[0] == x && i[1] == y){
                     combatController.moveOnPathEntity(entity, x , y);
                     break;
@@ -330,7 +331,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             }
         } else if(getBoard().getStep() == 2){
             Entity entity = combatController.getEntityPlaying();
-            for(int i[] : getBoard().getPossibleMoves()){
+            for(int[] i : getBoard().getPossibleMoves()){
                 if(i[0] == x && i[1] == y) {
                     combatController.entityAttackOnTarget(entity, x, y);
                     break;
