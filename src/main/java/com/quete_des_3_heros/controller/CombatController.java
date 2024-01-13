@@ -199,16 +199,16 @@ public class CombatController {
      * @param entity The entity to receive the turn.
      */
     private void giveEntityTurn(Entity entity) {
-        setHasSkipped(false);
-        setIsMoving(false);
-        setHasMoved(false);
-        setIsAttacking(false);
-        setHasAttacked(false);
-
-        boolean movesShown = false;
-
         // Check if the entity is a hero or a monster
         if (entity instanceof Hero) {
+            setHasSkipped(false);
+            setIsMoving(false);
+            setHasMoved(false);
+            setIsAttacking(false);
+            setHasAttacked(false);
+
+            boolean movesShown = false;
+
             // Loop until the hero has skipped
             while (!hasSkipped) {
                 if(!hasMoved) {
@@ -228,6 +228,10 @@ public class CombatController {
             // Find the closest hero and move the monster towards the target
             Hero target = targetClosestHero((Monster) entity);
             moveOnPathEntity(entity, target.getX(), target.getY());
+            int distanceToTarget = (int) distance(entity.getX(), entity.getY(), target.getX(), target.getY());
+            if(distanceToTarget <= ((Monster) entity).getRangeAttack()){
+                entityAttackOnTarget(entity, target.getX(), target.getY());
+            }
         }
     }
 
@@ -262,14 +266,15 @@ public class CombatController {
 
     public void entityAttackOnTarget(Entity entity, int x, int y){
         entity.attack(combatUI.getBoard(), x , y);
-
-        if(!hasMoved()){
-            showEntityMovements(entity);
-        } else {
-            combatUI.getBoard().setStep(0);
+        if(entity instanceof Hero){
+            if(!hasMoved()){
+                showEntityMovements(entity);
+            } else {
+                combatUI.getBoard().setStep(0);
+            }
+            setIsAttacking(false);
+            setHasAttacked(true);
         }
-        setIsAttacking(false);
-        setHasAttacked(true);
     }
 
     /**
