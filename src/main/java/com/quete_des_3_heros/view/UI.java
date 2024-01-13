@@ -2,14 +2,11 @@ package main.java.com.quete_des_3_heros.view;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.text.html.parser.Element;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.heros.Mage;
 import main.java.com.quete_des_3_heros.element.heros.Thief;
 import main.java.com.quete_des_3_heros.element.heros.Warrior;
-import main.java.com.quete_des_3_heros.factory.hero_creator.ConcreteCreatorMage;
-import main.java.com.quete_des_3_heros.factory.hero_creator.ConcreteCreatorWarrior;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 import main.java.com.quete_des_3_heros.view.dialogues.Dialogue;
 import main.java.com.quete_des_3_heros.view.title_screen.TitleScreen;

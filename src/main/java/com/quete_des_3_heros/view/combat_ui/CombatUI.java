@@ -37,13 +37,15 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     private RightPanel rightPanel;
 
 
-    private CombatController combatController = new CombatController(this);
+    private CombatController combatController;
 
     Zone current_zone;
 
     private List<Profile> profile_queue;
 
     public CombatUI(int phase_number){
+        combatController = new CombatController(this);
+        
         current_zone = new Zone(phase_number);
 
         // Add the entities in their own list and add all the entities in the priority list

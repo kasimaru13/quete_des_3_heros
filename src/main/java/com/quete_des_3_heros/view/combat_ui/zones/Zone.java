@@ -33,25 +33,29 @@ public class Zone {
 
             while (scanner.hasNextLine()){
                 current_line = scanner.nextLine();
-                if (current_line == "background:") {
+                if (current_line.equals("background:")) {
                     // Load background image
                     try {
-                        background = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/" + scanner.nextLine()));
+                        current_line = "src/main/java/com/quete_des_3_heros/ressources/backgrounds/" + scanner.nextLine();
+                        System.out.println(current_line);
+                        background = ImageIO.read(new File(current_line));
                     } catch (IOException e) {
                         System.err.println("Impossible de charger l'image d'arrière plan");
                     }
                 }
-                else if (current_line == "grid:") {
+                else if (current_line.equals("grid:")) {
                     // Run through each line to determine the grid
                     String[] line;
                     for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++) {
                         line = scanner.nextLine().split("\s");
                         for (int j = 0; j < Constants.NUMBER_OF_SQUARES; j++) {
-                            board[i][j] = findCorrespondingElement(line[j]);
-                            board[i][j].setX(j);
-                            board[i][j].setY(i);
-                            if (board[i][j] instanceof Monster) {
-                                monsters.add((Monster)board[i][j]);
+                            board[j][i] = findCorrespondingElement(line[j]);
+                            if (board[j][i] != null){
+                                board[j][i].setX(j);
+                                board[j][i].setY(i);
+                            }
+                            if (board[j][i] instanceof Monster) {
+                                monsters.add((Monster)board[j][i]);
                             }
                         }
                     }
@@ -83,11 +87,11 @@ public class Zone {
                 return new Dragon();
 
             // Create Obstacles
-            case "table":
+            case "rock":
             try{
                 return new Obstacle(ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png")));
                 } catch (IOException e) {
-                    System.err.println("Erreur dans la lecture des images du jeu");
+                    System.err.println("Erreur dans la lecture de l'image d'un obstacle");
                     return new Obstacle(null);
                 }
             
