@@ -23,7 +23,6 @@ import main.java.com.quete_des_3_heros.element.monsters.Goblin;
 import main.java.com.quete_des_3_heros.element.monsters.Skeleton;
 import main.java.com.quete_des_3_heros.inventory.Item;
 import main.java.com.quete_des_3_heros.inventory.potions.PotionItem;
-import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.BasePotionDecorator;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ConcretePotion;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.HealingPotion;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ManaPotion;
@@ -50,8 +49,6 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     private Goblin goblin = new Goblin();
     private Skeleton skeleton = new Skeleton();
     private Dragon dragon = new Dragon();
-
-    private Obstacle obstacle = new Obstacle(0,0);
 
     private List<Profile> profile_queue;
 

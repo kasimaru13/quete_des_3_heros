@@ -19,6 +19,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * JPanel class displaying a string for the dialogue phase of the game.
@@ -112,19 +114,32 @@ public class Dialogue extends JPanel implements KeyListener{
         }
 
         /**
-         * Finds the dialogue to display from the number passed. Prints an error if number mismatched
+         * Finds the dialogue to display from the number passed. Prints an error if number mismatched.
+         * Finds the dialogue text in files in the folder text. Each break line in the file means a forced break line
+         * on the UI.
          * @param phase_number The current phase of the game (in String)
          * @return String containing the html format of the dialogue
          */
         private String findDialogue(int phase_number){
-            switch (phase_number) {
-                case 1:
-                    return "<html><p>Une équipe d'aventuriers, inconscients du glorieux destin qui les attend, se rend dans une plaine connue pour sa dangerosité, dûe au nombre de monstres s'y trouvant. <br>Cette plaine n'était qu'une étape dans leur long voyage, qui mènera à la défaite du grand Dragon Prospalax, qui terrorise les races intelligentes de ce monde depuis toujours.</p></html>";
-            
-                default:
-                    System.err.println("Erreur dans la lecture du dialogue");
-                    return "";
+            String dialogue = "";
+
+            dialogue = "<html><p>";
+            try {
+                Scanner scanner = new Scanner(new File("src/main/java/com/quete_des_3_heros/view/dialogues/text/dialogue" + phase_number + ".txt"));
+
+                // Read the file
+                while (scanner.hasNextLine()){
+                    dialogue += scanner.nextLine() + "<br>";
+                }
+                dialogue += "</p></html>";
+
+                scanner.close();
+
+            } catch (FileNotFoundException e) {
+                System.err.println("Erreur dans la lecture du fichier de dialogue");
             }
+
+            return dialogue;
         }
 
         // Mouse listener methods --------------------------------------
