@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.Constants;
+import main.java.com.quete_des_3_heros.view.combat_ui.zones.Zone;
 
 /**
  * Panel in the center of the combat UI. It is a grid, containing characters, monsters and obstacles. 
  * When the player can move, his available moves are displayed on the grid as green squares.
  */
 public class Board extends JPanel implements MouseMotionListener{
-    private int length, width;
     private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
@@ -33,11 +33,14 @@ public class Board extends JPanel implements MouseMotionListener{
      * @param length length of the board
      * @param width width of the board
      */
-    public Board(int length, int width, ArrayList<Entity> entities){
-        this.length = length;
-        this.width = width;
-        grid = new Entity[this.length][this.width];
+    public Board(Zone zone){
         step = 0;
+
+        // Initialize grid
+        grid = zone.getBoard();
+
+        // Initialize background image
+        backgroundImage = zone.getBackground();
 
         // Initialize mousePosition to not be in the board at the start of the game
         mousePosition = new int[2];
@@ -183,22 +186,6 @@ public class Board extends JPanel implements MouseMotionListener{
      */
     public Element getEntity(int x, int y){
         return grid[x][y];
-    }
-
-    public int getBoardLength(){
-        return length;
-    }
-
-    public void setBoardLength(int length){
-        this.length = length;
-    }
-
-    public int getBoardWidth(){
-        return width;
-    }
-
-    public void setBoardWidth(int width){
-        this.width = width;
     }
 
     public Element[][] getGrid() {

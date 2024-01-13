@@ -15,6 +15,6 @@ grid:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 rock 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 skeletton 0 0 goblin 0 0 0 0 skeletton 0 0
+0 0 0 0 0 skeleton 0 0 goblin 0 0 0 0 skeleton 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

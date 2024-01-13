@@ -1,14 +1,10 @@
 package main.java.com.quete_des_3_heros.controller;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
-import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 
 import main.java.com.quete_des_3_heros.element.Entity;

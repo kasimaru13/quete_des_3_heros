@@ -14,18 +14,15 @@ import javax.swing.*;
 import main.java.com.quete_des_3_heros.controller.CombatController;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
-import main.java.com.quete_des_3_heros.element.heros.Mage;
-import main.java.com.quete_des_3_heros.element.heros.Thief;
-import main.java.com.quete_des_3_heros.element.heros.Warrior;
-import main.java.com.quete_des_3_heros.element.monsters.Dragon;
-import main.java.com.quete_des_3_heros.element.monsters.Goblin;
-import main.java.com.quete_des_3_heros.element.monsters.Skeleton;
+import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.inventory.Item;
 import main.java.com.quete_des_3_heros.inventory.potions.PotionItem;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ConcretePotion;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.HealingPotion;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ManaPotion;
 import main.java.com.quete_des_3_heros.view.Constants;
+import main.java.com.quete_des_3_heros.view.UI;
+import main.java.com.quete_des_3_heros.view.combat_ui.zones.Zone;
 import main.java.com.quete_des_3_heros.view.components.InventoryButton;
 import main.java.com.quete_des_3_heros.view.components.Profile;
 
@@ -42,24 +39,18 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
     private CombatController combatController = new CombatController(this);
 
-    private Warrior warrior = new Warrior();
-    private Mage mage = new Mage();
-    private Thief thief = new Thief();
-    private Goblin goblin = new Goblin();
-    private Skeleton skeleton = new Skeleton();
-    private Dragon dragon = new Dragon();
+    Zone current_zone;
 
     private List<Profile> profile_queue;
 
-    public CombatUI(){
+    public CombatUI(int phase_number){
+        current_zone = new Zone(phase_number);
+
         // Add the entities in their own list and add all the entities in the priority list
         initListEntities();
 
         // Initiate CombatUI preferences
-        initCombatUI(combatController.getEntitiesPriorityList());
-
-        // Add Entity on the grid
-        addEntitiesToGrid();
+        initCombatUI();
 
         SwingUtilities.invokeLater(this::startCombat);
     }
@@ -92,12 +83,12 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     /**
      * Initiate Combat Interface
      */
-    private void initCombatUI(ArrayList<Entity> entities){
+    private void initCombatUI(){
         setBackground(Color.blue);
         setFocusable(true);
 
         // Initialise different panels
-        board = new Board(16, 16, entities);
+        board = new Board(current_zone);
         leftPanel = new LeftPanel();
         rightPanel = new RightPanel(combatController.getHeroes());
 
@@ -118,7 +109,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         rightPanel.setBounds(280 + Constants.BOARD_SIZE, 0, Constants.RIGHTPANEL_WIDTH, Constants.WINDOW_HEIGHT);
 
         profile_queue = new ArrayList<Profile>();
-        updatePriorityQueue(entities);
+        updatePriorityQueue(combatController.getEntitiesPriorityList());
 
         // Add the panels to the UI
         add(leftPanel);
@@ -132,34 +123,25 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
      */
     private void initListEntities(){
         // ArrayList of Heroes
-        combatController.getHeroes().add(warrior);
-        combatController.getHeroes().add(mage);
-        combatController.getHeroes().add(thief);
+        for (Hero hero : UI.getInstance().getHeroes()) {
+            combatController.getHeroes().add(hero);
+        }
 
         // ArrayList of Monsters
-        combatController.getMonsters().add(goblin);
-        combatController.getMonsters().add(skeleton);
-        combatController.getMonsters().add(dragon);
+        for (Monster monster : current_zone.getMonsters()) {
+            combatController.getMonsters().add(monster);
+        }
 
         // ArrayList of all Entities for the Priority Order
         combatController.setEntitiesPriorityList();
-    }
-
-    private void addEntitiesToGrid() {
-        if(warrior.isAlive()) combatController.addEntity(warrior, 5, 2);
-        if(mage.isAlive()) combatController.addEntity(mage, 8, 2);
-        if(thief.isAlive()) combatController.addEntity(thief, 13, 2);
-        if(goblin.isAlive()) combatController.addEntity(goblin, 5, 13);
-        if(skeleton.isAlive()) combatController.addEntity(skeleton, 8, 13);
-        if(dragon.isAlive()) combatController.addEntity(dragon, 13, 13);
     }
 
     /**
      * Update Combat Textual Interface for the moment
      */
     public void updateCombatUI() {
-        for (int i = 0; i < board.getBoardLength(); i++) {
-            for (int j = 0; j < board.getBoardWidth(); j++) {
+        for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++) {
+            for (int j = 0; j < Constants.NUMBER_OF_SQUARES; j++) {
                 if (board.getEntity(i, j) != null) {
                     System.out.print(" " + board.getEntity(i, j).getClass().getSimpleName().charAt(0) + " ");
                 } else {

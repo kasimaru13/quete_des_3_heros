@@ -2,6 +2,14 @@ package main.java.com.quete_des_3_heros.view;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.text.html.parser.Element;
+
+import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.element.heros.Mage;
+import main.java.com.quete_des_3_heros.element.heros.Thief;
+import main.java.com.quete_des_3_heros.element.heros.Warrior;
+import main.java.com.quete_des_3_heros.factory.hero_creator.ConcreteCreatorMage;
+import main.java.com.quete_des_3_heros.factory.hero_creator.ConcreteCreatorWarrior;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 import main.java.com.quete_des_3_heros.view.dialogues.Dialogue;
 import main.java.com.quete_des_3_heros.view.title_screen.TitleScreen;
@@ -10,9 +18,13 @@ import main.java.com.quete_des_3_heros.view.title_screen.TitleScreen;
  * Singleton frame containing every UI logic.
  */
 public class UI extends JFrame {
-    static UI instance;
+    public static UI instance;
+
+    private Hero[] heroes;
 
     private UI(){
+        initializeHeroes();
+
         TitleScreen titleScreen = new TitleScreen();
         add(titleScreen);
         setTitle("La quête des 3 héros");
@@ -49,7 +61,7 @@ public class UI extends JFrame {
             add(new Dialogue(next_phase_number));
         }
         else if (type_of_phase == "Combat"){
-            add(new CombatUI());
+            add(new CombatUI(next_phase_number));
         }
         else{
             System.err.println("Erreur dans le changement de phase");
@@ -59,5 +71,29 @@ public class UI extends JFrame {
         // Repaint the frame
         revalidate();
         repaint();
+    }
+
+
+    private void initializeHeroes() {
+        heroes = new Hero[3];
+        heroes[0] = new Warrior();
+        heroes[1] = new Mage();
+        heroes[2] = new Thief();
+    }
+
+    public Hero[] getHeroes() {
+        return heroes;
+    }
+
+    public Hero getWarrior() {
+        return heroes[0];
+    }
+
+    public Hero getMage() {
+        return heroes[1];
+    }
+
+    public Hero getThief() {
+        return heroes[2];
     }
 }

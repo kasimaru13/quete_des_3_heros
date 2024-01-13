@@ -1,7 +1,6 @@
 package main.java.com.quete_des_3_heros.controller;
 
 import main.java.com.quete_des_3_heros.element.Element;
-import main.java.com.quete_des_3_heros.element.Entity;
 
 import java.util.*;
 
