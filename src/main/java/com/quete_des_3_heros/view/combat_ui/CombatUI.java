@@ -14,7 +14,6 @@ import javax.swing.*;
 import main.java.com.quete_des_3_heros.controller.CombatController;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
-import main.java.com.quete_des_3_heros.element.Obstacle;
 import main.java.com.quete_des_3_heros.element.heros.Mage;
 import main.java.com.quete_des_3_heros.element.heros.Thief;
 import main.java.com.quete_des_3_heros.element.heros.Warrior;
