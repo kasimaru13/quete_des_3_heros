@@ -327,6 +327,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
                     combatController.moveOnPathEntity(entity, x , y);
                     combatController.setHasMoved(true);
                     combatController.setHasSkipped(true);
+                    break;
                 }
             }
         }
