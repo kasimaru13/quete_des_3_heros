@@ -1,6 +1,10 @@
 package main.java.com.quete_des_3_heros.element;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Obstacle implements Element {
     private int x,y;
@@ -10,7 +14,17 @@ public class Obstacle implements Element {
      * Constructor of Obstacle inherits Element
      */
     public Obstacle(Image sprite) {
-        this.sprite = sprite;
+        if (sprite == null){
+            try {
+                this.sprite = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png"));
+            } catch (IOException e) {
+                System.err.println("Impossible de lire le substitu de sprite");
+                System.exit(0);
+            }
+        }
+        else {
+            this.sprite = sprite;
+        }
     }
 
     @Override

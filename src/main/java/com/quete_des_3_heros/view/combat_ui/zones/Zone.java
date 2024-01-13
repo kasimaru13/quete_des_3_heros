@@ -87,9 +87,23 @@ public class Zone {
                 return new Dragon();
 
             // Create Obstacles
-            case "rock":
-            try{
-                return new Obstacle(ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png")));
+            case "rock1":
+                try{
+                    return new Obstacle(ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/obstacles/rock1.png")).getScaledInstance(48, 48, Image.SCALE_SMOOTH));
+                } catch (IOException e) {
+                    System.err.println("Erreur dans la lecture de l'image d'un obstacle");
+                    return new Obstacle(null);
+                }
+            case "rock2":
+                try{
+                    return new Obstacle(ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/obstacles/rock2.png")).getScaledInstance(48, 48, Image.SCALE_SMOOTH));
+                } catch (IOException e) {
+                    System.err.println("Erreur dans la lecture de l'image d'un obstacle");
+                    return new Obstacle(null);
+                }
+            case "tree1":
+                try{
+                    return new Obstacle(ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/obstacles/tree1.png")).getScaledInstance(48, 48, Image.SCALE_SMOOTH));
                 } catch (IOException e) {
                     System.err.println("Erreur dans la lecture de l'image d'un obstacle");
                     return new Obstacle(null);
