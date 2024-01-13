@@ -1,9 +1,7 @@
 package main.java.com.quete_des_3_heros.controller;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 
 import main.java.com.quete_des_3_heros.element.Hero;
@@ -22,7 +20,10 @@ public class CombatController {
     private ArrayList<Entity> entitiesPriorityList;
     private Entity entityPlaying;
     private boolean hasSkipped;
+    private boolean isMoving;
     private boolean hasMoved;
+    private boolean isAttacking;
+    private boolean hasAttacked;
     private ArrayList<Hero> heroes;
     private ArrayList<Monster> monsters;
 
@@ -64,10 +65,22 @@ public class CombatController {
         PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
 
         // Find all paths within the movement range and set them as possible movements on the game board
-        combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, maxDistance));
+        combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, maxDistance, false));
 
         // Enable the move step on the game board to visualize possible movements
         combatUI.getBoard().setStep(1);
+        setIsMoving(true);
+    }
+
+    public void showEntityAttackRange(Entity entity, int attackRange){
+        PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
+
+        // Find all paths within the attack range and set them as possible moves on the game board
+        combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, attackRange, true));
+
+        // Enable the attack move on the game board to visualize possible movements
+        combatUI.getBoard().setStep(2);
+        setIsAttacking(true);
     }
 
 
@@ -87,7 +100,7 @@ public class CombatController {
         // Check if the entity is a Monster
         if (entity instanceof Monster) {
             // Find the path using the Monster-specific pathfinding method
-            path = PathfindingController.FindPathMonster(combatUI.getBoard().getGrid(), start, end, ((Monster) entity).getRangeAttack());
+            path = PathfindingController.FindPathMonster(combatUI.getBoard().getGrid(), start, end, ((Monster) entity).getRangeAttack(), false);
 
             // Move the entity along the path if a valid path is found
             if (path != null) {
@@ -101,8 +114,11 @@ public class CombatController {
                 }
             }
         } else if (entity instanceof Hero) {
+            combatUI.getBoard().setStep(0);
+
             // Move the Hero directly to the possible target location
             combatUI.getBoard().moveEntity(entity, targetX, targetY);
+            hasMoved = true;
         }
     }
 
@@ -185,15 +201,28 @@ public class CombatController {
      */
     private void giveEntityTurn(Entity entity) {
         setHasSkipped(false);
+        setIsMoving(false);
         setHasMoved(false);
+        setIsAttacking(false);
+        setHasAttacked(false);
+
+        boolean movesShown = false;
 
         // Check if the entity is a hero or a monster
         if (entity instanceof Hero) {
             // Loop until the hero has skipped
             while (!hasSkipped) {
-                if (!hasMoved) { // Show the possible movements of the entity until he performed a movement
+                if (!movesShown) { // Show the possible movements of the entity until he performed a movement
                     showEntityMovements(entity);
+                    if(isMoving) {
+                        movesShown = true;
+                        setHasMoved(false);
+                    }
                 }
+                if(hasMoved && hasAttacked){
+                    setHasSkipped(true);
+                }
+
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target
@@ -229,6 +258,18 @@ public class CombatController {
             }
         }
         return closestHero;
+    }
+
+    public void entityAttackOnTarget(Entity entity, int x, int y){
+        entity.attack(combatUI.getBoard(), x , y);
+
+        if(!hasMoved()){
+            showEntityMovements(entity);
+        } else {
+            combatUI.getBoard().setStep(0);
+        }
+        setIsAttacking(false);
+        setHasAttacked(true);
     }
 
     /**
@@ -272,17 +313,41 @@ public class CombatController {
      *
      * @return True if the entity has moved; false otherwise.
      */
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    /**
+     * Sets whether the currently playing entity is moving.
+     *
+     * @param isMoving True if the entity is moving; false otherwise.
+     */
+    public void setIsMoving(boolean isMoving) {
+        this.isMoving = isMoving;
+    }
+
     public boolean hasMoved() {
         return hasMoved;
     }
 
-    /**
-     * Sets whether the currently playing entity has moved.
-     *
-     * @param hasMoved True if the entity has moved; false otherwise.
-     */
-    public void setHasMoved(boolean hasMoved) {
+    public void setHasMoved(boolean hasMoved){
         this.hasMoved = hasMoved;
+    }
+
+    public boolean isAttacking(){
+        return isAttacking;
+    }
+
+    public void setIsAttacking(boolean isAttacking){
+        this.isAttacking = isAttacking;
+    }
+
+    public boolean HasAttacked(){
+        return hasAttacked;
+    }
+
+    public void setHasAttacked(boolean hasAttacked) {
+        this.hasAttacked = hasAttacked;
     }
 
     /**
