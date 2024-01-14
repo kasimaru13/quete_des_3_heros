@@ -17,6 +17,7 @@ import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.inventory.Inventory;
 import main.java.com.quete_des_3_heros.inventory.Item;
+import main.java.com.quete_des_3_heros.inventory.potions.PotionItem;
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.UI;
 import main.java.com.quete_des_3_heros.view.combat_ui.zones.Zone;
@@ -181,7 +182,12 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
      * @param entities Entity list in order of play
      */
     public void updatePriorityQueue(ArrayList<Entity> entities){
-        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
+        if (!entities.isEmpty() && profile_queue != null && leftPanel != null && profile_queue.size() == entities.size()) {
+            for (int i = 0; i < profile_queue.size(); i++) {
+                profile_queue.get(i).updateProfile(entities.get(i).getHealth(), entities.get(i).getMana());
+            }
+        }
+        else if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
             for (Entity entity : entities){
                 profile_queue.add(new Profile(entity));
             }
@@ -260,13 +266,17 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             if (index == rightPanel.getAlternativeButtons().size() - 1) rightPanel.actionButtonsToPanel(); // Back
             else {
                 if (rightPanel.getAlternativeButtons().get(0) instanceof InventoryButton) {
-                    // Inventory button
+                    // Item button
                     Item usedItem = ((InventoryButton)rightPanel.getAlternativeButtons().get(index)).getItem();
+
                     usedItem.useItem((Hero)combatController.getEntityPlaying()); // Use the item
                     Inventory.getInstance().deleteItem(usedItem);   // Delete the item from the inventory
+
+                    // Return to action panel (remove items from ui) and update profiles information
                     rightPanel.actionButtonsToPanel();
                     rightPanel.updateProfiles(combatController.getHeroes());
-                    combatController.setHasSkipped(true);
+
+                    if (usedItem instanceof PotionItem) combatController.setHasSkipped(true); // Skip turn only for potions
 
                 }
                 else {

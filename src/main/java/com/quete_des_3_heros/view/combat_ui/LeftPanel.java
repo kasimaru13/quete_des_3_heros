@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.text.html.parser.Entity;
 
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.Profile;
@@ -96,5 +97,9 @@ public class LeftPanel extends JPanel{
             revalidate();
             repaint();
         } 
+    }
+
+    public List<Profile> getPriority_queue() {
+        return priority_queue;
     }
 }

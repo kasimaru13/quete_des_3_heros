@@ -86,8 +86,6 @@ public class UI extends JFrame {
         heroes[0] = new Warrior();
         heroes[1] = new Mage();
         heroes[2] = new Thief();
-
-        heroes[2].setHealth(20);
     }
 
     /**

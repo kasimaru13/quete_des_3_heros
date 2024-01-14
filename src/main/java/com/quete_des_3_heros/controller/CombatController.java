@@ -70,6 +70,8 @@ public class CombatController {
         // Enable the move step on the game board to visualize possible movements
         combatUI.getBoard().setStep(1);
         setIsMoving(true);
+        combatUI.revalidate();
+        combatUI.repaint();
     }
 
     public void showEntityAttackRange(Entity entity, int attackRange){
@@ -81,6 +83,8 @@ public class CombatController {
         // Enable the attack move on the game board to visualize possible movements
         combatUI.getBoard().setStep(2);
         setIsAttacking(true);
+        combatUI.revalidate();
+        combatUI.repaint();
     }
 
 
@@ -120,6 +124,8 @@ public class CombatController {
             combatUI.getBoard().moveEntity(entity, targetX, targetY);
             hasMoved = true;
         }
+        combatUI.revalidate();
+        combatUI.repaint();
     }
 
 
@@ -154,7 +160,7 @@ public class CombatController {
     public void startCombat(){
         int tour = 1;
 
-        while(tour <= 3){
+        while(tour <= 5){
             System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
                 entityPlaying = entitiesPriorityList.get(i);
@@ -162,6 +168,10 @@ public class CombatController {
                     entityPlaying.resetResistance();
                 }
                 giveEntityTurn(entityPlaying);
+                combatUI.updatePriorityQueue(entitiesPriorityList);
+                combatUI.updateProfiles(heroes);
+                combatUI.revalidate();
+                combatUI.repaint();
             }
             tour += 1;
 
@@ -268,15 +278,17 @@ public class CombatController {
     public boolean entityAttackOnTarget(Entity entity, int x, int y){
         if (entity.attack(combatUI.getBoard(), x , y)){
             if(entity instanceof Hero){
-                if(!hasMoved()){
-                    showEntityMovements(entity);
-                } else {
-                    combatUI.getBoard().setStep(0);
-                }
+                combatUI.getBoard().setStep(0);
                 setIsAttacking(false);
                 setHasAttacked(true);
+                setHasMoved(true);
             }
+            combatUI.revalidate();
+            combatUI.repaint();
             return true;
+        }
+        if(!hasMoved()){
+            showEntityMovements(entity);
         }
         return false;
     }
