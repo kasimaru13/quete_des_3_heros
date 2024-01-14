@@ -14,7 +14,6 @@ public class Skeleton extends Monster {
 package main.java.com.quete_des_3_heros.element.monsters;
 
 import main.java.com.quete_des_3_heros.element.Monster;
-import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Skeleton extends Monster {
 
@@ -38,10 +37,5 @@ public class Skeleton extends Monster {
                 "Squelette",
                 null,
                 null);
-    }
-
-    @Override
-    public boolean attack(Board board, int targetX, int targetY) {
-        return getDamage(board, targetX, targetY, this.strength);
     }
 }

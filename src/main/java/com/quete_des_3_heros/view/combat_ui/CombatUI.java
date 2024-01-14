@@ -339,6 +339,8 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         int x = e.getX() / Constants.SPRITE_SIZE; // x in pixel -> x in squares
         int y = e.getY() / Constants.SPRITE_SIZE;
 
+        rightPanel.updateText("");
+
         if(getBoard().getStep() == 1){
             Entity entity = combatController.getEntityPlaying();
             for(int[] i : getBoard().getPossibleMoves()){
@@ -376,6 +378,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
                 if(i[0] == x && i[1] == y) {
                     if (combatController.entitySkillOnTarget(entity, x, y)){
                         combatController.setHasSkipped(true);
+                        rightPanel.actionButtonsToPanel();
                     }
                     else {
                         rightPanel.actionButtonsToPanel();

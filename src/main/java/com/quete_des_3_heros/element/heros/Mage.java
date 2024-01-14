@@ -33,7 +33,6 @@ package main.java.com.quete_des_3_heros.element.heros;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
-import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Mage extends Hero {
 
@@ -61,13 +60,18 @@ public class Mage extends Hero {
                 null);
 
         // Skills
-        addSkill(new Skill("Boule de feu", 40, 3, 25));
-        addSkill(new Skill("Soin", -50, 10, 25));
+        addSkill(new Skill("Boule de feu", 50, 3, 25));
+        addSkill(new Skill("Soin", -100, 10, 25));
     }
 
     @Override
-    public boolean attack(Board board, int targetX, int targetY) {
-        return getDamage(board, targetX, targetY, this.intelligence);
+    public int computeAttack() {
+        if (weapon == null) {
+            return intelligence;
+        }
+        else {
+            return intelligence + weapon.getDamage();
+        }
     }
 }
 

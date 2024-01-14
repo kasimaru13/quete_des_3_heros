@@ -47,9 +47,4 @@ public class Obstacle implements Element {
     public void setY(int y){
         this.y = y;
     }
-
-    @Override
-    public void hurt(int damage) {
-        System.out.println("C'est un obstacle, il ne prend pas de dégâts !");
-    }
 }

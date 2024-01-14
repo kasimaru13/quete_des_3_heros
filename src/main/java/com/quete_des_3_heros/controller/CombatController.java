@@ -282,6 +282,11 @@ public class CombatController {
             if(distanceToTarget <= ((Monster) entity).getRangeAttack()){
                 entityAttackOnTarget(entity, target.getX(), target.getY());
             }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.err.println("Erreur dans l'attente de l'ia");
+            }
         }
     }
 
@@ -315,7 +320,8 @@ public class CombatController {
     }
 
     public boolean entityAttackOnTarget(Entity entity, int x, int y){
-        if (entity.attack(combatUI.getBoard(), x , y)){
+        int damage = entity.attack(combatUI.getBoard(), x , y);
+        if (damage >= 0){
             if(entity instanceof Hero){
                 combatUI.getBoard().setStep(0);
                 setIsAttacking(false);
@@ -326,7 +332,7 @@ public class CombatController {
             else {
                 combatUI.getRightPanel().updateText(
                     "<html><p>" + entity.getName() + " a attaqué " + ((Entity)combatUI.getBoard().getEntity(x, y)).getName()
-                    + " et a infligé " + entity.computeAttack() + " dégats</p></html>"
+                    + " et a infligé " + damage + " dégats</p></html>"
                 );
             }
             combatUI.revalidate();

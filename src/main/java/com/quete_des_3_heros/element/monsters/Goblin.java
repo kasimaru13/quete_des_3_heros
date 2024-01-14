@@ -14,7 +14,6 @@ public class Goblin extends Monster {
 package main.java.com.quete_des_3_heros.element.monsters;
 
 import main.java.com.quete_des_3_heros.element.Monster;
-import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Goblin extends Monster {
 
@@ -41,7 +40,12 @@ public class Goblin extends Monster {
     }
 
     @Override
-    public boolean attack(Board board, int targetX, int targetY) {
-        return getDamage(board, targetX, targetY, this.agility);
+    public int computeAttack() {
+        if (weapon == null) {
+            return agility;
+        }
+        else {
+            return agility + weapon.getDamage();
+        }
     }
 }

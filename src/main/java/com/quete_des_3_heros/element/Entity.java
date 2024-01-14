@@ -104,9 +104,12 @@ public abstract class Entity implements Element{
      * @param targetY
      * @return 
      */
-    public boolean attack(Board board, int targetX, int targetY) {
-        int damage = computeAttack();
-        return getDamage(board, targetX, targetY, getCriticalDamage(damage)); // For example, Warrior main's stat is strength
+    public int attack(Board board, int targetX, int targetY) {
+        int damage = getCriticalDamage(computeAttack());
+        if (getDamage(board, targetX, targetY, getCriticalDamage(damage))) {
+            return damage;
+        }
+        else return -1;
     }
 
     public int getCriticalDamage(int damage){
@@ -129,7 +132,7 @@ public abstract class Entity implements Element{
             Element target;
             // Verify if there is a target at the coordinates
             if((target = board.getEntity(targetX, targetY)) != null){
-                target.hurt(damage);
+                ((Entity)target).setHealth(((Entity)target).getHealth() - damage);
                 System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
                 return true;
             }
@@ -141,11 +144,6 @@ public abstract class Entity implements Element{
             System.out.println("Coordonnées de la cible invalides !");
             return false;
         }
-    }
-
-    public void hurt(int damage) {
-        // Lower the health by the amount of damage
-        setHealth(getHealth() - damage);
     }
 
     /**
