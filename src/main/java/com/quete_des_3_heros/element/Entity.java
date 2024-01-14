@@ -163,12 +163,13 @@ public abstract class Entity implements Element{
      * @param skill
      * @return
      */
-    public boolean useSkill(Skill skill, Board board, int x, int y){
-        if (getDamage(board, x, y, skill.getAttack())){
+    public int useSkill(Skill skill, Board board, int x, int y){
+        int damage = getCriticalDamage(skill.getAttack());
+        if (getDamage(board, x, y, damage)){
             setMana(getMana() - skill.getMana_consumption());
-            return true;
+            return damage;
         }
-        return false;
+        return -1;
     }
 
     public void defend(){

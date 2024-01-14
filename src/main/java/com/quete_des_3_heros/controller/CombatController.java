@@ -346,13 +346,20 @@ public class CombatController {
     }
 
     public boolean entitySkillOnTarget(Entity entity, int x, int y) {
-        if (entity.useSkill(current_skill, combatUI.getBoard(), x , y)){
+        int damage = entity.useSkill(current_skill, combatUI.getBoard(), x , y);
+        if (damage >= 0){
             if(entity instanceof Hero){
                 combatUI.getBoard().setStep(0);
                 setIsAttacking(false);
                 setHasAttacked(true);
                 setHasSkipped(true);
                 setHasMoved(true);
+            }
+            else {
+                combatUI.getRightPanel().updateText(
+                    "<html><p>" + entity.getName() + " a utilisé " + current_skill + " sur " + ((Entity)combatUI.getBoard().getEntity(x, y)).getName()
+                    + " et a infligé " + damage + " dégats</p></html>"
+                );
             }
             combatUI.revalidate();
             combatUI.repaint();
