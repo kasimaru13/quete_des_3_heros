@@ -1,29 +1,29 @@
 package main.java.com.quete_des_3_heros.inventory;
 
+import java.util.ArrayList;
+
 /**
  * Inventory class, which is a singleton that contains an array of Item. Common for every characters of the player.
  */
 public class Inventory {
-    private int inventorySize;
-    private Item[] inventory;
-    private Inventory instance;
+    private ArrayList<Item> inventory;
+    private static Inventory instance;
 
     private Inventory(){
-        inventorySize = 16;
-        inventory = new Item[inventorySize];
+        inventory = new ArrayList<>();
     }
 
     /**
      * Returns the instance of the singleton Inventory, or create one if none exist.
      */
-    public Inventory getInstance(){
+    public static Inventory getInstance(){
         if (instance == null){
             instance = new Inventory();
         }
         return instance;
     }
 
-    public Item[] getInventory() {
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
@@ -33,16 +33,7 @@ public class Inventory {
      * @param item Item to add to the inventory
      */
     public void addItem(Item item){
-        int i = 0;
-        while (i < inventorySize && inventory[i] != null){
-            i++;
-        }
-        if (i == inventorySize){
-            throw new RuntimeException();
-        }
-        else{
-            inventory[i] = item;
-        }
+        inventory.add(item);
     }
 
     /**
@@ -51,17 +42,7 @@ public class Inventory {
      * @param item Item to delete from the inventory
      */
     public void deleteItem(Item item){
-        int i = 0;
-        while (i < inventorySize && inventory[i] != item){
-            i++;
-        }
-        if (i == inventorySize){
-            throw new RuntimeException();
-        }
-        else{
-            inventory[i] = null;
-            sortInventory();
-        }
+        inventory.remove(item);
     }
 
     /**
@@ -72,7 +53,8 @@ public class Inventory {
      * @return Item taken out of the inventory
      */
     public Item swapItem(Item item_inside_inventory, Item item_outside_inventory){
-        item_inside_inventory = item_outside_inventory;
+        inventory.add(item_outside_inventory);
+        inventory.remove(item_inside_inventory);
         return item_inside_inventory;
     }
 
@@ -92,31 +74,18 @@ public class Inventory {
      * @return Item taken out of inventory
      */
     public Item takeItem(int index){
-        Item item = inventory[index];
+        Item item = inventory.get(index);
         deleteItem(item);
         return item;
     }
 
     /**
-     * Sorts the inventory so there are no Null values between two Items
+     * DEBUG FUNCTION
+     * Prints all items in the inventory
      */
-    private void sortInventory(){
-        int i = 0;
-        int j = 0;
-
-        while (inventory[i] != null){
-            i++;
-        }
-        while(j < inventorySize){
-            j = i + 1;
-            while (inventory[j] == null){
-                j++;
-            }
-            if (j != inventorySize){
-                inventory[i] = inventory[j];
-                inventory[j] = null;
-                i++;
-            }
+    public void showInventory(){
+        for (Item item : inventory) {
+            System.out.println(item.getName());
         }
     }
 }

@@ -15,6 +15,7 @@ import main.java.com.quete_des_3_heros.controller.CombatController;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.inventory.Inventory;
 import main.java.com.quete_des_3_heros.inventory.Item;
 import main.java.com.quete_des_3_heros.inventory.potions.PotionItem;
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ConcretePotion;
@@ -246,26 +247,8 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         // Items
         else if (e.getSource() == rightPanel.getItemButton()){
-            // Get inventory in backend
-
-            ArrayList<Item> testItems = new ArrayList<>();
-            PotionItem healingPotion = new PotionItem(
-                "Potion de soin basique", 
-                "Potion soignant peu de HP", 
-                new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png").getImage(), 
-                new HealingPotion(new ConcretePotion(), 10)
-                );
-            PotionItem manaPotion = new PotionItem(
-                "Potion de mana basique", 
-                "Potion soignant peu de MP", 
-                new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/mana_potion.png").getImage(),
-                new ManaPotion(new ConcretePotion(), 10)
-                );
-            testItems.add(healingPotion);
-            testItems.add(manaPotion);
-
-            // Show items on UI
-            showInventory(testItems);
+            // Show inventory on UI
+            showInventory(Inventory.getInstance().getInventory());
         }
 
         // Rewind
