@@ -24,6 +24,7 @@ public class CombatController {
     private boolean hasMoved;
     private boolean isAttacking;
     private boolean hasAttacked;
+    private boolean hasDefended;
     private ArrayList<Hero> heroes;
     private ArrayList<Monster> monsters;
 
@@ -158,6 +159,9 @@ public class CombatController {
             System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
                 entityPlaying = entitiesPriorityList.get(i);
+                if(entityPlaying instanceof Hero){
+                    entityPlaying.resetResistance();
+                }
                 giveEntityTurn(entityPlaying);
             }
             tour += 1;
@@ -206,6 +210,7 @@ public class CombatController {
             setHasMoved(false);
             setIsAttacking(false);
             setHasAttacked(false);
+            setHasDefended(false);
 
             boolean movesShown = false;
 
@@ -220,9 +225,7 @@ public class CombatController {
                         }
                     }
                 }
-                if(hasMoved && hasAttacked){
-                    setHasSkipped(true);
-                }
+                System.out.print("");
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target
@@ -275,6 +278,11 @@ public class CombatController {
             setIsAttacking(false);
             setHasAttacked(true);
         }
+    }
+
+    public void entityDefense(Entity entity){
+        entity.defend();
+        setHasDefended(true);
     }
 
     /**
@@ -353,6 +361,14 @@ public class CombatController {
 
     public void setHasAttacked(boolean hasAttacked) {
         this.hasAttacked = hasAttacked;
+    }
+
+    public boolean hasDefended(){
+        return hasDefended;
+    }
+
+    public void setHasDefended(boolean hasDefended){
+        this.hasDefended = hasDefended;
     }
 
     /**

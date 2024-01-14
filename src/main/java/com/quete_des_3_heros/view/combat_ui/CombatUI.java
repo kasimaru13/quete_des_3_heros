@@ -242,14 +242,15 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         // Attack
         if (e.getSource() == rightPanel.getAttackButton()){
-            if(!combatController.hasAttacked()){
-                combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
-            }
+            if(!combatController.hasAttacked()) combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
         }
 
         // Defend
         else if (e.getSource() == rightPanel.getDefendButton()){
-            System.out.println("Defend");
+            if(!combatController.hasDefended()) {
+                combatController.entityDefense(combatController.getEntityPlaying());
+                combatController.setHasSkipped(true);
+            }
         }
 
         // Skills
@@ -334,6 +335,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             for(int[] i : getBoard().getPossibleMoves()){
                 if(i[0] == x && i[1] == y) {
                     combatController.entityAttackOnTarget(entity, x, y);
+                    if(combatController.hasMoved()) combatController.setHasSkipped(true);
                     break;
                 }
             }
