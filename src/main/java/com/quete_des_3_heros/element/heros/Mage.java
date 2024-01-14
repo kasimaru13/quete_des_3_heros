@@ -55,7 +55,9 @@ public class Mage extends Hero {
                 1,
                 0,
                 200,
-                "Mage");
+                "Mage",
+                null,
+                null);
     }
 
     @Override

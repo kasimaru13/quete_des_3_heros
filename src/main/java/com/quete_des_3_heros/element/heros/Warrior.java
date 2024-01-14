@@ -54,7 +54,9 @@ public class Warrior extends Hero {
                 1,
                 0,
                 200,
-                "Guerrier");
+                "Guerrier",
+                null,
+                null);
     }
 
     @Override

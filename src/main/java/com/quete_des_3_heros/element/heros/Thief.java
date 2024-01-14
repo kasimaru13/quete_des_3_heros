@@ -56,7 +56,9 @@ public class Thief extends Hero {
                 1,
                 0,
                 200,
-                "Voleur");
+                "Voleur",
+                null,
+                null);
     }
 
     @Override

@@ -191,6 +191,9 @@ public void defendre() {
 
 package main.java.com.quete_des_3_heros.element;
 
+import main.java.com.quete_des_3_heros.inventory.armors.Armor;
+import main.java.com.quete_des_3_heros.inventory.weapons.Weapon;
+
 public abstract class Hero extends Entity {
 
     private int level; // level of the hero
@@ -237,8 +240,10 @@ public abstract class Hero extends Entity {
                 int level,
                 int xp,
                 int xpMaxLevel,
-                String name) {
-        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate, movementRange, name);
+                String name,
+                Weapon weapon,
+                Armor armor) {
+        super(x, y, sprite, health, maxHealth, mana, maxMana, strength, intelligence, agility, resistance, speed, precision, criticalRate, movementRange, name, weapon, armor);
         this.level = level;
         this.xp = xp;
         this.xpMaxLevel = xpMaxLevel;

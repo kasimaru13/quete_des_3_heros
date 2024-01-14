@@ -271,7 +271,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
                 }
                 else {
                     // Skill button
-                    // DO SOMETHING WITH SKILL NAME (TEXT OF BUTTON)
+                    // DO SOMETHING WITH SKILL NAME (TEXT OF BUTTON) see bellow
                     System.out.println(rightPanel.getAlternativeButtons().get(index).getText());
                 }
             }

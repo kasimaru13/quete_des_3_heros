@@ -1,5 +1,7 @@
 package main.java.com.quete_des_3_heros.element;
 
+import main.java.com.quete_des_3_heros.inventory.armors.Armor;
+import main.java.com.quete_des_3_heros.inventory.weapons.Weapon;
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
@@ -25,6 +27,8 @@ public abstract class Entity implements Element{
     protected double criticalRate; // attribute critical rate of the entity
     protected int movementRange; // distance of the movement, one movement point is one cell
     protected boolean alive; // entity alive or not
+    protected Weapon weapon;
+    protected Armor armor;
 
     protected String name;
 
@@ -63,7 +67,9 @@ public abstract class Entity implements Element{
                   int precision,
                   double criticalRate,
                   int movementRange,
-                  String name){
+                  String name,
+                  Weapon weapon,
+                  Armor armor){
         this.x = x;
         this.y = y;
         try{
@@ -86,10 +92,12 @@ public abstract class Entity implements Element{
         this.movementRange = movementRange;
         this.alive = true;
         this.name = name;
+        this.weapon = weapon;
+        this.armor = armor;
     }
 
     public boolean attack(Board board, int targetX, int targetY) {
-        int damage = 10;
+        int damage = computeAttack();
         return getDamage(board, targetX, targetY, getCriticalDamage(damage)); // For example, Warrior main's stat is strength
     }
 
@@ -133,6 +141,18 @@ public abstract class Entity implements Element{
         if (health <= 0) {
             alive = false;
             System.out.println(this.getClass().getSimpleName() + " est mort.");
+        }
+    }
+
+    /**
+     * Computes the damage the entity can do
+     */
+    private int computeAttack() {
+        if (weapon == null) {
+            return strength;
+        }
+        else {
+            return strength + weapon.getDamage();
         }
     }
 
@@ -289,6 +309,22 @@ public abstract class Entity implements Element{
 
     public void resetResistance(){
         this.resistance = oldResistance;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 }
 

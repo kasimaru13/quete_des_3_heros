@@ -35,7 +35,9 @@ public class Skeleton extends Monster {
                 0.15,
                 2,
                 2,
-                "Squelette");
+                "Squelette",
+                null,
+                null);
     }
 
     @Override

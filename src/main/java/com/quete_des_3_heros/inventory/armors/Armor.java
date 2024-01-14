@@ -3,6 +3,7 @@ package main.java.com.quete_des_3_heros.inventory.armors;
 import java.awt.Image;
 
 import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.inventory.Inventory;
 import main.java.com.quete_des_3_heros.inventory.Item;
 
 public class Armor extends Item {
@@ -23,7 +24,11 @@ public class Armor extends Item {
 
     @Override
     public void useItem(Hero hero) {
-        
+        if (hero.getArmor() != null) {
+            Inventory.getInstance().addItem(hero.getArmor());
+        }
+        hero.setArmor(this);
+        Inventory.getInstance().deleteItem(this);
     }
 
     public String getType() {
