@@ -11,8 +11,7 @@ import main.java.com.quete_des_3_heros.inventory.Item;
  * Inventory button (Image, name of item and description of item)
  */
 public class InventoryButton extends GameButton {
-    String itemName;
-    Item item;
+    private Item item;
 
     public InventoryButton(Item item) {
         super("<html><p>" + item.getName() + "</p><p style=\"font-size:14\">" + item.getDescription() + "</p></html>");

@@ -20,6 +20,7 @@ import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.GameButton;
 import main.java.com.quete_des_3_heros.view.components.InventoryButton;
 import main.java.com.quete_des_3_heros.view.components.Profile;
+import main.java.com.quete_des_3_heros.view.components.SkillButton;
 
 
 /**
@@ -142,7 +143,7 @@ public class RightPanel extends JPanel{
 
         // Add each skill to alternativeButtons and to UI
         for (Skill skill : skillsNames) {
-            alternativeButtons.add(new GameButton(skill.getName()));
+            alternativeButtons.add(new SkillButton(skill));
             buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
             buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
         }
