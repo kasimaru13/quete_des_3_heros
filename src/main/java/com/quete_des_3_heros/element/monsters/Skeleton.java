@@ -39,7 +39,7 @@ public class Skeleton extends Monster {
     }
 
     @Override
-    public void attack(Board board, int targetX, int targetY) {
-        getDamage(board, targetX, targetY, this.strength);
+    public boolean attack(Board board, int targetX, int targetY) {
+        return getDamage(board, targetX, targetY, this.strength);
     }
 }

@@ -39,7 +39,7 @@ public class Goblin extends Monster {
     }
 
     @Override
-    public void attack(Board board, int targetX, int targetY) {
-        getDamage(board, targetX, targetY, this.agility);
+    public boolean attack(Board board, int targetX, int targetY) {
+        return getDamage(board, targetX, targetY, this.agility);
     }
 }
