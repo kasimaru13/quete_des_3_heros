@@ -232,7 +232,20 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         // Attack
         if (e.getSource() == rightPanel.getAttackButton()){
-            if(!combatController.hasAttacked()) combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
+            // If already in attack phase : go back to movement phase            
+            if (board.getStep() == 2) {
+                if(!combatController.hasMoved()){
+                    combatController.showEntityMovements(combatController.getEntityPlaying());
+                } else {
+                    getBoard().setStep(0);
+                }
+                combatController.setIsAttacking(false);
+                revalidate();
+                repaint();
+            }
+
+            // Go in attack phase
+            else if(!combatController.hasAttacked()) combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
         }
 
         // Defend
