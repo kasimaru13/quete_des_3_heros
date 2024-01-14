@@ -225,7 +225,6 @@ public class CombatController {
                         }
                     }
                 }
-                System.out.print("");
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target
