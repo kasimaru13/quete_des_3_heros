@@ -24,8 +24,8 @@ public class Board extends JPanel implements MouseMotionListener{
     private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
-    private int possibleMoves[][]; // TO GET RID OF WHEN BACKEND IS COMPLETE
-    private int step; // 1 is move step, 2 is attack step
+    private int possibleMoves[][]; // tiles to highlight
+    private int step; // 1 is move step, 2 is attack step, 3 is skill step
 
     /**
      *
@@ -101,6 +101,8 @@ public class Board extends JPanel implements MouseMotionListener{
     private void drawPossibleMoves(int positions[][], Graphics g){
         int x,y;
         Color col, col_hover;
+
+        // Set color of highlight
         if (step == 1) {col = new Color(0, 125, 0, 125); col_hover = new Color(0, 175, 0, 125);}
         else {col = new Color(125, 0, 0, 125); col_hover = new Color(175, 0, 0, 125);}
 

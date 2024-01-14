@@ -25,8 +25,9 @@ public class CombatController {
     private boolean isAttacking;
     private boolean hasAttacked;
     private boolean hasDefended;
-    private ArrayList<Hero> heroes;
-    private ArrayList<Monster> monsters;
+    private ArrayList<Hero> heroes; // List of all heroes
+    private ArrayList<Monster> monsters; // List of all monsters on map
+    private Skill current_skill; // skill currently in use
 
     /**
      * Constructs a CombatController associated with a specific CombatUI.
@@ -83,6 +84,21 @@ public class CombatController {
 
         // Enable the attack move on the game board to visualize possible movements
         combatUI.getBoard().setStep(2);
+        setIsAttacking(true);
+        combatUI.revalidate();
+        combatUI.repaint();
+    }
+
+    public void showEntitySkillRange(Entity entity, Skill skill){
+        current_skill = skill;
+
+        PathfindingController.Point start = new PathfindingController.Point(entity.getX(), entity.getY(), null);
+
+        // Find all paths within the attack range and set them as possible moves on the game board
+        combatUI.getBoard().setPossibleMoves(PathfindingController.FindAllPaths(combatUI.getBoard().getGrid(), start, skill.getRange(), true));
+
+        // Enable the attack move on the game board to visualize possible movements
+        combatUI.getBoard().setStep(3);
         setIsAttacking(true);
         combatUI.revalidate();
         combatUI.repaint();
@@ -317,11 +333,34 @@ public class CombatController {
         return false;
     }
 
+    public boolean entitySkillOnTarget(Entity entity, int x, int y) {
+        if (entity.useSkill(current_skill, combatUI.getBoard(), x , y)){
+            if(entity instanceof Hero){
+                combatUI.getBoard().setStep(0);
+                setIsAttacking(false);
+                setHasAttacked(true);
+                setHasSkipped(true);
+                setHasMoved(true);
+            }
+            combatUI.revalidate();
+            combatUI.repaint();
+            return true;
+        }
+        if(!hasMoved()){
+            showEntityMovements(entity);
+        }
+        return false;
+    }
+
     public void entityDefense(Entity entity){
         entity.defend();
         setHasDefended(true);
     }
 
+    /**
+     * Get skills of the current playing entity if it is a Hero
+     * @return list of the playing hero's skills
+     */
     public ArrayList<Skill> getSkills() {
         if (entityPlaying instanceof Hero) {
             return ((Hero)entityPlaying).getSkills();

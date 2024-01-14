@@ -1,5 +1,6 @@
 package main.java.com.quete_des_3_heros.element;
 
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.inventory.armors.Armor;
 import main.java.com.quete_des_3_heros.inventory.weapons.Weapon;
 import main.java.com.quete_des_3_heros.view.Constants;
@@ -155,6 +156,19 @@ public abstract class Entity implements Element{
         else {
             return strength + weapon.getDamage();
         }
+    }
+
+    /**
+     * Use a skill on an entity
+     * @param skill
+     * @return
+     */
+    public boolean useSkill(Skill skill, Board board, int x, int y){
+        if (getDamage(board, x, y, skill.getAttack())){
+            setMana(getMana() - skill.getMana_consumption());
+            return true;
+        }
+        return false;
     }
 
     public void defend(){

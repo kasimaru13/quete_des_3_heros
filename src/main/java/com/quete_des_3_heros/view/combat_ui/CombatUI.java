@@ -24,6 +24,7 @@ import main.java.com.quete_des_3_heros.view.UI;
 import main.java.com.quete_des_3_heros.view.combat_ui.zones.Zone;
 import main.java.com.quete_des_3_heros.view.components.InventoryButton;
 import main.java.com.quete_des_3_heros.view.components.Profile;
+import main.java.com.quete_des_3_heros.view.components.SkillButton;
 
 
 /**
@@ -279,10 +280,23 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         else if (rightPanel.getAlternativeButtons().contains(e.getSource())) {
             int index = rightPanel.getAlternativeButtons().indexOf(e.getSource());
 
-            if (index == rightPanel.getAlternativeButtons().size() - 1) rightPanel.actionButtonsToPanel(); // Back
+            // Back button
+            if (index == rightPanel.getAlternativeButtons().size() - 1) {
+                rightPanel.actionButtonsToPanel();
+                if(!combatController.hasMoved()){
+                    combatController.showEntityMovements(combatController.getEntityPlaying());
+                } else {
+                    getBoard().setStep(0);
+                }
+                combatController.setIsAttacking(false);
+                revalidate();
+                repaint();
+            }
+            // Other button
             else {
+
+                // Item button
                 if (rightPanel.getAlternativeButtons().get(0) instanceof InventoryButton) {
-                    // Item button
                     Item usedItem = ((InventoryButton)rightPanel.getAlternativeButtons().get(index)).getItem();
 
                     usedItem.useItem((Hero)combatController.getEntityPlaying()); // Use the item
@@ -295,10 +309,23 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
                     if (usedItem instanceof PotionItem) combatController.setHasSkipped(true); // Skip turn only for potions
 
                 }
+
+                // Skill button
                 else {
-                    // Skill button
-                    // DO SOMETHING WITH SKILL NAME (TEXT OF BUTTON) see bellow
-                    System.out.println(rightPanel.getAlternativeButtons().get(index).getText());
+                    // If already in skill attack phase : go back to movement phase            
+                    if (board.getStep() == 3) {
+                        if(!combatController.hasMoved()){
+                            combatController.showEntityMovements(combatController.getEntityPlaying());
+                        } else {
+                            getBoard().setStep(0);
+                        }
+                        combatController.setIsAttacking(false);
+                        revalidate();
+                        repaint();
+                    }
+                    Skill current_skill = ((SkillButton)rightPanel.getAlternativeButtons().get(index)).getSkill();
+                    
+                    combatController.showEntitySkillRange(combatController.getEntityPlaying(), current_skill);
                 }
             }
         }
@@ -340,6 +367,26 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
                         combatController.setIsAttacking(false);
                     }
                     break;
+                }
+            }
+        }
+        else if (getBoard().getStep() == 3) {
+            Entity entity = combatController.getEntityPlaying();
+            for(int[] i : getBoard().getPossibleMoves()){
+                if(i[0] == x && i[1] == y) {
+                    if (combatController.entityAttackOnTarget(entity, x, y)){
+                        combatController.setHasSkipped(true);
+                    }
+                    else {
+                        rightPanel.actionButtonsToPanel();
+                        if(!combatController.hasMoved()){
+                            combatController.showEntityMovements(entity);
+                        } else {
+                            getBoard().setStep(0);
+                        combatController.setIsAttacking(false);
+                    }
+                    break;
+                    }
                 }
             }
         }
