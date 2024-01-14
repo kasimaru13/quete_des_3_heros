@@ -16,6 +16,8 @@ import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.Healin
 import main.java.com.quete_des_3_heros.inventory.potions.potion_decorator.ManaPotion;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 import main.java.com.quete_des_3_heros.view.dialogues.Dialogue;
+import main.java.com.quete_des_3_heros.view.endscreens.GameOver;
+import main.java.com.quete_des_3_heros.view.endscreens.WinningScreen;
 import main.java.com.quete_des_3_heros.view.title_screen.TitleScreen;
 
 /**
@@ -30,8 +32,7 @@ public class UI extends JFrame {
         initializeHeroes();
         initInventory();
 
-        TitleScreen titleScreen = new TitleScreen();
-        add(titleScreen);
+        nextStep(0, "Title");
         setTitle("La quête des 3 héros");
 
         // Constant size of the window
@@ -62,7 +63,16 @@ public class UI extends JFrame {
         getContentPane().removeAll(); // Clean the frame
 
         // Creates the next phase and adds it to the frame
-        if (type_of_phase == "Dialogue"){
+        if (next_phase_number == 0){
+            add(new TitleScreen());
+        }
+        if (next_phase_number == -1){
+            add(new GameOver());
+        }
+        if (next_phase_number > Constants.PHASES){
+            add(new WinningScreen());
+        }
+        else if (type_of_phase == "Dialogue"){
             add(new Dialogue(next_phase_number));
         }
         else if (type_of_phase == "Combat"){

@@ -42,7 +42,7 @@ public class TitleScreen extends JPanel implements ActionListener {
 
         // Title
         title = new JLabel("La Quête des 3 Héros");
-        title.setFont(new Font("Serif", Font.BOLD, 50));
+        title.setFont(new Font("Serif", Font.BOLD, 80));
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setForeground(Color.WHITE);
 
