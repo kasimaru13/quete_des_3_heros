@@ -6,8 +6,7 @@ import java.util.List;
 
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
-
-
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 
@@ -298,6 +297,15 @@ public class CombatController {
     public void entityDefense(Entity entity){
         entity.defend();
         setHasDefended(true);
+    }
+
+    public ArrayList<Skill> getSkills() {
+        if (entityPlaying instanceof Hero) {
+            return ((Hero)entityPlaying).getSkills();
+        }
+        else {
+            return null;
+        }
     }
 
     /**

@@ -31,6 +31,7 @@ package main.java.com.quete_des_3_heros.element.heros;
 
 
 import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Warrior extends Hero {
@@ -57,6 +58,9 @@ public class Warrior extends Hero {
                 "Guerrier",
                 null,
                 null);
+        
+        // Skills
+        addSkill(new Skill("Ecrasement", 100, 1, 25));
     }
 
     @Override

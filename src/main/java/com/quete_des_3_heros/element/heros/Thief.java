@@ -33,6 +33,7 @@ public class Thief extends Hero {
 package main.java.com.quete_des_3_heros.element.heros;
 
 import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public class Thief extends Hero {
@@ -59,6 +60,9 @@ public class Thief extends Hero {
                 "Voleur",
                 null,
                 null);
+
+        // Skills
+        addSkill(new Skill("Tir à l'arc", 20, 5, 10));
     }
 
     @Override

@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import main.java.com.quete_des_3_heros.element.Hero;
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.inventory.Item;
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.GameButton;
@@ -135,13 +136,13 @@ public class RightPanel extends JPanel{
      * Displays the skills on the right panel of the UI (with back button)
      * @param skillsNames
      */
-    public void skillButtonsToPanel(ArrayList<String> skillsNames) {
+    public void skillButtonsToPanel(ArrayList<Skill> skillsNames) {
         alternativeButtons = new ArrayList<GameButton>();
         buttonPanel.removeAll(); // Remove all buttons from ui
 
         // Add each skill to alternativeButtons and to UI
-        for (String skill : skillsNames) {
-            alternativeButtons.add(new GameButton(skill));
+        for (Skill skill : skillsNames) {
+            alternativeButtons.add(new GameButton(skill.getName()));
             buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
             buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
         }

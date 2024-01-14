@@ -191,6 +191,9 @@ public void defendre() {
 
 package main.java.com.quete_des_3_heros.element;
 
+import java.util.ArrayList;
+
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.inventory.armors.Armor;
 import main.java.com.quete_des_3_heros.inventory.weapons.Weapon;
 
@@ -199,6 +202,7 @@ public abstract class Hero extends Entity {
     private int level; // level of the hero
     private int xp; // experience points of the hero
     private int xpMaxLevel; // maximum experience points of the level of the hero
+    private ArrayList<Skill> skills;
 
     /**
      * Constructor of Hero inherits Entity
@@ -247,6 +251,7 @@ public abstract class Hero extends Entity {
         this.level = level;
         this.xp = xp;
         this.xpMaxLevel = xpMaxLevel;
+        skills = new ArrayList<>();
     }
 
     public int getLevel() {
@@ -271,6 +276,14 @@ public abstract class Hero extends Entity {
 
     public void setXpMaxLevel(int xpMaxLevel) {
         this.xpMaxLevel = xpMaxLevel;
+    }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+    }
+
+    public ArrayList<Skill> getSkills() {
+        return skills;
     }
 }
 

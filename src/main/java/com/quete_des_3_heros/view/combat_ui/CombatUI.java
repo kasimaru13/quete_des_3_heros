@@ -15,6 +15,7 @@ import main.java.com.quete_des_3_heros.controller.CombatController;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
+import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.inventory.Inventory;
 import main.java.com.quete_des_3_heros.inventory.Item;
 import main.java.com.quete_des_3_heros.inventory.potions.PotionItem;
@@ -159,7 +160,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
      * Shows skill buttons on UI (and sets action listeners on them)
      * @param skillsName List of skills as strings
      */
-    private void showSkills(ArrayList<String> skillsName) {
+    private void showSkills(ArrayList<Skill> skillsName) {
         rightPanel.skillButtonsToPanel(skillsName);
 
         for (int i = 0; i < rightPanel.getAlternativeButtons().size(); i++) {
@@ -243,14 +244,9 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         }
 
         // Skills
-        else if (e.getSource() == rightPanel.getSkillButton()){// Get skills names in backend
-
-            ArrayList<String> testNames = new ArrayList<>(); // TO GET RID OF, CALL THE BACKEND
-            testNames.add("Technique 1"); // TO GET RID OF, CALL THE BACKEND
-            testNames.add("Technique 2"); // TO GET RID OF, CALL THE BACKEND
-
+        else if (e.getSource() == rightPanel.getSkillButton()){
             // Show the skills on the interface
-            showSkills(testNames);
+            showSkills(combatController.getSkills());
         }
 
         // Items
