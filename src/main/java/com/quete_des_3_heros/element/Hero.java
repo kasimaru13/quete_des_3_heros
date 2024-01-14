@@ -191,8 +191,6 @@ public void defendre() {
 
 package main.java.com.quete_des_3_heros.element;
 
-import main.java.com.quete_des_3_heros.view.combat_ui.Board;
-
 public abstract class Hero extends Entity {
 
     private int level; // level of the hero

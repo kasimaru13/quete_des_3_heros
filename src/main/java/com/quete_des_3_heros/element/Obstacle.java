@@ -13,14 +13,17 @@ public class Obstacle implements Element {
     /**
      * Constructor of Obstacle inherits Element
      */
-    public Obstacle(int x, int y) {
-        this.x = x;
-        this.y = y;
-        try{
-            this.sprite = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png"));
-        } catch (IOException e) {
-            System.out.println("Erreur dans la lecture des images du jeu");
-            System.exit(0);
+    public Obstacle(Image sprite) {
+        if (sprite == null){
+            try {
+                this.sprite = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/sprites/test_sprite.png"));
+            } catch (IOException e) {
+                System.err.println("Impossible de lire le substitu de sprite");
+                System.exit(0);
+            }
+        }
+        else {
+            this.sprite = sprite;
         }
     }
 

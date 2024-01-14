@@ -50,8 +50,7 @@ public class LeftPanel extends JPanel{
             for (Profile prof : priority_queue) {
                 profile_queue.add(prof);
                 profile_queue.add(Box.createRigidArea(new Dimension(0, 50)));
-                if (i == 1) prof.changeBorderColor(Color.green);
-                else prof.changeBorderColor(Color.black);
+                prof.changeBorderColor(Color.black);
                 if (priority_queue.indexOf(prof) != priority_queue.size() - 1){
                     drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, profile_queue.getY() + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, profile_queue.getY() + i * (75 + 50) - 45, 10, 5);
                 }
