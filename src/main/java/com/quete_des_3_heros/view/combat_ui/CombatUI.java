@@ -222,12 +222,15 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         // Attack
         if (e.getSource() == rightPanel.getAttackButton()){
-            System.out.println("Attack");
+            if(!combatController.hasAttacked()) combatController.showEntityAttackRange(combatController.getEntityPlaying(), 2);
         }
 
         // Defend
         else if (e.getSource() == rightPanel.getDefendButton()){
-            System.out.println("Defend");
+            if(!combatController.hasDefended()) {
+                combatController.entityDefense(combatController.getEntityPlaying());
+                combatController.setHasSkipped(true);
+            }
         }
 
         // Skills
@@ -301,12 +304,19 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         if(getBoard().getStep() == 1){
             Entity entity = combatController.getEntityPlaying();
-            for(int i[] : getBoard().getPossibleMoves()){
+            for(int[] i : getBoard().getPossibleMoves()){
                 if(i[0] == x && i[1] == y){
-                    getBoard().setStep(0);
                     combatController.moveOnPathEntity(entity, x , y);
-                    combatController.setHasMoved(true);
-                    combatController.setHasSkipped(true);
+                    if(combatController.hasAttacked()) combatController.setHasSkipped(true);
+                    break;
+                }
+            }
+        } else if(getBoard().getStep() == 2){
+            Entity entity = combatController.getEntityPlaying();
+            for(int[] i : getBoard().getPossibleMoves()){
+                if(i[0] == x && i[1] == y) {
+                    combatController.entityAttackOnTarget(entity, x, y);
+                    if(combatController.hasMoved()) combatController.setHasSkipped(true);
                     break;
                 }
             }

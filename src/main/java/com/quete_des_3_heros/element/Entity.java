@@ -28,6 +28,8 @@ public abstract class Entity implements Element{
 
     protected String name;
 
+    private int oldResistance = resistance;
+
     /**
      * Constructor of Entity
      * @param x position of x-axis on the grid
@@ -129,6 +131,10 @@ public abstract class Entity implements Element{
             alive = false;
             System.out.println(this.getClass().getSimpleName() + " est mort.");
         }
+    }
+
+    public void defend(){
+        resistance += 10;
     }
 
     public int getX() {
@@ -266,6 +272,10 @@ public abstract class Entity implements Element{
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public void resetResistance(){
+        this.resistance = oldResistance;
     }
 }
 
