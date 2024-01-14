@@ -62,6 +62,7 @@ public class Mage extends Hero {
 
         // Skills
         addSkill(new Skill("Boule de feu", 40, 3, 25));
+        addSkill(new Skill("Soin", -50, 10, 25));
     }
 
     @Override
