@@ -159,7 +159,7 @@ public class CombatController {
     public void startCombat(){
         int tour = 1;
 
-        while(tour <= 5){
+        while(tour <= 20){
             System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
                 entityPlaying = entitiesPriorityList.get(i);
@@ -234,6 +234,7 @@ public class CombatController {
                         }
                     }
                 }
+                if (hasSkipped) break;
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target
