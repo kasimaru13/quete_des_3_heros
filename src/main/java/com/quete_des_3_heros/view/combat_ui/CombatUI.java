@@ -187,7 +187,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     public void updatePriorityQueue(ArrayList<Entity> entities){
         if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
             for (Entity entity : entities){
-                profile_queue.add(new Profile(entity.getName(), entity.getHealth(), entity.getMana(), entity.getSprite()));
+                profile_queue.add(new Profile(entity));
             }
 
             leftPanel.setPriority_queue(profile_queue);
@@ -265,8 +265,13 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             else {
                 if (rightPanel.getAlternativeButtons().get(0) instanceof InventoryButton) {
                     // Inventory button
-                    // DO SOMETHING WITH NAME
-                    System.out.println(((InventoryButton)(rightPanel.getAlternativeButtons().get(index))).getItemName());
+                    Item usedItem = ((InventoryButton)rightPanel.getAlternativeButtons().get(index)).getItem();
+                    usedItem.useItem((Hero)combatController.getEntityPlaying()); // Use the item
+                    Inventory.getInstance().deleteItem(usedItem);   // Delete the item from the inventory
+                    rightPanel.actionButtonsToPanel();
+                    rightPanel.updateProfiles(combatController.getHeroes());
+                    combatController.setHasSkipped(true);
+
                 }
                 else {
                     // Skill button

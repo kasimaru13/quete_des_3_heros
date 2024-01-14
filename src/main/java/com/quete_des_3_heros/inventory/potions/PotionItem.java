@@ -14,7 +14,8 @@ public class PotionItem extends Item {
         potion = _potion;
     }
 
-    public void usePotion(Hero hero){
+    @Override
+    public void useItem(Hero hero){
         potion.usePotion(hero);
     }
 }

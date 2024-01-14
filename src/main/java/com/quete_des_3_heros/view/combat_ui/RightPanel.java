@@ -52,7 +52,7 @@ public class RightPanel extends JPanel{
         profiles = new Profile[heroes.size()];
         int i = 0;
         for (Hero hero : heroes) {
-            Profile tmp = new Profile(hero.getName(), hero.getHealth(), hero.getMana(), hero.getSprite());
+            Profile tmp = new Profile(hero);
             profiles[i] = tmp;
             profilesPanel.add(Box.createRigidArea(new Dimension(0, 10)));
             profilesPanel.add(tmp);
@@ -160,7 +160,7 @@ public class RightPanel extends JPanel{
 
         // Add each item to alternativeButtons and to UI
         for (Item item : items) {
-            alternativeButtons.add(new InventoryButton(item.getName(), item.getDescription(), item.getSprite()));
+            alternativeButtons.add(new InventoryButton(item));
             buttonPanel.add(alternativeButtons.get(alternativeButtons.size() - 1));
             buttonPanel.add(Box.createRigidArea(new Dimension(0, 25))); // Space between buttons
         }

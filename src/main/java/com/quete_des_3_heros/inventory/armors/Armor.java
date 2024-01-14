@@ -2,6 +2,7 @@ package main.java.com.quete_des_3_heros.inventory.armors;
 
 import java.awt.Image;
 
+import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.inventory.Item;
 
 public class Armor extends Item {
@@ -18,6 +19,11 @@ public class Armor extends Item {
         speed = _speed;
         dodge = _dodge;
         precision = _precision;
+    }
+
+    @Override
+    public void useItem(Hero hero) {
+        
     }
 
     public String getType() {

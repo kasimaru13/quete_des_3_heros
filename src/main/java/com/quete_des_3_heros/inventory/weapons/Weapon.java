@@ -2,6 +2,7 @@ package main.java.com.quete_des_3_heros.inventory.weapons;
 
 import java.awt.Image;
 
+import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.inventory.Item;
 
 /**
@@ -16,6 +17,11 @@ public class Weapon extends Item {
         super(_name, _description, _sprite);
         damage = _damage;
         range = _range;
+    }
+
+    @Override
+    public void useItem(Hero hero) {
+        
     }
 
     public int getDamage() {

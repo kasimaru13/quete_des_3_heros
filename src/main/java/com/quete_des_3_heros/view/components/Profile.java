@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.Constants;
 
 
@@ -25,15 +26,8 @@ public class Profile extends JPanel {
     private String name;
     private String total_hp;
     private String total_mp;
-    
-    /**
-     * Creates a profile component with the characteristics passed as arguments
-     * @param character_name Name of the character / monster put int the profile
-     * @param hp Their HP
-     * @param mp Their MP
-     * @param character_sprite Image of the sprite of the character / monster
-     */
-    public Profile(String character_name, int hp, int mp, Image character_sprite){
+
+    public Profile(Entity entity) {
         setBackground(new Color(215,215,215));
         setMinimumSize(new Dimension(Constants.LEFTPANEL_WIDTH * 65/100, 75));
         setPreferredSize(new Dimension(Constants.LEFTPANEL_WIDTH * 65/100, 75));
@@ -43,17 +37,17 @@ public class Profile extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setAlignmentY(CENTER_ALIGNMENT);
 
-        total_hp = String.valueOf(hp);
-        total_mp = String.valueOf(mp);
-        name = character_name;
+        total_hp = ((Integer)entity.getMaxHealth()).toString();
+        total_mp = ((Integer)entity.getMaxMana()).toString();
+        name = entity.getName();
 
         // Setting labels
-        sprite = new JLabel(new ImageIcon(character_sprite));
+        sprite = new JLabel(new ImageIcon(entity.getSprite()));
         sprite.setBorder(BorderFactory.createLineBorder(Color.black));
         description = new JLabel(
             "<html>" + name + " :<br/>" +
-            "&nbsp;&nbsp;HP: " + total_hp + "/" + total_hp + "<br/>" +
-            "&nbsp;&nbsp;MP: " + total_mp + "/" + total_mp
+            "&nbsp;&nbsp;HP: " + entity.getHealth() + "/" + total_hp + "<br/>" +
+            "&nbsp;&nbsp;MP: " + entity.getMana() + "/" + total_mp
         );
         
 

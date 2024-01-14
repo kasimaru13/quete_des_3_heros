@@ -170,7 +170,12 @@ public abstract class Entity implements Element{
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        if (health <= maxHealth){
+            this.health = health;
+        }
+        else {
+            this.health = maxHealth;
+        }
     }
 
     public int getMaxHealth() {
@@ -186,7 +191,12 @@ public abstract class Entity implements Element{
     }
 
     public void setMana(int mana) {
-        this.mana = mana;
+        if (mana <= maxMana){
+            this.mana = mana;
+        }
+        else {
+            this.mana = maxMana;
+        }
     }
 
     public int getMaxMana() {
