@@ -1,5 +1,6 @@
 package main.java.com.quete_des_3_heros.element;
 
+import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 import javax.imageio.ImageIO;
@@ -105,7 +106,7 @@ public abstract class Entity implements Element{
 
     public void getDamage(Board board, int targetX, int targetY, int damage){
         // Verify if coordinates of the target are valid
-        if (targetX >= 0 && targetX < board.getBoardLength() && targetY >= 0 && targetY < board.getBoardWidth()) {
+        if (targetX >= 0 && targetX < Constants.NUMBER_OF_SQUARES && targetY >= 0 && targetY < Constants.NUMBER_OF_SQUARES) {
             System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
             // Verify if there is a target at the coordinates
