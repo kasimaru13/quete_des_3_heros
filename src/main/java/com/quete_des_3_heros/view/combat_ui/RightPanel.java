@@ -91,6 +91,7 @@ public class RightPanel extends JPanel{
         rewind_button.setIcon(new ImageIcon(new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/icons/white_refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         rewind_button.setIconTextGap(20);
         rewind_button.setBorder(new EmptyBorder(10, 10, 10, 10));
+        rewind_button.setVisible(false); // By default the button is nnot visible
 
         add(rewind_button);
         add(Box.createRigidArea(new Dimension(0,15)));
@@ -172,6 +173,14 @@ public class RightPanel extends JPanel{
         // Repaint
         revalidate();
         repaint();
+    }
+
+    public void hideRewindButton() {
+        rewind_button.setVisible(false);
+    }
+
+    public void showRewindButton() {
+        rewind_button.setVisible(true);
     }
 
     public GameButton getAttackButton() {

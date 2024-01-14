@@ -168,6 +168,7 @@ public class CombatController {
                     entityPlaying.resetResistance();
                 }
                 giveEntityTurn(entityPlaying);
+                combatUI.getRightPanel().hideRewindButton();
                 combatUI.updatePriorityQueue(entitiesPriorityList);
                 combatUI.updateProfiles(heroes);
                 combatUI.revalidate();
@@ -281,6 +282,7 @@ public class CombatController {
                 combatUI.getBoard().setStep(0);
                 setIsAttacking(false);
                 setHasAttacked(true);
+                setHasSkipped(true);
                 setHasMoved(true);
             }
             combatUI.revalidate();

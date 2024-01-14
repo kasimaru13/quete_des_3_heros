@@ -41,6 +41,8 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
     private List<Profile> profile_queue;
 
+    private Move current_move;
+
     public CombatUI(int phase_number){
         combatController = new CombatController(this);
         
@@ -213,6 +215,10 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
         rightPanel.updateProfiles(heroes);
     }
 
+    public RightPanel getRightPanel() {
+        return rightPanel;
+    }
+
 
 
     
@@ -255,7 +261,12 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
         // Rewind
         else if (e.getSource() == rightPanel.getRewind_button()){
-            System.out.println("Rewind");
+            if (combatController.hasMoved()) {
+                combatController.setHasMoved(false);
+                rightPanel.hideRewindButton();
+                current_move.undo();
+                combatController.showEntityMovements(combatController.getEntityPlaying());
+            }
         }
 
 
@@ -300,8 +311,10 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             Entity entity = combatController.getEntityPlaying();
             for(int[] i : getBoard().getPossibleMoves()){
                 if(i[0] == x && i[1] == y){
-                    combatController.moveOnPathEntity(entity, x , y);
-                    if(combatController.hasAttacked()) combatController.setHasSkipped(true);
+                    // combatController.moveOnPathEntity(entity, x , y);
+                    current_move = new Move(entity, x, y, combatController);
+                    current_move.execute();
+                    rightPanel.showRewindButton();
                     break;
                 }
             }
