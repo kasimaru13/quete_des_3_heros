@@ -9,6 +9,7 @@ import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.view.Constants;
+import main.java.com.quete_des_3_heros.view.UI;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 
 import static java.awt.geom.Point2D.distance;
@@ -160,7 +161,7 @@ public class CombatController {
     public void startCombat(){
         int tour = 1;
 
-        while(tour <= 20){
+        while(heroesStillAlive() && monstersStillAlive()){
             System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
                 entityPlaying = entitiesPriorityList.get(i);
@@ -174,6 +175,8 @@ public class CombatController {
                 combatUI.updateProfiles(heroes);
                 combatUI.revalidate();
                 combatUI.repaint();
+
+                if (!heroesStillAlive() || !monstersStillAlive()) break;
             }
             tour += 1;
 
@@ -181,8 +184,10 @@ public class CombatController {
         }
         if(heroesStillAlive()){
             System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
+            UI.getInstance().nextStep(Constants.PHASES + 1, "Win");
         } else if(monstersStillAlive()){
             System.out.println("Vous avez perdu le combat ! Le combat a duré " + tour + " tours !");
+            UI.getInstance().nextStep(-1, "Game Over");
         } else {
             System.out.println("Erreur !");
         }

@@ -29,9 +29,6 @@ public class UI extends JFrame {
     private Hero[] heroes;
 
     private UI(){
-        initializeHeroes();
-        initInventory();
-
         nextStep(0, "Title");
         setTitle("La quête des 3 héros");
 
@@ -65,11 +62,13 @@ public class UI extends JFrame {
         // Creates the next phase and adds it to the frame
         if (next_phase_number == 0){
             add(new TitleScreen());
+            initializeHeroes();
+            initInventory();
         }
-        if (next_phase_number == -1){
+        else if (next_phase_number == -1){
             add(new GameOver());
         }
-        if (next_phase_number > Constants.PHASES){
+        else if (next_phase_number > Constants.PHASES){
             add(new WinningScreen());
         }
         else if (type_of_phase == "Dialogue"){

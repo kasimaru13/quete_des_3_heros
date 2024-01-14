@@ -58,7 +58,7 @@ public class Warrior extends Hero {
                 "Guerrier",
                 null,
                 null);
-        
+
         // Skills
         addSkill(new Skill("Ecrasement", 100, 1, 25));
     }
