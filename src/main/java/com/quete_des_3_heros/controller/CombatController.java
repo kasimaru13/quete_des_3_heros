@@ -266,17 +266,20 @@ public class CombatController {
         return closestHero;
     }
 
-    public void entityAttackOnTarget(Entity entity, int x, int y){
-        entity.attack(combatUI.getBoard(), x , y);
-        if(entity instanceof Hero){
-            if(!hasMoved()){
-                showEntityMovements(entity);
-            } else {
-                combatUI.getBoard().setStep(0);
+    public boolean entityAttackOnTarget(Entity entity, int x, int y){
+        if (entity.attack(combatUI.getBoard(), x , y)){
+            if(entity instanceof Hero){
+                if(!hasMoved()){
+                    showEntityMovements(entity);
+                } else {
+                    combatUI.getBoard().setStep(0);
+                }
+                setIsAttacking(false);
+                setHasAttacked(true);
             }
-            setIsAttacking(false);
-            setHasAttacked(true);
+            return true;
         }
+        return false;
     }
 
     public void entityDefense(Entity entity){

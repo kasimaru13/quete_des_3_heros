@@ -88,9 +88,9 @@ public abstract class Entity implements Element{
         this.name = name;
     }
 
-    public void attack(Board board, int targetX, int targetY) {
+    public boolean attack(Board board, int targetX, int targetY) {
         int damage = 10;
-        getDamage(board, targetX, targetY, getCriticalDamage(damage)); // For example, Warrior main's stat is strength
+        return getDamage(board, targetX, targetY, getCriticalDamage(damage)); // For example, Warrior main's stat is strength
     }
 
     public int getCriticalDamage(int damage){
@@ -106,7 +106,7 @@ public abstract class Entity implements Element{
         }
     }
 
-    public void getDamage(Board board, int targetX, int targetY, int damage){
+    public boolean getDamage(Board board, int targetX, int targetY, int damage){
         // Verify if coordinates of the target are valid
         if (targetX >= 0 && targetX < Constants.NUMBER_OF_SQUARES && targetY >= 0 && targetY < Constants.NUMBER_OF_SQUARES) {
             System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
@@ -115,12 +115,15 @@ public abstract class Entity implements Element{
             if((target = board.getEntity(targetX, targetY)) != null){
                 target.hurt(damage);
                 System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
+                return true;
             }
             else {
                 System.out.println("Cible ratée !");
+                return false;
             }
         } else {
             System.out.println("Coordonnées de la cible invalides !");
+            return false;
         }
     }
 
