@@ -323,6 +323,12 @@ public class CombatController {
                 setHasSkipped(true);
                 setHasMoved(true);
             }
+            else {
+                combatUI.getRightPanel().updateText(
+                    "<html><p>" + entity.getName() + " a attaqué " + ((Entity)combatUI.getBoard().getEntity(x, y)).getName()
+                    + " et a infligé " + entity.computeAttack() + " dégats</p></html>"
+                );
+            }
             combatUI.revalidate();
             combatUI.repaint();
             return true;

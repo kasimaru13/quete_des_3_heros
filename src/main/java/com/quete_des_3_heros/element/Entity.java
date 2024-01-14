@@ -97,6 +97,13 @@ public abstract class Entity implements Element{
         this.armor = armor;
     }
 
+    /**
+     * Returns true if attack is succesful
+     * @param board
+     * @param targetX
+     * @param targetY
+     * @return 
+     */
     public boolean attack(Board board, int targetX, int targetY) {
         int damage = computeAttack();
         return getDamage(board, targetX, targetY, getCriticalDamage(damage)); // For example, Warrior main's stat is strength
@@ -144,7 +151,7 @@ public abstract class Entity implements Element{
     /**
      * Computes the damage the entity can do
      */
-    private int computeAttack() {
+    public int computeAttack() {
         if (weapon == null) {
             return strength;
         }

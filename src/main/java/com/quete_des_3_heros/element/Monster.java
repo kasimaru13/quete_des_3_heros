@@ -157,6 +157,7 @@ package main.java.com.quete_des_3_heros.element;
 
 import main.java.com.quete_des_3_heros.inventory.armors.Armor;
 import main.java.com.quete_des_3_heros.inventory.weapons.Weapon;
+import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 public abstract class Monster extends Entity {
     private int rangeAttack; // distance range of the base attack of the entity

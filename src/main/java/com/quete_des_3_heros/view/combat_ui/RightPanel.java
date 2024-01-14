@@ -1,6 +1,8 @@
 package main.java.com.quete_des_3_heros.view.combat_ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -37,9 +39,11 @@ public class RightPanel extends JPanel{
     private GameButton skill;
     private GameButton item;
 
-    private JButton rewind_button;
+    private JLabel action_text; // Text to know what is happening
+    private JButton rewind_button; // Rewind button
+    private JPanel replacement_panel; // Panel replacing rewind button when it is hidden (for spacing)
 
-    private Profile[] profiles;
+    private Profile[] profiles; // Profiles of heroes
 
     private ArrayList<GameButton> alternativeButtons; // Skills buttons / Inventory buttons
 
@@ -86,16 +90,29 @@ public class RightPanel extends JPanel{
         add(scrollbuttonPanel);
         add(Box.createVerticalGlue());
 
-        // Rewind Move button
+        // Action text
+        action_text = new JLabel("");
+        action_text.setAlignmentX(CENTER_ALIGNMENT);
+        action_text.setFont(new Font("Arial", Font.PLAIN, 12));
+        action_text.setBorder(new EmptyBorder(0, 5, 0, 5));
+        add(action_text);
+
+        add(Box.createRigidArea(new Dimension(0, 6)));
+
+        // Rewind Move button (not visible by default)
         rewind_button = new GameButton("<html><p>Annuler de dernier déplacement</p></html>");
         rewind_button.setPreferredSize(new Dimension(Constants.RIGHTPANEL_WIDTH - 30, 40));
         rewind_button.setFont(new JLabel().getFont());
         rewind_button.setIcon(new ImageIcon(new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/icons/white_refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         rewind_button.setIconTextGap(20);
         rewind_button.setBorder(new EmptyBorder(10, 10, 10, 10));
-        rewind_button.setVisible(false); // By default the button is nnot visible
 
-        add(rewind_button);
+        // Replacement panel
+        replacement_panel = new JPanel();
+        replacement_panel.setPreferredSize(rewind_button.getPreferredSize());
+        replacement_panel.setMaximumSize(rewind_button.getMaximumSize());
+        add(replacement_panel);
+
         add(Box.createRigidArea(new Dimension(0,15)));
     } 
 
@@ -108,6 +125,7 @@ public class RightPanel extends JPanel{
         for (int i = 0; i < profiles.length; i++) {
             hero = heroes.get(i);
             profiles[i].updateProfile(hero.getHealth(), hero.getMana());
+            if (hero.getHealth() == 0) profiles[i].setBackground(Color.red); // Put profile in red if hero is dead
         }
     }
 
@@ -178,11 +196,17 @@ public class RightPanel extends JPanel{
     }
 
     public void hideRewindButton() {
-        rewind_button.setVisible(false);
+        remove(rewind_button);
+        add(replacement_panel, this.getComponents().length - 1);
     }
 
     public void showRewindButton() {
-        rewind_button.setVisible(true);
+        remove(replacement_panel);
+        add(rewind_button, this.getComponents().length - 1);
+    }
+
+    public void updateText(String text) {
+        action_text.setText(text);
     }
 
     public GameButton getAttackButton() {
