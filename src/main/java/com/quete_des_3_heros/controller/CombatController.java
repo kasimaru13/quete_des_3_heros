@@ -3,11 +3,12 @@ package main.java.com.quete_des_3_heros.controller;
 
 import java.util.*;
 import java.util.List;
-
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.Monster;
 import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
+import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
+import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.combat_ui.CombatUI;
 
 import static java.awt.geom.Point2D.distance;
@@ -167,6 +168,7 @@ public class CombatController {
                     entityPlaying.resetResistance();
                 }
                 giveEntityTurn(entityPlaying);
+                checkAliveState();
                 combatUI.getRightPanel().hideRewindButton();
                 combatUI.updatePriorityQueue(entitiesPriorityList);
                 combatUI.updateProfiles(heroes);
@@ -202,6 +204,21 @@ public class CombatController {
      */
     public boolean monstersStillAlive() {
         return this.monsters.stream().anyMatch(Entity::isAlive);
+    }
+
+    private void checkAliveState() {
+        Element[][] grid = combatUI.getBoard().getGrid();
+        Element cur_element;
+
+        for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++){
+            for (int j = 0; j < Constants.NUMBER_OF_SQUARES; j++) {
+                cur_element = grid[i][j];
+                if (cur_element != null && cur_element instanceof Entity && !((Entity)cur_element).isAlive()) {
+                    grid[i][j] = null;
+                    entitiesPriorityList.remove(cur_element);
+                }
+            }
+        }
     }
 
 

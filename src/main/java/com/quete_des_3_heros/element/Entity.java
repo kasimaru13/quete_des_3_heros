@@ -140,6 +140,7 @@ public abstract class Entity implements Element{
         this.health -= damage;
         if (health <= 0) {
             alive = false;
+            this.health = 0;
             System.out.println(this.getClass().getSimpleName() + " est mort.");
         }
     }
@@ -190,7 +191,11 @@ public abstract class Entity implements Element{
     }
 
     public void setHealth(int health) {
-        if (health <= maxHealth){
+        if (health <= 0) {
+            this.health = 0;
+            this.alive = false;
+        }
+        else if (health <= maxHealth){
             this.health = health;
         }
         else {
@@ -211,7 +216,10 @@ public abstract class Entity implements Element{
     }
 
     public void setMana(int mana) {
-        if (mana <= maxMana){
+        if (mana <= 0) {
+            this.mana = 0;
+        }
+        else if (mana <= maxMana){
             this.mana = mana;
         }
         else {

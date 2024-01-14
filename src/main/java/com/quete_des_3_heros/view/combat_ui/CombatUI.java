@@ -38,11 +38,11 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
 
     private CombatController combatController;
 
-    Zone current_zone;
+    Zone current_zone; // Current zone of game
+    private List<Profile> profile_queue; // Profiles in order of play order
+    private Move current_move; // Saved last move
 
-    private List<Profile> profile_queue;
 
-    private Move current_move;
 
     public CombatUI(int phase_number){
         combatController = new CombatController(this);
@@ -185,12 +185,8 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
      * @param entities Entity list in order of play
      */
     public void updatePriorityQueue(ArrayList<Entity> entities){
-        if (!entities.isEmpty() && profile_queue != null && leftPanel != null && profile_queue.size() == entities.size()) {
-            for (int i = 0; i < profile_queue.size(); i++) {
-                profile_queue.get(i).updateProfile(entities.get(i).getHealth(), entities.get(i).getMana());
-            }
-        }
-        else if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
+        profile_queue = new ArrayList<>();
+        if (!entities.isEmpty() && profile_queue != null && leftPanel != null){
             for (Entity entity : entities){
                 profile_queue.add(new Profile(entity));
             }
