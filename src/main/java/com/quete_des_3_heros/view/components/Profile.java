@@ -2,7 +2,6 @@ package main.java.com.quete_des_3_heros.view.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
