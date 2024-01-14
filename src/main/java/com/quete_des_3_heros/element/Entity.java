@@ -138,12 +138,7 @@ public abstract class Entity implements Element{
 
     public void hurt(int damage) {
         // Lower the health by the amount of damage
-        this.health -= damage;
-        if (health <= 0) {
-            alive = false;
-            this.health = 0;
-            System.out.println(this.getClass().getSimpleName() + " est mort.");
-        }
+        setHealth(getHealth() - damage);
     }
 
     /**

@@ -374,7 +374,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
             Entity entity = combatController.getEntityPlaying();
             for(int[] i : getBoard().getPossibleMoves()){
                 if(i[0] == x && i[1] == y) {
-                    if (combatController.entityAttackOnTarget(entity, x, y)){
+                    if (combatController.entitySkillOnTarget(entity, x, y)){
                         combatController.setHasSkipped(true);
                     }
                     else {

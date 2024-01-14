@@ -6,8 +6,8 @@ public class SkillButton extends GameButton {
     private Skill skill;
     
     public SkillButton(Skill skill) {
-        super("<html><p>" + skill.getName() + "</p><p style=\"font-size: 10px\">" + "att:" + 
-        skill.getAttack() + "/rng:" + skill.getRange() + "/mp:" + skill.getMana_consumption() +  "</p></html>");
+        super("<html><p>" + skill.getName() + "</p><p style=\"font-size: 10px\">" + "damage:" + 
+        skill.getAttack() + "/range:" + skill.getRange() + "/mp:" + skill.getMana_consumption() +  "</p></html>");
 
         this.skill = skill;
     }
