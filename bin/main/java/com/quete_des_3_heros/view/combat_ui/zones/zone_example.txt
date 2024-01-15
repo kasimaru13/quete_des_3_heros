@@ -1,0 +1,26 @@
+// Ce fichier est un example de fichier zone. Il s'organise de la façon suivante:
+// Tout d'abord, on écrit le titre de la section, puis ce qui correspond à la section
+
+background: // Section donnant le nom du fichier d'arrière plan dans le dossier ressources/background, ainsi que son extension
+nom_du_fichier_arriere_plan.extension_du_fichier
+
+grid: // Section indiquant la forme de la grille de jeu. 0 indique une case vide, et un nom indique le nom de l'entité se trouvant sur la case
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 warrior 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+
+// Les entités possibles sont : warrior, mage, thief, skeletton, goblin, dragon, rock, ...

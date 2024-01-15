@@ -1,0 +1,3 @@
+Ceci sera affiché dans le premier paragraphe. Le texte est automatiquement adapté pour tenir dans l'ui (avec des sauts à la ligne).
+Ceci sera affiché dans le second paragraphe. Dès qu'un saut de ligne apparait, un saut de ligne aura lieu sur l'ui également.
+On peut créer autant de paragraphes que l'on souhaite avec des sauts de ligne. Cependant, il faut faire attention à ce que le texte tient dans l'ui.

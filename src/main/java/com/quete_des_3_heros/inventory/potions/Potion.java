@@ -1,9 +1,7 @@
 package main.java.com.quete_des_3_heros.inventory.potions;
 
-import main.java.com.quete_des_3_heros.inventory.Item;
+import main.java.com.quete_des_3_heros.element.Hero;
 
-public class Potion extends Item {
-    public Potion(String _name, String _description){
-        super(_name, _description);
-    }
+public interface Potion {
+    public void usePotion(Hero hero);
 }

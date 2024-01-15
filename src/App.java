@@ -1,4 +1,4 @@
-import main.java.com.quete_des_3_heros.ui.UI;
+import main.java.com.quete_des_3_heros.view.UI;
 import java.awt.EventQueue;
 
 public class App {
