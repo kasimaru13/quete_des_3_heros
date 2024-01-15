@@ -2,6 +2,9 @@ package main.java.com.quete_des_3_heros.view.components;
 
 import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 
+/**
+ * Button displayed when clicking on skill button, displays informations on skills of current character
+ */
 public class SkillButton extends GameButton {
     private Skill skill;
     
