@@ -1,19 +1,12 @@
 package main.java.com.quete_des_3_heros.view.combat_ui;
 
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import main.java.com.quete_des_3_heros.element.Element;
 import main.java.com.quete_des_3_heros.element.Entity;
@@ -27,11 +20,9 @@ import main.java.com.quete_des_3_heros.view.combat_ui.zones.Zone;
 public class Board extends JPanel implements MouseMotionListener{
     private Element[][] grid; // Array of 256 (16*16) values containing all the elements of the game to draw (characters, monsters and obstacles)
     private Image backgroundImage;
-    private JLabel backgroundPanel; // Panel to display background image on
     private int mousePosition[]; // Position of the mouse as an index of an int[][]
     private int possibleMoves[][]; // tiles to highlight
     private int step; // 1 is move step, 2 is attack step, 3 is skill step
-    private ArrayList<JLabel> entities_information;
 
     /**
      *
@@ -52,17 +43,7 @@ public class Board extends JPanel implements MouseMotionListener{
         mousePosition[0] = -1;
         mousePosition[1] = -1;
 
-        possibleMoves = new int[16][16]; // TO GET RID OF WHEN BACKEND IS COMPLETE
-
-        // Import background image (TO CHANGE TO PATH PARAMETER)
-        try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png")).getSubimage(0, 0, Constants.BOARD_SIZE, Constants.BOARD_SIZE);
-        } catch (IOException e) {
-            System.out.println("Erreur dans la lecture des images du jeu");
-            System.exit(0);
-        }
-
-        add(new JLabel("qdslfljhqsdklfgqsdklf"));
+        possibleMoves = new int[16][16];
 
         addMouseMotionListener(this);
     }
@@ -83,9 +64,8 @@ public class Board extends JPanel implements MouseMotionListener{
             }
         }    
 
+
         // Draw entities
-        entities_information = new ArrayList<>();
-        JLabel current_info;
         Element current_element;
         for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++){
             for (int j = 0; j < Constants.NUMBER_OF_SQUARES; j++){
@@ -93,22 +73,6 @@ public class Board extends JPanel implements MouseMotionListener{
                 if (current_element != null) {
                     // Draw sprite
                     g.drawImage(current_element.getSprite(), i * (Constants.SPRITE_SIZE + Constants.GRID), j * (Constants.SPRITE_SIZE + Constants.GRID), null);
-
-                    // Draw HP & MP
-                    if (current_element instanceof Entity) {
-                        current_info = new JLabel("HP:" + ((Integer)((Entity)current_element).getHealth()).toString() + "/MP:" + ((Integer)((Entity)current_element).getMana()).toString());
-                        if (i != Constants.NUMBER_OF_SQUARES - 1) {
-                            // current_info.setBounds(
-                            //     (i + 1) * Constants.SPRITE_SIZE, 
-                            //     j * Constants.SPRITE_SIZE, 
-                            //     current_info.getWidth(), 
-                            //     current_info.getHeight()
-                            // );
-                            current_info.setLocation((i + 1) * Constants.SPRITE_SIZE, j * Constants.SPRITE_SIZE);
-                        }
-                        entities_information.add(current_info);
-                        this.add(entities_information.get(entities_information.size() - 1));
-                    }
                 }
             }
         }
