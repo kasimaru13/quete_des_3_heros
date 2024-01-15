@@ -76,7 +76,7 @@ public class RightPanel extends JPanel{
 
         // Creation of the buttons
         attack = new GameButton("Attaquer");
-        defend = new GameButton("Défense");
+        defend = new GameButton("Défendre");
         skill = new GameButton("Technique");
         item = new GameButton("Objet");
 
@@ -153,7 +153,7 @@ public class RightPanel extends JPanel{
 
     /**
      * Displays the skills on the right panel of the UI (with back button)
-     * @param skillsNames
+     * @param skillsNames   An ArrayList of Skill objects representing the skills to be displayed.
      */
     public void skillButtonsToPanel(ArrayList<Skill> skillsNames) {
         alternativeButtons = new ArrayList<GameButton>();
