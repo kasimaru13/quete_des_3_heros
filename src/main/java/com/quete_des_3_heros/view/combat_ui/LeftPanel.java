@@ -11,6 +11,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 import main.java.com.quete_des_3_heros.view.Constants;
 import main.java.com.quete_des_3_heros.view.components.Profile;
@@ -22,6 +24,7 @@ public class LeftPanel extends JPanel{
     private JLabel title;
     private List<Profile> priority_queue;
     private JPanel profile_queue;
+    private JScrollPane scrollable_profile_queue;
 
     public LeftPanel(){
         priority_queue = new ArrayList<>();
@@ -33,11 +36,14 @@ public class LeftPanel extends JPanel{
 
         profile_queue = new JPanel();
         profile_queue.setLayout(new BoxLayout(profile_queue, BoxLayout.Y_AXIS));
+        scrollable_profile_queue = new JScrollPane(profile_queue);
+        profile_queue.setAutoscrolls(true);
+        scrollable_profile_queue.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         add(Box.createRigidArea(new Dimension(0,15)));
         add(title);
         add(Box.createRigidArea(new Dimension(0, 15)));
-        add(profile_queue);
+        add(scrollable_profile_queue);
     }
 
     @Override
@@ -52,7 +58,7 @@ public class LeftPanel extends JPanel{
                 profile_queue.add(Box.createRigidArea(new Dimension(0, 50)));
                 prof.changeBorderColor(Color.black);
                 if (priority_queue.indexOf(prof) != priority_queue.size() - 1){
-                    drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, profile_queue.getY() + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, profile_queue.getY() + i * (75 + 50) - 45, 10, 5);
+                    drawArrowLine(g, Constants.LEFTPANEL_WIDTH/2, scrollable_profile_queue.getY() + i * (75 + 50) - 5, Constants.LEFTPANEL_WIDTH/2, scrollable_profile_queue.getY() + i * (75 + 50) - 45, 10, 5);
                 }
                 i++;
             }
