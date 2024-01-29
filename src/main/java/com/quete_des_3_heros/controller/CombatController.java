@@ -19,7 +19,7 @@ public class CombatController {
     private CombatUI combatUI;
     private ArrayList<Entity> entitiesPriorityList;
     private Entity entityPlaying;
-    private boolean hasSkipped;
+    private volatile boolean hasSkipped;
     private boolean isMoving;
     private boolean hasMoved;
     private boolean isAttacking;
@@ -272,7 +272,6 @@ public class CombatController {
                         }
                     }
                 }
-                if (hasSkipped) break;
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target
