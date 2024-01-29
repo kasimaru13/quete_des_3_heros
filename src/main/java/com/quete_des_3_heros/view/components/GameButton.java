@@ -18,6 +18,7 @@ public class GameButton extends JButton implements MouseListener {
 
         setFocusable(false);
         setFont(new Font("Arial", Font.PLAIN, 18));
+        setOpaque(true);
         setBackground(Color.gray);
         setForeground(Color.WHITE);
         setPreferredSize(new Dimension(250, 60));
