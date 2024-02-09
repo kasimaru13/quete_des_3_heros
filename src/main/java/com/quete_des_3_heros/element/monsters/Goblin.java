@@ -20,7 +20,7 @@ public class Goblin extends Monster {
     public Goblin() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/goblin.png",
+                "/main/java/com/quete_des_3_heros/ressources/sprites/goblin.png",
                 100,
                 100,
                 30,

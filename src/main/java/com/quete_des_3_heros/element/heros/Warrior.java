@@ -38,7 +38,7 @@ public class Warrior extends Hero {
     public Warrior() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
+                "/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png",
                 200,
                 200,
                 50,

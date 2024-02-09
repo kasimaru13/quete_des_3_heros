@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -103,7 +105,11 @@ public class RightPanel extends JPanel{
         rewind_button = new GameButton("<html><p>Annuler de dernier déplacement</p></html>");
         rewind_button.setPreferredSize(new Dimension(Constants.RIGHTPANEL_WIDTH - 30, 40));
         rewind_button.setFont(new JLabel().getFont());
-        rewind_button.setIcon(new ImageIcon(new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/icons/white_refresh.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        try {
+            rewind_button.setIcon(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/icons/white_refresh.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        } catch (IOException e) {
+            System.err.println("Impossible de charger icône d'annulation de déplacement");
+        }
         rewind_button.setIconTextGap(20);
         rewind_button.setBorder(new EmptyBorder(10, 10, 10, 10));
 

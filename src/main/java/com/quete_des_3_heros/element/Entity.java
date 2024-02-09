@@ -8,7 +8,6 @@ import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -74,7 +73,7 @@ public abstract class Entity implements Element{
         this.x = x;
         this.y = y;
         try{
-            this.sprite = ImageIO.read(new File(sprite));
+            this.sprite = ImageIO.read(getClass().getResourceAsStream(sprite));
         } catch (IOException e) {
             System.out.println("Erreur dans la lecture des images du jeu");
             System.exit(0);

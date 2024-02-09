@@ -40,7 +40,7 @@ public class Thief extends Hero {
     public Thief() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/rogue.png",
+                "/main/java/com/quete_des_3_heros/ressources/sprites/rogue.png",
                 100,
                 100,
                 100,

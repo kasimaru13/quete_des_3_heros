@@ -39,7 +39,7 @@ public class Mage extends Hero {
     public Mage() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/mage.png",
+                "/main/java/com/quete_des_3_heros/ressources/sprites/mage.png",
                 50,
                 50,
                 150,

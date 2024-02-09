@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -30,7 +29,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     public TitleScreen(){
         // Loading images
         try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/landscape.jpg"));
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/backgrounds/landscape.jpg"));
             // Scale the image so it fills the whole window
             backgroundImage = backgroundImage.getScaledInstance(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Image.SCALE_DEFAULT);
         } catch (IOException e) {
