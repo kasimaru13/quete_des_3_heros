@@ -32,6 +32,7 @@ public class Thief extends Hero {
 
 package main.java.com.quete_des_3_heros.element.heros;
 
+import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 
@@ -64,13 +65,15 @@ public class Thief extends Hero {
         addSkill(new Skill("Tir à l'arc", 20, 5, 10));
     }
 
-    @Override
-    public int computeAttack() {
-        if (weapon == null) {
-            return agility;
+    public int computeAttack(Entity target) {
+        int starter_attack = agility, target_defense = target.getResistance();
+        if (weapon != null) {
+            starter_attack = agility + weapon.getDamage();
         }
-        else {
-            return agility + weapon.getDamage();
+        if (target.getArmor() != null) {
+            target_defense = target.getResistance() + target.getArmor().getResistance();
         }
+
+        return Math.max(10, starter_attack - target_defense / 2);
     }
 }

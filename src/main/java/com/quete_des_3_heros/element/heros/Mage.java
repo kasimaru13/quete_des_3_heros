@@ -31,6 +31,7 @@ public class Mage extends Hero {
 
 package main.java.com.quete_des_3_heros.element.heros;
 
+import main.java.com.quete_des_3_heros.element.Entity;
 import main.java.com.quete_des_3_heros.element.Hero;
 import main.java.com.quete_des_3_heros.element.heros.skills.Skill;
 
@@ -65,13 +66,16 @@ public class Mage extends Hero {
     }
 
     @Override
-    public int computeAttack() {
-        if (weapon == null) {
-            return intelligence;
+    public int computeAttack(Entity target) {
+        int starter_attack = intelligence, target_defense = target.getResistance();
+        if (weapon != null) {
+            starter_attack = intelligence + weapon.getDamage();
         }
-        else {
-            return intelligence + weapon.getDamage();
+        if (target.getArmor() != null) {
+            target_defense = target.getResistance() + target.getArmor().getResistance();
         }
+
+        return Math.max(10, starter_attack - target_defense / 2);
     }
 }
 

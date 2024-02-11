@@ -12,7 +12,6 @@ public class Goblin extends Monster {
 }*/
 
 package main.java.com.quete_des_3_heros.element.monsters;
-
 import main.java.com.quete_des_3_heros.element.Monster;
 
 public class Goblin extends Monster {
@@ -37,15 +36,5 @@ public class Goblin extends Monster {
                 "Goblin",
                 null,
                 null);
-    }
-
-    @Override
-    public int computeAttack() {
-        if (weapon == null) {
-            return agility;
-        }
-        else {
-            return agility + weapon.getDamage();
-        }
     }
 }
