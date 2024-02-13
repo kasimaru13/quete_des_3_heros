@@ -158,7 +158,7 @@ public abstract class Entity implements Element{
             target_defense = target.getResistance() + target.getArmor().getResistance();
         }
 
-        return Math.max(10, starter_attack - target_defense / 2);
+        return Math.max(10, starter_attack - target_defense / 5);
     }
 
     /**
@@ -167,6 +167,9 @@ public abstract class Entity implements Element{
      * @return
      */
     public int useSkill(Skill skill, Board board, int x, int y){
+        if (getMana() < skill.getMana_consumption()){
+            return -1;
+        }
         int damage = getCriticalDamage(getDamage(board, x, y));
         if (damage != -1){
             setMana(getMana() - skill.getMana_consumption());
