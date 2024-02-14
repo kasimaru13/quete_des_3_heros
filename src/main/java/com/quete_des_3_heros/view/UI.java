@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import main.java.com.quete_des_3_heros.element.Hero;
@@ -36,6 +37,15 @@ public class UI extends JFrame {
         // Constant size of the window
         getContentPane().setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         pack();
+
+        // Set window icon
+        try {
+            ImageIcon window_icon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png")));
+            setIconImage(window_icon.getImage());
+        } catch (IOException e) {
+            System.err.println("Impossible de charger l'icône de la fenêtre (warrior.png)");
+            System.exit(0);
+        }
 
         setResizable(false);
         setLocationRelativeTo(null);
