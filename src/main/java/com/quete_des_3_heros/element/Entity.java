@@ -75,7 +75,7 @@ public abstract class Entity implements Element{
         try{
             this.sprite = ImageIO.read(getClass().getResourceAsStream(sprite));
         } catch (IOException e) {
-            System.out.println("Erreur dans la lecture des images du jeu");
+            System.err.println("Erreur dans la lecture des images du jeu");
             System.exit(0);
         }
         this.health = health;
@@ -127,21 +127,21 @@ public abstract class Entity implements Element{
     public int getDamage(Board board, int targetX, int targetY){
         // Verify if coordinates of the target are valid
         if (targetX >= 0 && targetX < Constants.NUMBER_OF_SQUARES && targetY >= 0 && targetY < Constants.NUMBER_OF_SQUARES) {
-            System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
+            // System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
             // Verify if there is a target at the coordinates
             if((target = board.getEntity(targetX, targetY)) != null){
                 int damage = getCriticalDamage(computeAttack((Entity)target));
                 ((Entity)target).setHealth(((Entity)target).getHealth() - damage);
-                System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
+                // System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
                 return damage;
             }
             else {
-                System.out.println("Cible ratée !");
+                // System.out.println("Cible ratée !");
                 return 1;
             }
         } else {
-            System.out.println("Coordonnées de la cible invalides !");
+            // System.out.println("Coordonnées de la cible invalides !");
             return -1;
         }
     }

@@ -33,7 +33,7 @@ public class TitleScreen extends JPanel implements ActionListener {
             // Scale the image so it fills the whole window
             backgroundImage = backgroundImage.getScaledInstance(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Image.SCALE_DEFAULT);
         } catch (IOException e) {
-            System.out.println("Erreur dans la lecture de l'image de fond de l'écran titre");
+            System.err.println("Erreur dans la lecture de l'image de fond de l'écran titre");
             System.exit(0);
         }
 
