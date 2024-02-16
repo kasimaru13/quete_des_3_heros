@@ -138,7 +138,7 @@ public abstract class Entity implements Element{
             }
             else {
                 System.out.println("Cible ratée !");
-                return -1;
+                return 1;
             }
         } else {
             System.out.println("Coordonnées de la cible invalides !");
