@@ -175,8 +175,6 @@ public class CombatController {
 
 
     public void startCombat(){
-        int tour = 1;
-
         while(heroesStillAlive() && monstersStillAlive()){
             // System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
@@ -194,7 +192,6 @@ public class CombatController {
 
                 if (!heroesStillAlive() || !monstersStillAlive()) break;
             }
-            tour += 1;
 
             setEntitiesPriorityList();
         }
