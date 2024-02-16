@@ -124,26 +124,51 @@ public abstract class Entity implements Element{
         }
     }
 
-    public int getDamage(Board board, int targetX, int targetY){
+    /**
+     * Gives the amount of damage inflicted to an entity with a skill
+     * @param board the board
+     * @param targetX x in tiles of target
+     * @param targetY y in tiles of target
+     * @param skill the skill used
+     * @return damage inflicted, or -1 if attack missed
+     */
+    public int getDamage(Board board, int targetX, int targetY, Skill skill){
         // Verify if coordinates of the target are valid
         if (targetX >= 0 && targetX < Constants.NUMBER_OF_SQUARES && targetY >= 0 && targetY < Constants.NUMBER_OF_SQUARES) {
             // System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
             // Verify if there is a target at the coordinates
             if((target = board.getEntity(targetX, targetY)) != null){
-                int damage = getCriticalDamage(computeAttack((Entity)target));
+                int damage;
+                if (skill == null){
+                    damage = getCriticalDamage(computeAttack((Entity)target));
+                }
+                else {
+                    damage = skill.getAttack();
+                }
                 ((Entity)target).setHealth(((Entity)target).getHealth() - damage);
                 // System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
                 return damage;
             }
             else {
                 // System.out.println("Cible ratée !");
-                return 1;
+                return -1;
             }
         } else {
             // System.out.println("Coordonnées de la cible invalides !");
             return -1;
         }
+    }
+
+    /**
+     * Gives the amount of damage inflicted to an entity
+     * @param board the board
+     * @param targetX x in tiles of target
+     * @param targetY y in tiles of target
+     * @return damage inflicted, or -1 if attack missed
+     */
+    public int getDamage(Board board, int targetX, int targetY){
+        return getDamage(board, targetX, targetY, null);
     }
 
     /**
@@ -170,7 +195,7 @@ public abstract class Entity implements Element{
         if (getMana() < skill.getMana_consumption()){
             return -1;
         }
-        int damage = getCriticalDamage(getDamage(board, x, y));
+        int damage = getDamage(board, x, y, skill);
         if (damage != -1){
             setMana(getMana() - skill.getMana_consumption());
             return damage;

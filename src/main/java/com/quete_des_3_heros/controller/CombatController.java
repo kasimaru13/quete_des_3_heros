@@ -343,7 +343,7 @@ public class CombatController {
 
     public boolean entitySkillOnTarget(Entity entity, int x, int y) {
         int damage = entity.useSkill(current_skill, combatUI.getBoard(), x , y);
-        if (damage >= 0){
+        if (damage != -1){
             if(entity instanceof Hero){
                 combatUI.getBoard().setStep(0);
                 setIsAttacking(false);
