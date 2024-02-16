@@ -1,7 +1,9 @@
 package main.java.com.quete_des_3_heros.view;
 
 import java.awt.Dimension;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -35,6 +37,15 @@ public class UI extends JFrame {
         // Constant size of the window
         getContentPane().setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         pack();
+
+        // Set window icon
+        try {
+            ImageIcon window_icon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/sprites/warrior.png")));
+            setIconImage(window_icon.getImage());
+        } catch (IOException e) {
+            System.err.println("Impossible de charger l'icône de la fenêtre (warrior.png)");
+            System.exit(0);
+        }
 
         setResizable(false);
         setLocationRelativeTo(null);
@@ -104,28 +115,30 @@ public class UI extends JFrame {
     private void initInventory() {
         Inventory inventory = Inventory.getInstance();
 
-        PotionItem healingPotion = new PotionItem(
-            "Potion de soin basique", 
-            "Potion soignant peu de HP", 
-            new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png").getImage(), 
-            new HealingPotion(new ConcretePotion(), 40)
-        );
+        PotionItem healingPotion;
+        try {
+            healingPotion = new PotionItem(
+                "Potion de soin basique", 
+                "Potion soignant peu de HP", 
+                ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png")), 
+                new HealingPotion(new ConcretePotion(), 40)
+            );
         PotionItem midHealingPotion = new PotionItem(
             "Potion de soin", 
             "Potion soignant des HP", 
-            new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png").getImage(), 
+            ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png")), 
             new HealingPotion(new ConcretePotion(), 100)
         );
         PotionItem maxHealingPotion = new PotionItem(
             "Potion de soin forte", 
             "Potion rendant toute la vie", 
-            new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png").getImage(), 
+            ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/items/potions/healing_potion.png")), 
             new HealingPotion(new ConcretePotion(), 200)
         );
         PotionItem manaPotion = new PotionItem(
             "Potion de mana basique", 
             "Potion soignant peu de MP", 
-            new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/items/potions/mana_potion.png").getImage(),
+            ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/items/potions/mana_potion.png")),
             new ManaPotion(new ConcretePotion(), 10)
         );
 
@@ -133,6 +146,12 @@ public class UI extends JFrame {
         inventory.addItem(midHealingPotion);
         inventory.addItem(maxHealingPotion);
         inventory.addItem(manaPotion);
+
+
+        } catch (IOException e) {
+            System.err.println("Impossible de charger les sprites des potions");
+            System.exit(0);
+        }
     }
 
     public Hero[] getHeroes() {

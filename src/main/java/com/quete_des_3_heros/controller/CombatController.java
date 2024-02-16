@@ -19,7 +19,7 @@ public class CombatController {
     private CombatUI combatUI;
     private ArrayList<Entity> entitiesPriorityList;
     private Entity entityPlaying;
-    private boolean hasSkipped;
+    private volatile boolean hasSkipped;
     private boolean isMoving;
     private boolean hasMoved;
     private boolean isAttacking;
@@ -175,10 +175,8 @@ public class CombatController {
 
 
     public void startCombat(){
-        int tour = 1;
-
         while(heroesStillAlive() && monstersStillAlive()){
-            System.out.println("TOUR " + tour);
+            // System.out.println("TOUR " + tour);
             for(int i = 0; i<entitiesPriorityList.size(); i++) {
                 entityPlaying = entitiesPriorityList.get(i);
                 if(entityPlaying instanceof Hero){
@@ -194,18 +192,17 @@ public class CombatController {
 
                 if (!heroesStillAlive() || !monstersStillAlive()) break;
             }
-            tour += 1;
 
             setEntitiesPriorityList();
         }
         if(heroesStillAlive()){
-            System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
+            // System.out.println("Vous avez gagné le combat ! Le combat a duré " + tour + " tours !");
             UI.getInstance().nextStep(Constants.PHASES + 1, "Win");
         } else if(monstersStillAlive()){
-            System.out.println("Vous avez perdu le combat ! Le combat a duré " + tour + " tours !");
+            // System.out.println("Vous avez perdu le combat ! Le combat a duré " + tour + " tours !");
             UI.getInstance().nextStep(-1, "Game Over");
         } else {
-            System.out.println("Erreur !");
+            System.err.println("Erreur !");
         }
     }
 
@@ -272,7 +269,6 @@ public class CombatController {
                         }
                     }
                 }
-                if (hasSkipped) break;
             }
         } else if (entity instanceof Monster) {
             // Find the closest hero and move the monster towards the target

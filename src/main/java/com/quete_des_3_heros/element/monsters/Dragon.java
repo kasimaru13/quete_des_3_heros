@@ -20,7 +20,7 @@ public class Dragon extends Monster {
     public Dragon() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/dragon.png",
+                "/main/java/com/quete_des_3_heros/ressources/sprites/dragon.png",
                 100,
                 100,
                 30,

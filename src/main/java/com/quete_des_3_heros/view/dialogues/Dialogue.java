@@ -18,8 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -41,7 +40,7 @@ public class Dialogue extends JPanel implements KeyListener{
 
         // Load background image
         try {
-            backgroundImage = ImageIO.read(new File("src/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png"))
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/backgrounds/grass.png"))
                 .getScaledInstance(Constants.WINDOW_WIDTH, Constants.WINDOW_WIDTH, Image.SCALE_DEFAULT);
         } catch (Exception e) {
             System.err.println("Erreur dans le chargement de l'image de fond de la phase de dialogue");
@@ -90,7 +89,13 @@ public class Dialogue extends JPanel implements KeyListener{
     private class DialogueLabel extends JLabel implements MouseListener {
         public DialogueLabel(int phase_number){
             // Load JLabel icon (down arrow)
-            ImageIcon arrow = new ImageIcon("src/main/java/com/quete_des_3_heros/ressources/icons/arrow_down.png");
+            ImageIcon arrow = null;
+
+            try {
+                arrow = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/ressources/icons/arrow_down.png")));
+            } catch (IOException e) {
+                System.err.println("Impossible de charger l'icone de flèche");
+            }
 
             setPreferredSize(new Dimension(Constants.WINDOW_WIDTH * 60/100, Constants.WINDOW_HEIGHT * 70/100));
             setFont(new Font(getFont().getName(), Font.PLAIN, 22));
@@ -124,20 +129,16 @@ public class Dialogue extends JPanel implements KeyListener{
             String dialogue = "";
 
             dialogue = "<html><p>";
-            try {
-                Scanner scanner = new Scanner(new File("src/main/java/com/quete_des_3_heros/view/dialogues/text/dialogue" + phase_number + ".txt"));
+            
+            Scanner scanner = new Scanner(getClass().getResourceAsStream("/main/java/com/quete_des_3_heros/view/dialogues/text/dialogue" + phase_number + ".txt"));
 
-                // Read the file
-                while (scanner.hasNextLine()){
-                    dialogue += scanner.nextLine() + "<br>";
-                }
-                dialogue += "</p></html>";
-
-                scanner.close();
-
-            } catch (FileNotFoundException e) {
-                System.err.println("Erreur dans la lecture du fichier de dialogue");
+            // Read the file
+            while (scanner.hasNextLine()){
+                dialogue += scanner.nextLine() + "<br>";
             }
+            dialogue += "</p></html>";
+
+            scanner.close();
 
             return dialogue;
         }

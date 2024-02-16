@@ -141,7 +141,7 @@ public class CombatUI extends JPanel implements ActionListener, MouseListener {
     }
 
     /**
-     * Update Combat Textual Interface for the moment
+     * DEBUG FUNCTION Update Combat Textual Interface for the moment
      */
     public void updateCombatUI() {
         for (int i = 0; i < Constants.NUMBER_OF_SQUARES; i++) {

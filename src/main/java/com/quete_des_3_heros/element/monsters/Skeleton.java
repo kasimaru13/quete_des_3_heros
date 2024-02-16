@@ -20,7 +20,7 @@ public class Skeleton extends Monster {
     public Skeleton() {
         super(0,
                 0,
-                "src/main/java/com/quete_des_3_heros/ressources/sprites/skeleton.png",
+                "/main/java/com/quete_des_3_heros/ressources/sprites/skeleton.png",
                 100,
                 100,
                 30,

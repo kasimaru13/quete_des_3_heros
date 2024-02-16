@@ -8,7 +8,6 @@ import main.java.com.quete_des_3_heros.view.combat_ui.Board;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -74,9 +73,9 @@ public abstract class Entity implements Element{
         this.x = x;
         this.y = y;
         try{
-            this.sprite = ImageIO.read(new File(sprite));
+            this.sprite = ImageIO.read(getClass().getResourceAsStream(sprite));
         } catch (IOException e) {
-            System.out.println("Erreur dans la lecture des images du jeu");
+            System.err.println("Erreur dans la lecture des images du jeu");
             System.exit(0);
         }
         this.health = health;
@@ -105,8 +104,8 @@ public abstract class Entity implements Element{
      * @return 
      */
     public int attack(Board board, int targetX, int targetY) {
-        int damage = getCriticalDamage(computeAttack());
-        if (getDamage(board, targetX, targetY, getCriticalDamage(damage))) {
+        int damage = getDamage(board, targetX, targetY);
+        if (damage != -1) {
             return damage;
         }
         else return -1;
@@ -125,37 +124,41 @@ public abstract class Entity implements Element{
         }
     }
 
-    public boolean getDamage(Board board, int targetX, int targetY, int damage){
+    public int getDamage(Board board, int targetX, int targetY){
         // Verify if coordinates of the target are valid
         if (targetX >= 0 && targetX < Constants.NUMBER_OF_SQUARES && targetY >= 0 && targetY < Constants.NUMBER_OF_SQUARES) {
-            System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
+            // System.out.println(this.getClass().getSimpleName() + " attaque la case (" + targetX + ", " + targetY + ") !");
             Element target;
             // Verify if there is a target at the coordinates
             if((target = board.getEntity(targetX, targetY)) != null){
+                int damage = getCriticalDamage(computeAttack((Entity)target));
                 ((Entity)target).setHealth(((Entity)target).getHealth() - damage);
-                System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
-                return true;
+                // System.out.println("La cible " + target.getClass().getSimpleName() + " a perdu " + damage + " points de vie !");
+                return damage;
             }
             else {
-                System.out.println("Cible ratée !");
-                return false;
+                // System.out.println("Cible ratée !");
+                return 1;
             }
         } else {
-            System.out.println("Coordonnées de la cible invalides !");
-            return false;
+            // System.out.println("Coordonnées de la cible invalides !");
+            return -1;
         }
     }
 
     /**
      * Computes the damage the entity can do
      */
-    public int computeAttack() {
-        if (weapon == null) {
-            return strength;
+    public int computeAttack(Entity target) {
+        int starter_attack = strength, target_defense = target.getResistance();
+        if (weapon != null) {
+            starter_attack = strength + weapon.getDamage();
         }
-        else {
-            return strength + weapon.getDamage();
+        if (target.getArmor() != null) {
+            target_defense = target.getResistance() + target.getArmor().getResistance();
         }
+
+        return Math.max(10, starter_attack - target_defense / 5);
     }
 
     /**
@@ -164,8 +167,11 @@ public abstract class Entity implements Element{
      * @return
      */
     public int useSkill(Skill skill, Board board, int x, int y){
-        int damage = getCriticalDamage(skill.getAttack());
-        if (getDamage(board, x, y, damage)){
+        if (getMana() < skill.getMana_consumption()){
+            return -1;
+        }
+        int damage = getCriticalDamage(getDamage(board, x, y));
+        if (damage != -1){
             setMana(getMana() - skill.getMana_consumption());
             return damage;
         }
